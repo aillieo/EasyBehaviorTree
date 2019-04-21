@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using System;
 using System.Reflection;
+using System.IO;
 
 namespace EasyBehaviorTree
 {
@@ -33,11 +34,10 @@ namespace EasyBehaviorTree
 
             ProcessChildrenForTrans(root, behaviorTree.root);
 
-
-            string fullPath = Application.dataPath + "/" + go.name + ".bt";
+            string fullPath = GetFullPathForTree(go);
             AillieoUtils.SerializeHelper.SerializeDataToBytes(behaviorTree, fullPath);
 
-            Debug.Log("生成完毕\n" + fullPath + "\n" + behaviorTree.DumpTree());
+            Debug.Log("Created successfully!\n" + fullPath + "\n" + behaviorTree.DumpTree());
 
             return behaviorTree;
 
@@ -62,6 +62,13 @@ namespace EasyBehaviorTree
                 }
 
             }
+        }
+
+        static string GetFullPathForTree(GameObject prefab)
+        {
+            string prefabPath = AssetDatabase.GetAssetPath(prefab);
+            string path = Path.GetDirectoryName(prefabPath);
+            return string.Format("{0}/../{1}/{2}.bt", Application.dataPath, path,prefab.name);
         }
 
         static NodeBase GameObjectToNode(GameObject go)

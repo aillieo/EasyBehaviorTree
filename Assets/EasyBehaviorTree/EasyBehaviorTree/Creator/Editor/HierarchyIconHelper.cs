@@ -7,7 +7,7 @@ namespace EasyBehaviorTree
 
     [InitializeOnLoad]
     public class HierarchyIconHelper
-    { 
+    {
         private static readonly EditorApplication.HierarchyWindowItemCallback hiearchyItemCallback;
 
         private static Texture2D hierarchyNodeIcon;
@@ -15,21 +15,20 @@ namespace EasyBehaviorTree
         {
             get
             {
-                if (HierarchyIconHelper.hierarchyNodeIcon == null)
+                if (hierarchyNodeIcon == null)
                 {
-                    HierarchyIconHelper.hierarchyNodeIcon = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/EasyBehaviorTree/Textures/n.png");
+                    hierarchyNodeIcon = AillieoUtils.ImageUtils.Base64ToTexture2D(TextureAssets.HierarchyNodeIcon);
                 }
-                return HierarchyIconHelper.hierarchyNodeIcon;
+                return hierarchyNodeIcon;
             }
         }
 
         static HierarchyIconHelper()
         {
-            HierarchyIconHelper.hiearchyItemCallback = new EditorApplication.HierarchyWindowItemCallback(HierarchyIconHelper.DrawHierarchyIcon);
+            hiearchyItemCallback = new EditorApplication.HierarchyWindowItemCallback(HierarchyIconHelper.DrawHierarchyIcon);
             EditorApplication.hierarchyWindowItemOnGUI = (EditorApplication.HierarchyWindowItemCallback)Delegate.Combine(
                 EditorApplication.hierarchyWindowItemOnGUI,
-                HierarchyIconHelper.hiearchyItemCallback);
-
+                hiearchyItemCallback);
         }
 
         private static void DrawHierarchyIcon(int instanceID, Rect selectionRect)
@@ -38,11 +37,8 @@ namespace EasyBehaviorTree
             if (gameObject!= null && gameObject.GetComponent<NodeDefine>() != null)
             {
                 Rect rect = new Rect(selectionRect.x + selectionRect.width - 16f, selectionRect.y, 16f, 16f);
-                GUI.DrawTexture(rect, HierarchyIconHelper.HierarchyNodeIcon);
+                GUI.DrawTexture(rect, HierarchyNodeIcon);
             }
-
         }
-
     }
-
 }

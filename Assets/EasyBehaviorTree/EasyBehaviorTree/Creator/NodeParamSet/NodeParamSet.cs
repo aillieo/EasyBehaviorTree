@@ -5,26 +5,26 @@ using UnityEngine;
 namespace EasyBehaviorTree
 {
     [Serializable]
-    struct StringParam
+    public class NodeParam<T>
     {
         public string key;
-        public string value;
+        public T value;
     }
 
     [Serializable]
-    public class StringParamSet
+    public class NodeParamSet<R,T> where R: NodeParam<T>,new()
     {
         [NonSerialized]
         Dictionary<string, int> dict = new Dictionary<string, int>();
 
         [SerializeField]
-        StringParam[] stringParams = Array.Empty<StringParam>();
+        R[] nodeParams = Array.Empty<R>();
 
-        public string this[string key]
+        public T this[string key]
         {
             get
             {
-                if (dict.Count == 0 && stringParams.Length != 0)
+                if (dict.Count == 0 && nodeParams.Length != 0)
                 {
                     InitDict();
                 }
@@ -33,12 +33,12 @@ namespace EasyBehaviorTree
                     AddDefaultValue(key);
                 }
 
-                return stringParams[dict[key]].value;
+                return nodeParams[dict[key]].value;
             }
 
             set
             {
-                int len = stringParams.Length;
+                int len = nodeParams.Length;
                 int index = len;
                 if(dict.ContainsKey(key))
                 {
@@ -46,11 +46,11 @@ namespace EasyBehaviorTree
                 }
                 if(index == len)
                 {
-                    Array.Resize(ref stringParams, len + 1);
+                    Array.Resize(ref nodeParams, len + 1);
                 }
 
                 dict[key] = index;
-                stringParams[index] = new StringParam
+                nodeParams[index] = new R
                 {
                     key = key,
                     value = value
@@ -61,19 +61,19 @@ namespace EasyBehaviorTree
 
         private void AddDefaultValue(string key)
         {
-            int len = stringParams.Length;
-            Array.Resize(ref stringParams, len + 1);
-            stringParams[len] = new StringParam
+            int len = nodeParams.Length;
+            Array.Resize(ref nodeParams, len + 1);
+            nodeParams[len] = new R
             {
                 key = key,
-                value = string.Empty
+                value = default(T)
             };
             dict.Add(key, len);
         }
 
         public int GetIndexOfKey(string key)
         {
-            if (dict.Count == 0 && stringParams.Length != 0)
+            if (dict.Count == 0 && nodeParams.Length != 0)
             {
                 InitDict();
             }
@@ -86,10 +86,11 @@ namespace EasyBehaviorTree
 
         private void InitDict()
         {
-            for (int i = 0, len = stringParams.Length; i < len; ++i)
+            for (int i = 0, len = nodeParams.Length; i < len; ++i)
             {
-                dict[stringParams[i].key] = i;
+                dict[nodeParams[i].key] = i;
             }
         }
     }
+
 }

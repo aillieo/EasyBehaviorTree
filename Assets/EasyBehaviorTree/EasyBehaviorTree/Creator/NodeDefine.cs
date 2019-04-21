@@ -16,6 +16,9 @@ namespace EasyBehaviorTree
         [HideInInspector]
         public string assemblyName;
 
+        [HideInInspector]
+        public string displayName;
+
 #if UNITY_EDITOR
         [HideInInspector]
         [SerializeField]
@@ -33,6 +36,7 @@ namespace EasyBehaviorTree
                     NodeBase node = Activator.CreateInstance(t) as NodeBase;
                     if(node != null)
                     {
+                        node.name = displayName;
                         var properties = t.GetProperties();
                         foreach(var p in properties)
                         {

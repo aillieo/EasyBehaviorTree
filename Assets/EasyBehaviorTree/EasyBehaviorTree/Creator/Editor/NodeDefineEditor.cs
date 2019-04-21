@@ -22,6 +22,7 @@ namespace EasyBehaviorTree
 
         private SerializedProperty nodeFullName;
         private SerializedProperty assemblyName;
+        private SerializedProperty displayName;
         private SerializedProperty stringParamSet;
 
         private void Collect()
@@ -33,10 +34,11 @@ namespace EasyBehaviorTree
 
         private void OnEnable()
         {
-            nodeDefine = serializedObject.targetObject as NodeDefine;
             Collect();
+            nodeDefine = serializedObject.targetObject as NodeDefine;
             nodeFullName = this.serializedObject.FindProperty("nodeFullName");
             assemblyName = this.serializedObject.FindProperty("assemblyName");
+            displayName = this.serializedObject.FindProperty("displayName");
             stringParamSet = this.serializedObject.FindProperty("stringParamSet");
 
             for (int i = 0, len = nodeTypes.Length; i < len; ++i)
@@ -47,6 +49,7 @@ namespace EasyBehaviorTree
                     selected = i;
                 }
             }
+            OnSelectIndexChanged();
         }
 
         private void OnDisable()
@@ -63,10 +66,13 @@ namespace EasyBehaviorTree
                     DrawStringProperty(p);
                 }
             }
+
         }
 
         private void DrawStringProperty(PropertyInfo propertyInfo)
         {
+            GUILayout.BeginVertical("Box");
+
             string propertyName = propertyInfo.Name;
             GUILayout.Label(propertyName);
 
@@ -74,12 +80,16 @@ namespace EasyBehaviorTree
             string newValue = EditorGUILayout.TextField(value);
             if(newValue != value)
             {
-                var array = stringParamSet.FindPropertyRelative("stringParams");
+                var array = stringParamSet.FindPropertyRelative("nodeParams");
                 var index = nodeDefine.stringParamSet.GetIndexOfKey(propertyName);
                 var param = array.GetArrayElementAtIndex(index);
                 var paramValue = param.FindPropertyRelative("value");
                 paramValue.stringValue = newValue;
+                // nodeDefine.stringParamSet[propertyName] = newValue;
             }
+
+            GUILayout.EndVertical();
+
         }
 
 
@@ -89,21 +99,28 @@ namespace EasyBehaviorTree
 
             this.serializedObject.Update();
 
-
             GUILayout.BeginVertical("Box");
+
+            displayName.stringValue = EditorGUILayout.TextField("displayName", displayName.stringValue);
 
             int newSelected = EditorGUILayout.Popup("NodeType", selected, nodeNames);
             if(selected != newSelected)
             {
                 selected = newSelected;
-                nodeFullName.stringValue = nodeNames[selected];
-                assemblyName.stringValue = assemNames[selected];
+                OnSelectIndexChanged();
             }
 
             DrawNodeProperties();
 
             GUILayout.EndVertical();
 
+            serializedObject.ApplyModifiedProperties();
+        }
+
+        private void OnSelectIndexChanged()
+        {
+            nodeFullName.stringValue = nodeNames[selected];
+            assemblyName.stringValue = assemNames[selected];
             serializedObject.ApplyModifiedProperties();
         }
     }
