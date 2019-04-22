@@ -10,7 +10,7 @@ namespace EasyBehaviorTree
     public interface INode
     {
         void Init();
-        BTState Update();
+        BTState Update(float deltaTime);
         void OnEnter();
         void OnExit();
         void Destroy();

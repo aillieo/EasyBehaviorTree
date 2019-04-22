@@ -20,7 +20,7 @@ public class NodeActionLog : NodeAction
         base.Init();
     }
 
-    protected override BTState ExecuteTask()
+    protected override BTState ExecuteTask(float deltaTime)
     {
         if(string.IsNullOrEmpty(logStr))
         {
@@ -30,4 +30,8 @@ public class NodeActionLog : NodeAction
         return BTState.Success;
     }
 }
+
+
+
+
 

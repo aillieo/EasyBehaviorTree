@@ -20,9 +20,12 @@ namespace EasyBehaviorTree
         public string displayName;
 
 #if UNITY_EDITOR
-        [HideInInspector]
-        [SerializeField]
+        [HideInInspector][SerializeField]
         public StringParamSet stringParamSet = new StringParamSet();
+        [HideInInspector][SerializeField]
+        public FloatParamSet floatParamSet = new FloatParamSet();
+        [HideInInspector][SerializeField]
+        public IntParamSet intParamSet = new IntParamSet();
 #endif
 
         public NodeBase CreateNode()
@@ -43,6 +46,14 @@ namespace EasyBehaviorTree
                             if(p.PropertyType == typeof(string))
                             {
                                 p.SetValue(node, stringParamSet[p.Name]);
+                            }
+                            else if (p.PropertyType == typeof(float))
+                            {
+                                p.SetValue(node, floatParamSet[p.Name]);
+                            }
+                            else if (p.PropertyType == typeof(int))
+                            {
+                                p.SetValue(node, intParamSet[p.Name]);
                             }
                         }
                     }

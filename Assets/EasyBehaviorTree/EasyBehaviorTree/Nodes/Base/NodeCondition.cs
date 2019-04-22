@@ -9,11 +9,11 @@ namespace EasyBehaviorTree
     public abstract class NodeCondition : NodeDecoratee
     {
 
-        protected abstract bool CheckCondition();
+        protected abstract bool CheckCondition(float deltaTime);
 
-        public override BTState Update()
+        public override BTState Update(float deltaTime)
         {
-            if(CheckCondition())
+            if(CheckCondition(deltaTime))
             {
                 return BTState.Success;
             }

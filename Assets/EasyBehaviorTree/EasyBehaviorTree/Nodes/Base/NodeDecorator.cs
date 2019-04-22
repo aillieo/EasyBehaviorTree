@@ -19,12 +19,12 @@ namespace EasyBehaviorTree
 #endif
         }
 
-        public virtual BTState PostUpdate()
+        public virtual BTState PostUpdate(float deltaTime)
         {
             return BTState.Success;
         }
 
-        public virtual BTState PreUpdate()
+        public virtual BTState PreUpdate(float deltaTime)
         {
             return BTState.Success;
         }

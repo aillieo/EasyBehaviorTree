@@ -24,6 +24,8 @@ namespace EasyBehaviorTree
         private SerializedProperty assemblyName;
         private SerializedProperty displayName;
         private SerializedProperty stringParamSet;
+        private SerializedProperty floatParamSet;
+        private SerializedProperty intParamSet;
 
         private void Collect()
         {
@@ -40,6 +42,8 @@ namespace EasyBehaviorTree
             assemblyName = this.serializedObject.FindProperty("assemblyName");
             displayName = this.serializedObject.FindProperty("displayName");
             stringParamSet = this.serializedObject.FindProperty("stringParamSet");
+            floatParamSet = this.serializedObject.FindProperty("floatParamSet");
+            intParamSet = this.serializedObject.FindProperty("intParamSet");
 
             for (int i = 0, len = nodeTypes.Length; i < len; ++i)
             {
@@ -64,6 +68,14 @@ namespace EasyBehaviorTree
                 if(p.PropertyType == typeof(string))
                 {
                     DrawStringProperty(p);
+                }
+                else if (p.PropertyType == typeof(float))
+                {
+                    DrawFloatProperty(p);
+                }
+                else if (p.PropertyType == typeof(int))
+                {
+                    DrawIntProperty(p);
                 }
             }
 
@@ -92,6 +104,51 @@ namespace EasyBehaviorTree
 
         }
 
+
+        private void DrawFloatProperty(PropertyInfo propertyInfo)
+        {
+            GUILayout.BeginVertical("Box");
+
+            string propertyName = propertyInfo.Name;
+            GUILayout.Label(propertyName);
+
+            float value = nodeDefine.floatParamSet[propertyName];
+            float newValue = EditorGUILayout.FloatField(value);
+            if (newValue != value)
+            {
+                var array = floatParamSet.FindPropertyRelative("nodeParams");
+                var index = nodeDefine.floatParamSet.GetIndexOfKey(propertyName);
+                var param = array.GetArrayElementAtIndex(index);
+                var paramValue = param.FindPropertyRelative("value");
+                paramValue.floatValue = newValue;
+            }
+
+            GUILayout.EndVertical();
+
+        }
+
+
+        private void DrawIntProperty(PropertyInfo propertyInfo)
+        {
+            GUILayout.BeginVertical("Box");
+
+            string propertyName = propertyInfo.Name;
+            GUILayout.Label(propertyName);
+
+            int value = nodeDefine.intParamSet[propertyName];
+            int newValue = EditorGUILayout.IntField(value);
+            if (newValue != value)
+            {
+                var array = intParamSet.FindPropertyRelative("nodeParams");
+                var index = nodeDefine.intParamSet.GetIndexOfKey(propertyName);
+                var param = array.GetArrayElementAtIndex(index);
+                var paramValue = param.FindPropertyRelative("value");
+                paramValue.intValue = newValue;
+            }
+
+            GUILayout.EndVertical();
+
+        }
 
         public override void OnInspectorGUI()
         {

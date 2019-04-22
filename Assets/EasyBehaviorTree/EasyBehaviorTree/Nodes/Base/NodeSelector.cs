@@ -13,12 +13,12 @@ namespace EasyBehaviorTree
 
         }
 
-        public override BTState Update()
+        public override BTState Update(float deltaTime)
         {
             BTState ret = BTState.Failure;
             foreach (var node in Children)
             {
-                if (TickNode(node) == BTState.Success)
+                if (TickNode(node,deltaTime) == BTState.Success)
                 {
                     ret = BTState.Success;
                     break;

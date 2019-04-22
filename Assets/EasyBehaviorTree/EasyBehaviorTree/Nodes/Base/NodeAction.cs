@@ -11,12 +11,12 @@ namespace EasyBehaviorTree
     public abstract class NodeAction : NodeDecoratee
     {
 
-        protected abstract BTState ExecuteTask();
+        protected abstract BTState ExecuteTask(float deltaTime);
 
 
-        public override BTState Update()
+        public override BTState Update(float deltaTime)
         {
-            return ExecuteTask();
+            return ExecuteTask(deltaTime);
         }
     }
 }

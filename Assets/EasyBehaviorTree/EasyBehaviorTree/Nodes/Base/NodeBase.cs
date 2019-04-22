@@ -22,14 +22,14 @@ namespace EasyBehaviorTree
                 return;
             }
 
-            stringBuilder.Append(new string('-',level));
+            stringBuilder.Append(new string('-', level));
             stringBuilder.Append(ToString());
             stringBuilder.AppendLine();
         }
 
         public override string ToString()
         {
-            return string.Format("{0}({1})",name, GetType().Name);
+            return string.Format("{0}({1})", name, GetType().Name);
         }
 
         public static void Init(NodeBase node, BehaviorTree behaviorTree)
@@ -38,27 +38,29 @@ namespace EasyBehaviorTree
             node.Init();
         }
 
-        public static BTState TickNode(NodeBase node)
+        public static BTState TickNode(NodeBase node, float deltaTime)
         {
             node.OnEnter();
-            BTState ret = node.Update();
+            BTState ret = node.Update(deltaTime);
             node.OnExit();
             return ret;
         }
 
         public virtual void Init()
         {
-            Debug.Log(ToString() + " : Init");
+            behaviorTree.Log(ToString() + " : Init");
         }
 
-        public virtual void OnEnter() {
-            Debug.Log(ToString() +  " : OnEnter");
+        public virtual void OnEnter()
+        {
+            behaviorTree.Log(ToString() + " : OnEnter");
         }
-        public virtual void OnExit() {
-            Debug.Log(ToString() + " : OnExit");
+        public virtual void OnExit()
+        {
+            behaviorTree.Log(ToString() + " : OnExit");
         }
 
-        public abstract BTState Update();
+        public abstract BTState Update(float deltaTime);
         public abstract void Destroy();
     }
 

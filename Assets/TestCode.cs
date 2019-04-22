@@ -5,15 +5,21 @@ using EasyBehaviorTree;
 
 public class TestCode : MonoBehaviour
 {
+
+    BehaviorTree behaviorTree = null;
+
     void Start()
     {
-        BehaviorTree behaviorTree = null;
 
         string fullPath = Application.dataPath + "/BT_GameObject.bt";
         AillieoUtils.SerializeHelper.DeserializeBytesToData(fullPath, out behaviorTree);
 
         behaviorTree.Init();
-        behaviorTree.Tick();
+        
     }
 
+    void Update()
+    {
+        behaviorTree.Tick(Time.deltaTime);
+    }
 }
