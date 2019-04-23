@@ -10,6 +10,8 @@ namespace EasyBehaviorTree
     public abstract class NodeComposite : NodeDecoratee, IComposite
     {
 
+        protected BTState? lastState = null;
+
         protected List<NodeBase> mChildren = new List<NodeBase>();
 
         public IList<NodeBase> Children => mChildren;
@@ -25,6 +27,9 @@ namespace EasyBehaviorTree
         public override void Init()
         {
             base.Init();
+
+            lastState = null;
+
             foreach(var n in mChildren)
             {
                 Init(n,this.behaviorTree);

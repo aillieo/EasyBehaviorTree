@@ -55,6 +55,7 @@ namespace EasyBehaviorTree
         {
             behaviorTree.Log(ToString() + " : OnEnter");
         }
+
         public virtual void OnExit()
         {
             behaviorTree.Log(ToString() + " : OnExit");

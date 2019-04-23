@@ -26,6 +26,12 @@ namespace EasyBehaviorTree
         public FloatParamSet floatParamSet = new FloatParamSet();
         [HideInInspector][SerializeField]
         public IntParamSet intParamSet = new IntParamSet();
+
+        public Dictionary<string, NodeParamSet<NodeParam<object>, object>> paramDict = new Dictionary<string, NodeParamSet<NodeParam<object>, object>>()
+        {
+            //{ "string", new StringParamSet() }
+        };
+
 #endif
 
         public NodeBase CreateNode()
@@ -41,21 +47,11 @@ namespace EasyBehaviorTree
                     {
                         node.name = displayName;
                         var properties = t.GetProperties();
-                        foreach(var p in properties)
-                        {
-                            if(p.PropertyType == typeof(string))
-                            {
-                                p.SetValue(node, stringParamSet[p.Name]);
-                            }
-                            else if (p.PropertyType == typeof(float))
-                            {
-                                p.SetValue(node, floatParamSet[p.Name]);
-                            }
-                            else if (p.PropertyType == typeof(int))
-                            {
-                                p.SetValue(node, intParamSet[p.Name]);
-                            }
-                        }
+
+                        stringParamSet.SetPropertiesForType(properties, node);
+                        floatParamSet.SetPropertiesForType(properties, node);
+                        intParamSet.SetPropertiesForType(properties, node);
+
                     }
 
                     return node;

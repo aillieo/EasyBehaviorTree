@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 using UnityEditor;
 
@@ -34,7 +34,7 @@ namespace EasyBehaviorTree
         private static void DrawHierarchyIcon(int instanceID, Rect selectionRect)
         {
             GameObject gameObject = EditorUtility.InstanceIDToObject(instanceID) as GameObject;
-            if (gameObject!= null && gameObject.GetComponent<NodeDefine>() != null)
+            if (gameObject != null && gameObject.GetComponent<NodeDefine>() != null)
             {
                 Rect rect = new Rect(selectionRect.x + selectionRect.width - 16f, selectionRect.y, 16f, 16f);
                 GUI.DrawTexture(rect, HierarchyNodeIcon);

@@ -1,9 +1,15 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Reflection;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace EasyBehaviorTree
 {
+
     [Serializable]
     public class NodeParam<T>
     {
@@ -71,7 +77,19 @@ namespace EasyBehaviorTree
             dict.Add(key, len);
         }
 
-        public int GetIndexOfKey(string key)
+
+        private void InitDict()
+        {
+            for (int i = 0, len = nodeParams.Length; i < len; ++i)
+            {
+                dict[nodeParams[i].key] = i;
+            }
+        }
+
+
+#if UNITY_EDITOR
+
+        private int GetIndexOfKey(string key)
         {
             if (dict.Count == 0 && nodeParams.Length != 0)
             {
@@ -84,13 +102,49 @@ namespace EasyBehaviorTree
             return dict[key];
         }
 
-        private void InitDict()
+
+        private SerializedProperty GetSerializedValue(SerializedProperty nodeParamSet, string propertyName)
         {
-            for (int i = 0, len = nodeParams.Length; i < len; ++i)
+            var array = nodeParamSet.FindPropertyRelative("nodeParams");
+            var index = GetIndexOfKey(propertyName);
+            if (array.arraySize <= index)
             {
-                dict[nodeParams[i].key] = i;
+                nodeParamSet.serializedObject.Update();
+            }
+            var param = array.GetArrayElementAtIndex(index);
+            var paramValue = param.FindPropertyRelative("value");
+            return paramValue;
+        }
+
+
+        public void SetPropertiesForType(PropertyInfo[] properties, NodeBase node)
+        {
+            foreach (var p in properties)
+            {
+                if (p.PropertyType == typeof(T))
+                {
+                    p.SetValue(node, this[p.Name]);
+                }
             }
         }
-    }
 
+
+        public void DrawPropertiesForType(PropertyInfo[] properties, SerializedProperty serializedProperty)
+        {
+            foreach (var p in properties)
+            {
+                if (p.PropertyType == typeof(T))
+                {
+                    string propertyName = p.Name;
+                    GUILayout.BeginVertical("Box");
+                    var paramValue = GetSerializedValue(serializedProperty, propertyName);
+                    EditorGUILayout.PropertyField(paramValue, new GUIContent(propertyName));
+                    GUILayout.EndVertical();
+                }
+            }
+        }
+
+#endif
+
+    }
 }

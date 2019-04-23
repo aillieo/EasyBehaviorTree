@@ -23,11 +23,12 @@ namespace EasyBehaviorTree
 
         public override BTState Update(float deltaTime)
         {
-            int nodeCount = Children.Count;
-            if(curIndex >= nodeCount)
+            if (lastState != null)
             {
-                curIndex = 0;
+                return lastState.Value;
             }
+
+            int nodeCount = Children.Count;
 
             while (curIndex < nodeCount)
             {
@@ -41,12 +42,13 @@ namespace EasyBehaviorTree
                     case BTState.Running:
                         return BTState.Running;
                     case BTState.Failure:
-                        curIndex = 0;
+                        lastState = BTState.Failure;
                         return BTState.Failure;
                 }
 
             }
 
+            lastState = BTState.Success;
             return BTState.Success;
         }
     }

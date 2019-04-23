@@ -14,8 +14,23 @@ public class TestCode : MonoBehaviour
         string fullPath = Application.dataPath + "/BT_GameObject.bt";
         AillieoUtils.SerializeHelper.DeserializeBytesToData(fullPath, out behaviorTree);
 
-        behaviorTree.Init();
-        
+        behaviorTree.Restart();
+
+        // behaviorTree.OnBehaviorTreeEnd += (bt) => bt.Restart();
+
+        // behaviorTree.enableLog = true;
+
+        /*
+        var ts = NodeParamSetCollector.CollectNodeParamSetTypes();
+        foreach (var t in ts)
+        {
+            var args = t.BaseType.GetGenericArguments();
+            foreach (var a in args)
+            {
+                Debug.LogError(a.FullName);
+            }
+        }
+        */
     }
 
     void Update()
