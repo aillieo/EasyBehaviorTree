@@ -5,6 +5,7 @@ using UnityEditor;
 using System;
 using System.Reflection;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace EasyBehaviorTree.Creator
 {
@@ -35,7 +36,7 @@ namespace EasyBehaviorTree.Creator
             ProcessChildrenForTrans(root, behaviorTree.root);
 
             string fullPath = GetFullPathForTree(go);
-            AillieoUtils.Utils.SerializeDataToBytes(behaviorTree, fullPath);
+            SaveBehaviorTree(behaviorTree, fullPath);
 
             Debug.Log("Created successfully!\n" + fullPath + "\n" + behaviorTree.DumpTree());
 
@@ -81,6 +82,16 @@ namespace EasyBehaviorTree.Creator
 
             return null;
         }
-    }
 
+        static bool SaveBehaviorTree(BehaviorTree behaviorTree, string filename)
+        {
+            using (Stream stream = new FileStream(filename, FileMode.Create, FileAccess.Write, FileShare.None))
+            {
+                BinaryFormatter formatter = new BinaryFormatter();
+                formatter.Serialize(stream, behaviorTree);
+                stream.Close();
+                return true;
+            }
+        }
+    }
 }

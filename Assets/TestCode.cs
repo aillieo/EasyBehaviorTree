@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EasyBehaviorTree;
-using AillieoUtils;
 
 public class TestCode : MonoBehaviour
 {
@@ -13,10 +12,10 @@ public class TestCode : MonoBehaviour
     {
 
         string fullPath = Application.dataPath + "/BT_GameObject.bt";
-        Utils.DeserializeBytesToData(fullPath, out behaviorTree);
+        behaviorTree = BehaviorTree.LoadBehaviorTree(fullPath);
 
 
-        // behaviorTree.OnBehaviorTreeEnd += (bt) => bt.Restart();
+        // behaviorTree.OnBehaviorTreeCompleted += (bt,st) => bt.Restart();
 
 
         behaviorTree.Restart();

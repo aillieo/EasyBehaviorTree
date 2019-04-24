@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using System;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace EasyBehaviorTree
 {
     [Serializable]
     public class BehaviorTree
     {
-        public event Action<BehaviorTree> OnBehaviorTreeEnd;
+        public event Action<BehaviorTree> OnBehaviorTreeStarted;
+        public event Action<BehaviorTree, BTState> OnBehaviorTreeCompleted;
 
         public NodeBase root;
 
@@ -56,6 +59,12 @@ namespace EasyBehaviorTree
             }
         }
 
+#if UNITY_EDITOR
+#else
+        private BehaviorTree()
+        { }
+#endif
+
         public void Init()
         {
             if (isRunning)
@@ -64,49 +73,70 @@ namespace EasyBehaviorTree
             }
             this.blackBoard = new BlackBoard();
             this.random = new Random(DateTime.Now.Second);
-            NodeBase.Init(root,this);
+            NodeBase.Init(root, this);
         }
 
         public void Restart()
         {
-            if(isRunning)
+            if (isRunning)
             {
                 return;
             }
 
             Init();
 
+            if(OnBehaviorTreeStarted != null)
+            {
+                OnBehaviorTreeStarted.Invoke(this);
+            }
+
             isRunning = true;
         }
 
         public void Tick(float deltaTime)
         {
-            if(!isRunning)
+            if (!isRunning)
             {
                 return;
             }
 
-            BTState ret = NodeBase.TickNode(root,deltaTime);
+            BTState ret = NodeBase.TickNode(root, deltaTime);
 
             if (ret != BTState.Running)
             {
                 isRunning = false;
 
-                if(OnBehaviorTreeEnd != null)
+                if (OnBehaviorTreeCompleted != null)
                 {
-                    OnBehaviorTreeEnd.Invoke(this);
+                    OnBehaviorTreeCompleted.Invoke(this, ret);
                 }
             }
 
             logger.Debug("tree ret = " + ret);
         }
 
-        
+
         public string DumpTree()
         {
             StringBuilder sb = new StringBuilder();
-            root.DumpNode(sb,0);
+            root.DumpNode(sb, 0);
             return sb.ToString();
+        }
+
+        public static BehaviorTree LoadBehaviorTree(string filename)
+        {
+            if (!File.Exists(filename))
+            {
+                return null;
+            }
+            BehaviorTree behaviorTree = null;
+            using (Stream stream = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read))
+            {
+                BinaryFormatter formatter = new BinaryFormatter();
+                behaviorTree = formatter.Deserialize(stream) as BehaviorTree;
+                stream.Close();
+            }
+            return behaviorTree;
         }
     }
 }

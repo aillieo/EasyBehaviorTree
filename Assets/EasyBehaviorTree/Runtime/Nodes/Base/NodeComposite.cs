@@ -13,7 +13,7 @@ namespace EasyBehaviorTree
 
         protected List<NodeBase> mChildren = new List<NodeBase>();
 
-        public IList<NodeBase> Children => mChildren;
+        public IList<NodeBase> Children => mChildren.AsReadOnly();
 
 #if UNITY_EDITOR
 

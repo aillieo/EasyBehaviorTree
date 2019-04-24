@@ -17,7 +17,7 @@ namespace EasyBehaviorTree.Creator
             {
                 if (hierarchyNodeIcon == null)
                 {
-                    hierarchyNodeIcon = AillieoUtils.Utils.Base64ToTexture2D(TextureAssets.HierarchyNodeIcon);
+                    hierarchyNodeIcon = Base64ToTexture2D(TextureAssets.HierarchyNodeIcon);
                 }
                 return hierarchyNodeIcon;
             }
@@ -39,6 +39,14 @@ namespace EasyBehaviorTree.Creator
                 Rect rect = new Rect(selectionRect.x + selectionRect.width - 16f, selectionRect.y, 16f, 16f);
                 GUI.DrawTexture(rect, HierarchyNodeIcon);
             }
+        }
+
+        private static Texture2D Base64ToTexture2D(string base64)
+        {
+            Texture2D tex = new Texture2D(1, 1);
+            tex.LoadImage(Convert.FromBase64String(base64));
+            tex.Apply();
+            return tex;
         }
     }
 }

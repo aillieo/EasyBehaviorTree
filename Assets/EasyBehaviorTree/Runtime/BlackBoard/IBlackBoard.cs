@@ -7,12 +7,9 @@ namespace EasyBehaviorTree
 {
     public interface IBlackBoard
     {
-        T Get<T>(string key);
-
-        void Set<T>(string key, T value);
-
-        event Action<string> OnValueChanged;
-
+        IBlackBoardData this[string key]
+        {
+            get; set;
+        }
     }
-
 }

@@ -8,28 +8,22 @@ namespace EasyBehaviorTree
     [Serializable]
     public class BlackBoard : IBlackBoard
     {
-        public Dictionary<string, object> objDict = new Dictionary<string, object>();
+        public Dictionary<string, IBlackBoardData> dict = new Dictionary<string, IBlackBoardData>();
 
-        public event Action<string> OnValueChanged;
-
-        public T Get<T>(string key)
+        public IBlackBoardData this[string key]
         {
-            if(objDict.ContainsKey(key))
+            get
             {
-                return (T)objDict[key];
-
+                if (!dict.ContainsKey(key))
+                {
+                    dict.Add(key, default(IBlackBoardData));
+                }
+                return dict[key];
             }
-            return default(T);
+            set
+            {
+                dict[key] = value;
+            }
         }
-
-
-        public void Set<T>(string key, T value)
-        {
-            objDict[key] = value;
-            OnValueChanged.Invoke(key);
-        }
-
-
     }
-
 }
