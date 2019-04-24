@@ -25,12 +25,7 @@ public class NodeActionLog : NodeAction
         {
             return BTState.Failure;
         }
-        UnityEngine.Debug.Log(logStr);
+        behaviorTree.logger.Log(logStr);
         return BTState.Success;
     }
 }
-
-
-
-
-

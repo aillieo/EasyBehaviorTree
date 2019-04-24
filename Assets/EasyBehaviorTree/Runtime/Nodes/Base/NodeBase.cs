@@ -47,17 +47,17 @@ namespace EasyBehaviorTree
 
         public virtual void Init()
         {
-            behaviorTree.Log(ToString() + " : Init");
+            behaviorTree.logger.Debug(ToString() + " : Init");
         }
 
         public virtual void OnEnter()
         {
-            behaviorTree.Log(ToString() + " : OnEnter");
+            behaviorTree.logger.Debug(ToString() + " : OnEnter");
         }
 
         public virtual void OnExit()
         {
-            behaviorTree.Log(ToString() + " : OnExit");
+            behaviorTree.logger.Debug(ToString() + " : OnExit");
         }
 
         public abstract BTState Update(float deltaTime);

@@ -15,11 +15,11 @@ public class TestCode : MonoBehaviour
         string fullPath = Application.dataPath + "/BT_GameObject.bt";
         Utils.DeserializeBytesToData(fullPath, out behaviorTree);
 
-        behaviorTree.Restart();
 
         // behaviorTree.OnBehaviorTreeEnd += (bt) => bt.Restart();
 
-        // behaviorTree.enableLog = true;
+
+        behaviorTree.Restart();
 
         /*
         var ts = NodeParamSetCollector.CollectNodeParamSetTypes();
@@ -32,6 +32,7 @@ public class TestCode : MonoBehaviour
             }
         }
         */
+
     }
 
     void Update()

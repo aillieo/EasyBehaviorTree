@@ -4,14 +4,14 @@ using System;
 
 namespace EasyBehaviorTree
 {
-
     public interface IDecoratee
     {
-        IList<NodeDecorator> Decorators { get;}
-
+        NodeDecorator decorator
+        {
+            get;
 #if UNITY_EDITOR
-        void AddDecorator(NodeDecorator decorator);
+            set;
 #endif
-
+        }
     }
 }

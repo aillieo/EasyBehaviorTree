@@ -117,30 +117,24 @@ namespace EasyBehaviorTree.Creator
         }
 
 
-        public virtual void SetPropertiesForType(PropertyInfo[] properties, NodeBase node)
+        public virtual void TrySetPropertyForType(PropertyInfo property, NodeBase node)
         {
-            foreach (var p in properties)
+            if (property.PropertyType == typeof(T))
             {
-                if (p.PropertyType == typeof(T))
-                {
-                    p.SetValue(node, this[p.Name]);
-                }
+                property.SetValue(node, this[property.Name]);
             }
         }
 
 
-        public virtual void DrawPropertiesForType(PropertyInfo[] properties, SerializedProperty serializedProperty)
+        public virtual void TryDrawPropertyForType(PropertyInfo property, SerializedProperty serializedProperty)
         {
-            foreach (var p in properties)
+            if (property.PropertyType == typeof(T))
             {
-                if (p.PropertyType == typeof(T))
-                {
-                    string propertyName = p.Name;
-                    GUILayout.BeginVertical("Box");
-                    var paramValue = GetSerializedValue(serializedProperty, propertyName);
-                    EditorGUILayout.PropertyField(paramValue, new GUIContent(propertyName));
-                    GUILayout.EndVertical();
-                }
+                string propertyName = property.Name;
+                GUILayout.BeginVertical("Box");
+                var paramValue = GetSerializedValue(serializedProperty, propertyName);
+                EditorGUILayout.PropertyField(paramValue, new GUIContent(propertyName));
+                GUILayout.EndVertical();
             }
         }
 

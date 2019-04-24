@@ -16,9 +16,45 @@ namespace EasyBehaviorTree
 
         public Random random { get; private set; }
 
-        public bool enableLog { get; set; } = false;
+        public bool debugLogging
+        {
+            get
+            {
+                return (logger.filter & LogLevel.Debug) > 0;
+            }
+            set
+            {
+                if (value)
+                {
+                    logger.filter |= LogLevel.Debug;
+                }
+                else
+                {
+                    logger.filter &= LogLevel.NonDebug;
+                }
+            }
+        }
 
         public bool isRunning { get; private set; } = false;
+
+        [NonSerialized]
+        private BaseLogger mLogger;
+        public BaseLogger logger
+        {
+            get
+            {
+                if (mLogger == null)
+                {
+                    mLogger = new DefaultLogger();
+                    mLogger.filter = LogLevel.NonDebug;
+                }
+                return mLogger;
+            }
+            set
+            {
+                mLogger = value;
+            }
+        }
 
         public void Init()
         {
@@ -62,24 +98,10 @@ namespace EasyBehaviorTree
                 }
             }
 
-            Log("tree ret = " + ret);
+            logger.Debug("tree ret = " + ret);
         }
 
-        public void Log(string message, Action<string> logAction = null)
-        {
-            if(!enableLog)
-            {
-                return;
-            }
-
-            if (logAction == null)
-            {
-                logAction = UnityEngine.Debug.Log;
-            }
-
-            logAction(message);
-        }
-
+        
         public string DumpTree()
         {
             StringBuilder sb = new StringBuilder();

@@ -19,33 +19,27 @@ namespace EasyBehaviorTree.Creator
     {
 
 #if UNITY_EDITOR
-        public void SetPropertiesForType(PropertyInfo[] properties, NodeBase node)
+        public void TrySetPropertyForType(PropertyInfo property, NodeBase node)
         {
-            foreach (var p in properties)
+            if (property.PropertyType.IsEnum)
             {
-                if (p.PropertyType.IsEnum)
-                {
-                    p.SetValue(node, Enum.ToObject(p.PropertyType, this[p.Name]));
-                }
+                property.SetValue(node, Enum.ToObject(property.PropertyType, this[property.Name]));
             }
         }
 
-        public void DrawPropertiesForType(PropertyInfo[] properties, SerializedProperty serializedProperty)
+        public void TryDrawPropertyForType(PropertyInfo property, SerializedProperty serializedProperty)
         {
-            foreach (var p in properties)
+            if (property.PropertyType.IsEnum)
             {
-                if (p.PropertyType.IsEnum)
+                string propertyName = property.Name;
+                GUILayout.BeginVertical("Box");
+                var paramValue = GetSerializedValue(serializedProperty, propertyName);
+                if (!Enum.IsDefined(property.PropertyType, paramValue.intValue))
                 {
-                    string propertyName = p.Name;
-                    GUILayout.BeginVertical("Box");
-                    var paramValue = GetSerializedValue(serializedProperty, propertyName);
-                    if (!Enum.IsDefined(p.PropertyType, paramValue.intValue))
-                    {
-                        paramValue.intValue = (int)Enum.GetValues(p.PropertyType).GetValue(0);
-                    }
-                    paramValue.intValue = EditorGUILayout.Popup(new GUIContent(propertyName), paramValue.intValue, p.PropertyType.GetEnumNames());
-                    GUILayout.EndVertical();
+                    paramValue.intValue = (int)Enum.GetValues(property.PropertyType).GetValue(0);
                 }
+                paramValue.intValue = EditorGUILayout.Popup(new GUIContent(propertyName), paramValue.intValue, property.PropertyType.GetEnumNames());
+                GUILayout.EndVertical();
             }
         }
 

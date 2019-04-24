@@ -5,14 +5,32 @@ using System;
 namespace EasyBehaviorTree
 {
     [Serializable]
-    public class NodeSequence : NodeComposite
+    public class NodeParallel : NodeComposite
     {
-        private int curIndex;
+
+        public enum ParallelStrategy
+        {
+            FailCertain,
+            PassCertain,
+        }
+
+        public ParallelStrategy strategy { get; set; }
+        public int targetCount { get; set; }
+
+
+        private int failCount;
+        private int passCount;
 
         public override void Init()
         {
             base.Init();
-            curIndex = 0;
+            if (targetCount > Children.Count)
+            {
+                behaviorTree.logger.Error("Not enough child nodes");
+            }
+
+            failCount = 0;
+            passCount = 0;
         }
 
         public override void Destroy()
@@ -29,6 +47,9 @@ namespace EasyBehaviorTree
 
             int nodeCount = Children.Count;
 
+
+            /*
+             * 
             while (curIndex < nodeCount)
             {
                 var node = Children[curIndex];
@@ -47,6 +68,7 @@ namespace EasyBehaviorTree
 
             }
 
+            */
             lastState = BTState.Success;
             return BTState.Success;
         }

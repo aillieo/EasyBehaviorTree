@@ -54,6 +54,10 @@ MonoBehaviour:
     nodeParams: []
   intParamSet:
     nodeParams: []
+  boolParamSet:
+    nodeParams: []
+  enumParamSet:
+    nodeParams: []
 --- !u!1 &1186219581182755943
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,6 +112,10 @@ MonoBehaviour:
     nodeParams: []
   intParamSet:
     nodeParams: []
+  boolParamSet:
+    nodeParams: []
+  enumParamSet:
+    nodeParams: []
 --- !u!1 &2339786093053525259
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,7 +127,7 @@ GameObject:
   - component: {fileID: 7174168825476787908}
   - component: {fileID: 3863388138327265879}
   m_Layer: 0
-  m_Name: BT_GameObject
+  m_Name: seq
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -158,7 +166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeFullName: EasyBehaviorTree.NodeSequence
   assemblyName: Assembly-CSharp
-  displayName: seq1
+  displayName: seq
   stringParamSet:
     nodeParams:
     - key: logStr
@@ -168,6 +176,10 @@ MonoBehaviour:
     - key: time
       value: 3
   intParamSet:
+    nodeParams: []
+  boolParamSet:
+    nodeParams: []
+  enumParamSet:
     nodeParams: []
 --- !u!1 &2911101578763579772
 GameObject:
@@ -180,7 +192,7 @@ GameObject:
   - component: {fileID: 3497755549839415656}
   - component: {fileID: 1825008479883143692}
   m_Layer: 0
-  m_Name: BT_GameObject (3)
+  m_Name: condition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -224,6 +236,10 @@ MonoBehaviour:
     - key: passProbability
       value: 0.5
   intParamSet:
+    nodeParams: []
+  boolParamSet:
+    nodeParams: []
+  enumParamSet:
     nodeParams: []
 --- !u!1 &2913718961010072425
 GameObject:
@@ -279,6 +295,10 @@ MonoBehaviour:
     nodeParams: []
   intParamSet:
     nodeParams: []
+  boolParamSet:
+    nodeParams: []
+  enumParamSet:
+    nodeParams: []
 --- !u!1 &2934653693818511374
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,7 +310,7 @@ GameObject:
   - component: {fileID: 2376576654465122831}
   - component: {fileID: 4746859104304149590}
   m_Layer: 0
-  m_Name: BT_GameObject
+  m_Name: logger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -333,6 +353,10 @@ MonoBehaviour:
     nodeParams: []
   intParamSet:
     nodeParams: []
+  boolParamSet:
+    nodeParams: []
+  enumParamSet:
+    nodeParams: []
 --- !u!1 &3627030667243379438
 GameObject:
   m_ObjectHideFlags: 0
@@ -344,7 +368,7 @@ GameObject:
   - component: {fileID: 2971306020923797032}
   - component: {fileID: 4937340119130205433}
   m_Layer: 0
-  m_Name: BT_GameObject (1)
+  m_Name: logger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -386,6 +410,10 @@ MonoBehaviour:
   floatParamSet:
     nodeParams: []
   intParamSet:
+    nodeParams: []
+  boolParamSet:
+    nodeParams: []
+  enumParamSet:
     nodeParams: []
 --- !u!1 &4766001342276335170
 GameObject:
@@ -443,6 +471,10 @@ MonoBehaviour:
       value: 0.5
   intParamSet:
     nodeParams: []
+  boolParamSet:
+    nodeParams: []
+  enumParamSet:
+    nodeParams: []
 --- !u!1 &6196793568509514124
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,6 +531,10 @@ MonoBehaviour:
       value: 0.5
   intParamSet:
     nodeParams: []
+  boolParamSet:
+    nodeParams: []
+  enumParamSet:
+    nodeParams: []
 --- !u!1 &8060800111424515444
 GameObject:
   m_ObjectHideFlags: 0
@@ -510,7 +546,7 @@ GameObject:
   - component: {fileID: 5397644146433608027}
   - component: {fileID: 6218485268024090711}
   m_Layer: 0
-  m_Name: BT_GameObject (4)
+  m_Name: logger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -553,6 +589,10 @@ MonoBehaviour:
     nodeParams: []
   intParamSet:
     nodeParams: []
+  boolParamSet:
+    nodeParams: []
+  enumParamSet:
+    nodeParams: []
 --- !u!1 &8169475924984919255
 GameObject:
   m_ObjectHideFlags: 0
@@ -564,7 +604,7 @@ GameObject:
   - component: {fileID: 4699340043573276622}
   - component: {fileID: 1791391853659320550}
   m_Layer: 0
-  m_Name: BT_GameObject (2)
+  m_Name: selector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -614,6 +654,10 @@ MonoBehaviour:
       value: 3
   intParamSet:
     nodeParams: []
+  boolParamSet:
+    nodeParams: []
+  enumParamSet:
+    nodeParams: []
 --- !u!1 &9005535539826585653
 GameObject:
   m_ObjectHideFlags: 0
@@ -625,7 +669,7 @@ GameObject:
   - component: {fileID: 2751029655147698228}
   - component: {fileID: 9062482881750317823}
   m_Layer: 0
-  m_Name: BT_GameObject (2)
+  m_Name: condition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -669,6 +713,10 @@ MonoBehaviour:
     - key: passProbability
       value: 0.5
   intParamSet:
+    nodeParams: []
+  boolParamSet:
+    nodeParams: []
+  enumParamSet:
     nodeParams: []
 --- !u!1 &9013434109520092283
 GameObject:
@@ -727,4 +775,8 @@ MonoBehaviour:
     - key: time
       value: 6
   intParamSet:
+    nodeParams: []
+  boolParamSet:
+    nodeParams: []
+  enumParamSet:
     nodeParams: []

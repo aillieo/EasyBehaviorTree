@@ -60,14 +60,16 @@ namespace EasyBehaviorTree.Creator
         {
             var properties = nodeTypes[selected].GetProperties();
 
-            // =============================================================================================================================
-            nodeDefine.stringParamSet.DrawPropertiesForType(properties, this.serializedObject.FindProperty("stringParamSet"));
-            nodeDefine.floatParamSet.DrawPropertiesForType(properties, this.serializedObject.FindProperty("floatParamSet"));
-            nodeDefine.intParamSet.DrawPropertiesForType(properties, this.serializedObject.FindProperty("intParamSet"));
-            nodeDefine.boolParamSet.DrawPropertiesForType(properties, this.serializedObject.FindProperty("boolParamSet"));
-            nodeDefine.enumParamSet.DrawPropertiesForType(properties, this.serializedObject.FindProperty("enumParamSet"));
-            // =============================================================================================================================
-
+            foreach(var property in properties)
+            {
+                // =============================================================================================================================
+                nodeDefine.stringParamSet.TryDrawPropertyForType(property, this.serializedObject.FindProperty("stringParamSet"));
+                nodeDefine.floatParamSet.TryDrawPropertyForType(property, this.serializedObject.FindProperty("floatParamSet"));
+                nodeDefine.intParamSet.TryDrawPropertyForType(property, this.serializedObject.FindProperty("intParamSet"));
+                nodeDefine.boolParamSet.TryDrawPropertyForType(property, this.serializedObject.FindProperty("boolParamSet"));
+                nodeDefine.enumParamSet.TryDrawPropertyForType(property, this.serializedObject.FindProperty("enumParamSet"));
+                // =============================================================================================================================
+            }
         }
 
         public override void OnInspectorGUI()

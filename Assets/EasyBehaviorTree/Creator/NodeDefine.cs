@@ -19,7 +19,6 @@ namespace EasyBehaviorTree.Creator
         [HideInInspector]
         public string displayName;
 
-#if UNITY_EDITOR
 
         // =============================================================================================================================
         [HideInInspector][SerializeField]
@@ -34,12 +33,6 @@ namespace EasyBehaviorTree.Creator
         public EnumParamSet enumParamSet = new EnumParamSet();
         // =============================================================================================================================
 
-        public Dictionary<string, NodeParamSet<NodeParam<object>, object>> paramDict = new Dictionary<string, NodeParamSet<NodeParam<object>, object>>()
-        {
-            //{ "string", new StringParamSet() }
-        };
-
-#endif
 
         public NodeBase CreateNode()
         {
@@ -54,15 +47,16 @@ namespace EasyBehaviorTree.Creator
                     {
                         node.name = displayName;
                         var properties = t.GetProperties();
-
-                        // =============================================================================================================================
-                        stringParamSet.SetPropertiesForType(properties, node);
-                        floatParamSet.SetPropertiesForType(properties, node);
-                        intParamSet.SetPropertiesForType(properties, node);
-                        boolParamSet.SetPropertiesForType(properties, node);
-                        enumParamSet.SetPropertiesForType(properties, node);
-                        // =============================================================================================================================
-
+                        foreach (var property in properties)
+                        {
+                            // =============================================================================================================================
+                            stringParamSet.TrySetPropertyForType(property, node);
+                            floatParamSet.TrySetPropertyForType(property, node);
+                            intParamSet.TrySetPropertyForType(property, node);
+                            boolParamSet.TrySetPropertyForType(property, node);
+                            enumParamSet.TrySetPropertyForType(property, node);
+                            // =============================================================================================================================
+                        }
                     }
 
                     return node;
