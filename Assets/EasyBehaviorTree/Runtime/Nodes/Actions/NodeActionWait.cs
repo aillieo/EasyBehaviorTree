@@ -3,34 +3,50 @@ using System.Collections.Generic;
 using EasyBehaviorTree;
 using System;
 
-[Serializable]
-public class NodeActionWait : NodeAction
+namespace EasyBehaviorTree
 {
-
-    public float time { get; set; }
-
-    private float timer;
-
-    public override void Destroy()
+    [Serializable]
+    public class NodeActionWait : NodeAction
     {
+        [NodeParam]
+        public float time { get; set; }
 
-    }
+        private float timer;
 
-    public override void Init()
-    {
-        base.Init();
-        timer = 0f;
-    }
-
-    protected override BTState ExecuteTask(float deltaTime)
-    {
-        timer += deltaTime;
-        if(timer > time)
+        public override void Cleanup()
         {
-            timer = 0;
-            return BTState.Success;
+
         }
 
-        return BTState.Running;
+#if UNITY_EDITOR
+        public override bool Validate(out string error)
+        {
+            error = null;
+            if (time < 0)
+            {
+                error = "Invalid time";
+            }
+            return error != null;
+        }
+#endif
+
+        public override void Reset()
+        {
+            base.Reset();
+            timer = 0f;
+        }
+
+        protected override BTState ExecuteTask(float deltaTime)
+        {
+            timer += deltaTime;
+            if (timer > time)
+            {
+                timer = 0;
+                return BTState.Success;
+            }
+
+            return BTState.Running;
+        }
     }
+
 }

@@ -7,17 +7,12 @@ namespace EasyBehaviorTree
 {
     public interface IDecorator
     {
-        IDecoratee Target
+        NodeDecoratee Child
         {
             get;
 #if UNITY_EDITOR
             set;
 #endif
         }
-
-
-        BTState PreUpdate(float deltaTime);
-        BTState PostUpdate(float deltaTime);
-
     }
 }

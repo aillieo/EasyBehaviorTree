@@ -14,26 +14,39 @@ namespace EasyBehaviorTree
             PassCertain,
         }
 
+        [NodeParam]
         public ParallelStrategy strategy { get; set; }
+
+        [NodeParam]
         public int targetCount { get; set; }
 
         private Dictionary<int, BTState> nodeStates = new Dictionary<int, BTState>();
 
-        public override void Init()
+        public override void Reset()
         {
-            base.Init();
-            if (targetCount > Children.Count)
-            {
-                behaviorTree.logger.Error("Not enough child nodes");
-            }
-
+            base.Reset();
             nodeStates.Clear();
         }
 
-        public override void Destroy()
+        public override void Cleanup()
         {
 
         }
+
+#if UNITY_EDITOR
+        public override bool Validate(out string error)
+        {
+            bool ret = base.Validate(out error);
+            if(ret)
+            {
+                if (targetCount > Children.Count)
+                {
+                    error = "Not enough child nodes";
+                }
+            }
+            return error != null;
+        }
+#endif
 
         public override BTState Update(float deltaTime)
         {

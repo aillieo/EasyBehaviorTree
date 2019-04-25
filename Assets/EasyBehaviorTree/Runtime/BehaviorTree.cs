@@ -73,7 +73,7 @@ namespace EasyBehaviorTree
             }
             this.blackBoard = new BlackBoard();
             this.random = new Random(DateTime.Now.Second);
-            NodeBase.Init(root, this);
+            NodeBase.InitNode(root, this);
         }
 
         public void Restart()
@@ -116,10 +116,10 @@ namespace EasyBehaviorTree
         }
 
 
-        public string DumpTree()
+        public string DumpTree(bool withBriefInfo = false)
         {
             StringBuilder sb = new StringBuilder();
-            root.DumpNode(sb, 0);
+            root.DumpNode(sb, withBriefInfo, 0);
             return sb.ToString();
         }
 

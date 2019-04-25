@@ -38,7 +38,7 @@ namespace EasyBehaviorTree.Creator
             string fullPath = GetFullPathForTree(go);
             SaveBehaviorTree(behaviorTree, fullPath);
 
-            Debug.Log("Created successfully!\n" + fullPath + "\n" + behaviorTree.DumpTree());
+            Debug.Log("Created successfully!\n" + fullPath + "\n" + behaviorTree.DumpTree(true));
 
             return behaviorTree;
 
@@ -60,6 +60,16 @@ namespace EasyBehaviorTree.Creator
                 {
                     composite.AddChild(node);
                     ProcessChildrenForTrans(t, node);
+                    continue;
+                }
+
+                NodeDecorator decorator = parentNode as NodeDecorator;
+                NodeDecoratee decoratee = node as NodeDecoratee;
+                if (decorator != null && decoratee != null)
+                {
+                    decorator.Child = decoratee;
+                    ProcessChildrenForTrans(t, node);
+                    continue;
                 }
 
             }

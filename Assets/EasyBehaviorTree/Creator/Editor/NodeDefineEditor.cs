@@ -23,6 +23,7 @@ namespace EasyBehaviorTree.Creator
         private SerializedProperty nodeFullName;
         private SerializedProperty assemblyName;
         private SerializedProperty displayName;
+        private SerializedProperty nodeDescription;
 
         private void Collect()
         {
@@ -38,7 +39,7 @@ namespace EasyBehaviorTree.Creator
             nodeFullName = this.serializedObject.FindProperty("nodeFullName");
             assemblyName = this.serializedObject.FindProperty("assemblyName");
             displayName = this.serializedObject.FindProperty("displayName");
-
+            nodeDescription = this.serializedObject.FindProperty("nodeDescription");
 
             for (int i = 0, len = nodeTypes.Length; i < len; ++i)
             {
@@ -58,7 +59,7 @@ namespace EasyBehaviorTree.Creator
 
         private void DrawNodeProperties()
         {
-            var properties = nodeTypes[selected].GetProperties();
+            var properties = NodeDefine.GetNodeParamProperties(nodeTypes[selected]);
 
             foreach(var property in properties)
             {
@@ -94,6 +95,9 @@ namespace EasyBehaviorTree.Creator
             GUILayout.EndVertical();
 
             DrawButtons();
+
+            GUILayout.Label("Description");
+            nodeDescription.stringValue = EditorGUILayout.TextArea(nodeDescription.stringValue,GUILayout.MinHeight(50));
 
             serializedObject.ApplyModifiedProperties();
         }

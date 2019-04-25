@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &479688510014867028
+--- !u!1 &390500512716528126
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,57 +8,61 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7232212033305166685}
-  - component: {fileID: 435600295324062170}
+  - component: {fileID: 6351743138858968871}
+  - component: {fileID: 554796499751058715}
   m_Layer: 0
-  m_Name: logger
+  m_Name: inv
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7232212033305166685
+--- !u!4 &6351743138858968871
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 479688510014867028}
+  m_GameObject: {fileID: 390500512716528126}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4699340043573276622}
-  m_RootOrder: 4
+  m_Children:
+  - {fileID: 5709822861898414853}
+  m_Father: {fileID: 5029907821792034462}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &435600295324062170
+--- !u!114 &554796499751058715
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 479688510014867028}
+  m_GameObject: {fileID: 390500512716528126}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: feb5477fb5ae48f49b6c170e3613c8fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nodeFullName: NodeActionLog
+  nodeFullName: EasyBehaviorTree.NodeInvert
   assemblyName: Assembly-CSharp
-  displayName: logger
+  displayName: inv
+  nodeDescription: 
   stringParamSet:
     nodeParams:
     - key: logStr
-      value: in sel 2   c
+      value: xixixi again
   floatParamSet:
-    nodeParams: []
+    nodeParams:
+    - key: passProbability
+      value: 0.5
   intParamSet:
     nodeParams: []
   boolParamSet:
     nodeParams: []
   enumParamSet:
     nodeParams: []
---- !u!1 &1186219581182755943
+--- !u!1 &524446370117698833
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -66,8 +70,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 862595502837439245}
-  - component: {fileID: 94195309560953744}
+  - component: {fileID: 2298456890506143845}
+  - component: {fileID: 358806568063287919}
   m_Layer: 0
   m_Name: logger
   m_TagString: Untagged
@@ -75,39 +79,349 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &862595502837439245
+--- !u!4 &2298456890506143845
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1186219581182755943}
+  m_GameObject: {fileID: 524446370117698833}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4699340043573276622}
+  m_Father: {fileID: 6038908548018234917}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &358806568063287919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 524446370117698833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: feb5477fb5ae48f49b6c170e3613c8fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodeFullName: EasyBehaviorTree.NodeActionLog
+  assemblyName: Assembly-CSharp
+  displayName: logger
+  nodeDescription: 
+  stringParamSet:
+    nodeParams:
+    - key: logStr
+      value: xixixi
+  floatParamSet:
+    nodeParams:
+    - key: time
+      value: 3
+  intParamSet:
+    nodeParams: []
+  boolParamSet:
+    nodeParams: []
+  enumParamSet:
+    nodeParams: []
+--- !u!1 &2694959127662684527
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7524395297674540263}
+  - component: {fileID: 3106179717775437890}
+  m_Layer: 0
+  m_Name: rand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7524395297674540263
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2694959127662684527}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6038908548018234917}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &94195309560953744
+--- !u!114 &3106179717775437890
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1186219581182755943}
+  m_GameObject: {fileID: 2694959127662684527}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: feb5477fb5ae48f49b6c170e3613c8fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nodeFullName: NodeActionLog
+  nodeFullName: EasyBehaviorTree.NodeConditionRandom
   assemblyName: Assembly-CSharp
-  displayName: logger
+  displayName: rand
+  nodeDescription: 
   stringParamSet:
     nodeParams:
     - key: logStr
-      value: in sel 2   b
+      value: 
+  floatParamSet:
+    nodeParams:
+    - key: passProbability
+      value: 0.5
+  intParamSet:
+    nodeParams: []
+  boolParamSet:
+    nodeParams: []
+  enumParamSet:
+    nodeParams: []
+--- !u!1 &3091194340361083576
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5029907821792034462}
+  - component: {fileID: 3577076098894803220}
+  m_Layer: 0
+  m_Name: sel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5029907821792034462
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3091194340361083576}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 6351743138858968871}
+  - {fileID: 8163873526572573549}
+  m_Father: {fileID: 6038908548018234917}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3577076098894803220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3091194340361083576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: feb5477fb5ae48f49b6c170e3613c8fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodeFullName: EasyBehaviorTree.NodeSelector
+  assemblyName: Assembly-CSharp
+  displayName: sel
+  nodeDescription: 
+  stringParamSet:
+    nodeParams:
+    - key: logStr
+      value: xixixi again
+  floatParamSet:
+    nodeParams:
+    - key: passProbability
+      value: 0.5
+  intParamSet:
+    nodeParams: []
+  boolParamSet:
+    nodeParams: []
+  enumParamSet:
+    nodeParams: []
+--- !u!1 &4024296256866472905
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6042652884301486020}
+  - component: {fileID: 1405395451246056853}
+  m_Layer: 0
+  m_Name: logger2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6042652884301486020
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4024296256866472905}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6038908548018234917}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1405395451246056853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4024296256866472905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: feb5477fb5ae48f49b6c170e3613c8fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodeFullName: EasyBehaviorTree.NodeActionLog
+  assemblyName: Assembly-CSharp
+  displayName: logger2
+  nodeDescription: 
+  stringParamSet:
+    nodeParams:
+    - key: logStr
+      value: xixixi again
+  floatParamSet:
+    nodeParams:
+    - key: passProbability
+      value: 0.5
+  intParamSet:
+    nodeParams: []
+  boolParamSet:
+    nodeParams: []
+  enumParamSet:
+    nodeParams: []
+--- !u!1 &4258583553955009579
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5709822861898414853}
+  - component: {fileID: 7065081823552931930}
+  m_Layer: 0
+  m_Name: wait
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5709822861898414853
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4258583553955009579}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6351743138858968871}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7065081823552931930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4258583553955009579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: feb5477fb5ae48f49b6c170e3613c8fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodeFullName: EasyBehaviorTree.NodeActionWait
+  assemblyName: Assembly-CSharp
+  displayName: wait
+  nodeDescription: 
+  stringParamSet:
+    nodeParams:
+    - key: logStr
+      value: xixixi again
+  floatParamSet:
+    nodeParams:
+    - key: passProbability
+      value: 0.5
+    - key: time
+      value: 1
+  intParamSet:
+    nodeParams: []
+  boolParamSet:
+    nodeParams: []
+  enumParamSet:
+    nodeParams: []
+--- !u!1 &5212268213413486706
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8163873526572573549}
+  - component: {fileID: 4315565102802216812}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8163873526572573549
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5212268213413486706}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5029907821792034462}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4315565102802216812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5212268213413486706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: feb5477fb5ae48f49b6c170e3613c8fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodeFullName: EasyBehaviorTree.NodeActionLog
+  assemblyName: Assembly-CSharp
+  displayName: logger
+  nodeDescription: 
+  stringParamSet:
+    nodeParams:
+    - key: logStr
+      value: after invert
   floatParamSet:
     nodeParams: []
   intParamSet:
@@ -116,7 +430,7 @@ MonoBehaviour:
     nodeParams: []
   enumParamSet:
     nodeParams: []
---- !u!1 &2339786093053525259
+--- !u!1 &7250049149516005805
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,8 +438,69 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7174168825476787908}
-  - component: {fileID: 3863388138327265879}
+  - component: {fileID: 5080145349469489006}
+  - component: {fileID: 6872137341970812858}
+  m_Layer: 0
+  m_Name: wait
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5080145349469489006
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7250049149516005805}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6038908548018234917}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6872137341970812858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7250049149516005805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: feb5477fb5ae48f49b6c170e3613c8fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodeFullName: EasyBehaviorTree.NodeActionWait
+  assemblyName: Assembly-CSharp
+  displayName: wait
+  nodeDescription: 
+  stringParamSet:
+    nodeParams:
+    - key: logStr
+      value: 
+  floatParamSet:
+    nodeParams:
+    - key: time
+      value: 0.3
+  intParamSet:
+    nodeParams: []
+  boolParamSet:
+    nodeParams: []
+  enumParamSet:
+    nodeParams: []
+--- !u!1 &8377143371657126283
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6038908548018234917}
+  - component: {fileID: 5125005229915618059}
   m_Layer: 0
   m_Name: seq
   m_TagString: Untagged
@@ -133,32 +508,32 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7174168825476787908
+--- !u!4 &6038908548018234917
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2339786093053525259}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_GameObject: {fileID: 8377143371657126283}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2376576654465122831}
-  - {fileID: 2751029655147698228}
-  - {fileID: 2971306020923797032}
-  - {fileID: 3497755549839415656}
-  - {fileID: 5397644146433608027}
+  - {fileID: 5080145349469489006}
+  - {fileID: 2298456890506143845}
+  - {fileID: 7524395297674540263}
+  - {fileID: 6042652884301486020}
+  - {fileID: 5029907821792034462}
   m_Father: {fileID: 6920991187801829615}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3863388138327265879
+--- !u!114 &5125005229915618059
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2339786093053525259}
+  m_GameObject: {fileID: 8377143371657126283}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: feb5477fb5ae48f49b6c170e3613c8fa, type: 3}
@@ -167,551 +542,13 @@ MonoBehaviour:
   nodeFullName: EasyBehaviorTree.NodeSequence
   assemblyName: Assembly-CSharp
   displayName: seq
+  nodeDescription: 
   stringParamSet:
     nodeParams:
     - key: logStr
-      value: 
-  floatParamSet:
-    nodeParams:
-    - key: time
-      value: 3
-  intParamSet:
-    nodeParams: []
-  boolParamSet:
-    nodeParams: []
-  enumParamSet:
-    nodeParams: []
---- !u!1 &2911101578763579772
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3497755549839415656}
-  - component: {fileID: 1825008479883143692}
-  m_Layer: 0
-  m_Name: condition
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3497755549839415656
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2911101578763579772}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 7174168825476787908}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1825008479883143692
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2911101578763579772}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: feb5477fb5ae48f49b6c170e3613c8fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nodeFullName: NodeConditionRandom
-  assemblyName: Assembly-CSharp
-  displayName: condition
-  stringParamSet:
-    nodeParams:
-    - key: logStr
-      value: hello bt
-  floatParamSet:
-    nodeParams:
-    - key: passProbability
-      value: 0.5
-  intParamSet:
-    nodeParams: []
-  boolParamSet:
-    nodeParams: []
-  enumParamSet:
-    nodeParams: []
---- !u!1 &2913718961010072425
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7214364974566387101}
-  - component: {fileID: 4713084057794424749}
-  m_Layer: 0
-  m_Name: logger
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7214364974566387101
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2913718961010072425}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4699340043573276622}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4713084057794424749
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2913718961010072425}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: feb5477fb5ae48f49b6c170e3613c8fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nodeFullName: NodeActionLog
-  assemblyName: Assembly-CSharp
-  displayName: logger
-  stringParamSet:
-    nodeParams:
-    - key: logStr
-      value: in sel 2   a
+      value: heheda
   floatParamSet:
     nodeParams: []
-  intParamSet:
-    nodeParams: []
-  boolParamSet:
-    nodeParams: []
-  enumParamSet:
-    nodeParams: []
---- !u!1 &2934653693818511374
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2376576654465122831}
-  - component: {fileID: 4746859104304149590}
-  m_Layer: 0
-  m_Name: logger
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2376576654465122831
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2934653693818511374}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 7174168825476787908}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4746859104304149590
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2934653693818511374}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: feb5477fb5ae48f49b6c170e3613c8fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nodeFullName: NodeActionLog
-  assemblyName: Assembly-CSharp
-  displayName: logger
-  stringParamSet:
-    nodeParams:
-    - key: logStr
-      value: in seq 1   a
-  floatParamSet:
-    nodeParams: []
-  intParamSet:
-    nodeParams: []
-  boolParamSet:
-    nodeParams: []
-  enumParamSet:
-    nodeParams: []
---- !u!1 &3627030667243379438
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2971306020923797032}
-  - component: {fileID: 4937340119130205433}
-  m_Layer: 0
-  m_Name: logger
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2971306020923797032
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3627030667243379438}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 7174168825476787908}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4937340119130205433
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3627030667243379438}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: feb5477fb5ae48f49b6c170e3613c8fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nodeFullName: NodeActionLog
-  assemblyName: Assembly-CSharp
-  displayName: logger
-  stringParamSet:
-    nodeParams:
-    - key: logStr
-      value: in seq 1   b
-  floatParamSet:
-    nodeParams: []
-  intParamSet:
-    nodeParams: []
-  boolParamSet:
-    nodeParams: []
-  enumParamSet:
-    nodeParams: []
---- !u!1 &4766001342276335170
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6440633983046284604}
-  - component: {fileID: 3235928422040397944}
-  m_Layer: 0
-  m_Name: condition
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6440633983046284604
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4766001342276335170}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4699340043573276622}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3235928422040397944
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4766001342276335170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: feb5477fb5ae48f49b6c170e3613c8fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nodeFullName: NodeConditionRandom
-  assemblyName: Assembly-CSharp
-  displayName: condition
-  stringParamSet:
-    nodeParams:
-    - key: logStr
-      value: hello bt
-  floatParamSet:
-    nodeParams:
-    - key: passProbability
-      value: 0.5
-  intParamSet:
-    nodeParams: []
-  boolParamSet:
-    nodeParams: []
-  enumParamSet:
-    nodeParams: []
---- !u!1 &6196793568509514124
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2729240987344432353}
-  - component: {fileID: 7764006332390409557}
-  m_Layer: 0
-  m_Name: condition
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2729240987344432353
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6196793568509514124}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4699340043573276622}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7764006332390409557
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6196793568509514124}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: feb5477fb5ae48f49b6c170e3613c8fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nodeFullName: NodeConditionRandom
-  assemblyName: Assembly-CSharp
-  displayName: condition
-  stringParamSet:
-    nodeParams:
-    - key: logStr
-      value: hello bt
-  floatParamSet:
-    nodeParams:
-    - key: passProbability
-      value: 0.5
-  intParamSet:
-    nodeParams: []
-  boolParamSet:
-    nodeParams: []
-  enumParamSet:
-    nodeParams: []
---- !u!1 &8060800111424515444
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5397644146433608027}
-  - component: {fileID: 6218485268024090711}
-  m_Layer: 0
-  m_Name: logger
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5397644146433608027
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8060800111424515444}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 7174168825476787908}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6218485268024090711
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8060800111424515444}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: feb5477fb5ae48f49b6c170e3613c8fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nodeFullName: NodeActionLog
-  assemblyName: Assembly-CSharp
-  displayName: logger
-  stringParamSet:
-    nodeParams:
-    - key: logStr
-      value: in seq 1   c
-  floatParamSet:
-    nodeParams: []
-  intParamSet:
-    nodeParams: []
-  boolParamSet:
-    nodeParams: []
-  enumParamSet:
-    nodeParams: []
---- !u!1 &8169475924984919255
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4699340043573276622}
-  - component: {fileID: 1791391853659320550}
-  m_Layer: 0
-  m_Name: selector
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4699340043573276622
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8169475924984919255}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 7214364974566387101}
-  - {fileID: 2729240987344432353}
-  - {fileID: 862595502837439245}
-  - {fileID: 6440633983046284604}
-  - {fileID: 7232212033305166685}
-  m_Father: {fileID: 6920991187801829615}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1791391853659320550
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8169475924984919255}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: feb5477fb5ae48f49b6c170e3613c8fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nodeFullName: EasyBehaviorTree.NodeSelector
-  assemblyName: Assembly-CSharp
-  displayName: selector
-  stringParamSet:
-    nodeParams:
-    - key: logStr
-      value: 
-  floatParamSet:
-    nodeParams:
-    - key: time
-      value: 3
-  intParamSet:
-    nodeParams: []
-  boolParamSet:
-    nodeParams: []
-  enumParamSet:
-    nodeParams: []
---- !u!1 &9005535539826585653
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2751029655147698228}
-  - component: {fileID: 9062482881750317823}
-  m_Layer: 0
-  m_Name: condition
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2751029655147698228
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9005535539826585653}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 7174168825476787908}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9062482881750317823
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9005535539826585653}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: feb5477fb5ae48f49b6c170e3613c8fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nodeFullName: NodeConditionRandom
-  assemblyName: Assembly-CSharp
-  displayName: condition
-  stringParamSet:
-    nodeParams:
-    - key: logStr
-      value: hello bt
-  floatParamSet:
-    nodeParams:
-    - key: passProbability
-      value: 0.5
   intParamSet:
     nodeParams: []
   boolParamSet:
@@ -746,8 +583,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 7174168825476787908}
-  - {fileID: 4699340043573276622}
+  - {fileID: 6038908548018234917}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -763,9 +599,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feb5477fb5ae48f49b6c170e3613c8fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nodeFullName: EasyBehaviorTree.NodeSelector
+  nodeFullName: EasyBehaviorTree.NodeRepeater
   assemblyName: Assembly-CSharp
   displayName: root
+  nodeDescription: test root
   stringParamSet:
     nodeParams:
     - key: logStr
@@ -775,8 +612,12 @@ MonoBehaviour:
     - key: time
       value: 6
   intParamSet:
-    nodeParams: []
+    nodeParams:
+    - key: repeatTimes
+      value: 5
   boolParamSet:
-    nodeParams: []
+    nodeParams:
+    - key: ignoringFailure
+      value: 1
   enumParamSet:
     nodeParams: []

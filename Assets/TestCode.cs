@@ -14,6 +14,7 @@ public class TestCode : MonoBehaviour
         string fullPath = Application.dataPath + "/BT_GameObject.bt";
         behaviorTree = BehaviorTree.LoadBehaviorTree(fullPath);
 
+        // behaviorTree.debugLogging = true;
 
         // behaviorTree.OnBehaviorTreeCompleted += (bt,st) => bt.Restart();
 

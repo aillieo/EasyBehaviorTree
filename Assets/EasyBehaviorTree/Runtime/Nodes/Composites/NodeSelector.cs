@@ -10,13 +10,13 @@ namespace EasyBehaviorTree
 
         private int curIndex;
 
-        public override void Init()
+        public override void Reset()
         {
-            base.Init();
+            base.Reset();
             curIndex = 0;
         }
 
-        public override void Destroy()
+        public override void Cleanup()
         {
 
         }

@@ -1,33 +1,67 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.Text;
 
 namespace EasyBehaviorTree
 {
     [Serializable]
-    public abstract class NodeDecorator : NodeBase, IDecorator
+    public abstract class NodeDecorator : NodeDecoratee, IDecorator
     {
 
-        protected IDecoratee mTarget;
-
-        public IDecoratee Target { get => mTarget; 
-
+        public NodeDecoratee Child
+        {
+            get;
 #if UNITY_EDITOR
-
-        set => mTarget = value; 
+            set;
 #endif
         }
 
-        public virtual BTState PostUpdate(float deltaTime)
+#if UNITY_EDITOR
+
+        public override bool Validate(out string error)
         {
-            return BTState.Success;
+            error = null;
+            if (Child == null)
+            {
+                error = "Dont have a child";
+                return false;
+            }
+            return true;
+        }
+#endif
+
+
+        public override void Init()
+        {
+            base.Init();
+
+            if (Child != null)
+            {
+                InitNode(Child, this.behaviorTree);
+            }
         }
 
-        public virtual BTState PreUpdate(float deltaTime)
+
+        public override void Reset()
         {
-            return BTState.Success;
+            base.Reset();
+
+            if (Child != null)
+            {
+                ResetNode(Child);
+            }
         }
 
 
+        public override void DumpNode(StringBuilder stringBuilder, bool withBriefInfo, int level = 0)
+        {
+            base.DumpNode(stringBuilder, withBriefInfo, level);
+
+            if (Child != null)
+            {
+                Child.DumpNode(stringBuilder, withBriefInfo, level + 1);
+            }
+        }
     }
 }

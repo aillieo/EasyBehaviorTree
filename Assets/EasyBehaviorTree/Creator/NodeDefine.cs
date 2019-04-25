@@ -5,6 +5,7 @@ using UnityEditor;
 using System;
 using System.Reflection;
 using System.Linq;
+using System.Text;
 
 namespace EasyBehaviorTree.Creator
 {
@@ -18,7 +19,8 @@ namespace EasyBehaviorTree.Creator
 
         [HideInInspector]
         public string displayName;
-
+        [HideInInspector]
+        public string nodeDescription;
 
         // =============================================================================================================================
         [HideInInspector][SerializeField]
@@ -33,6 +35,11 @@ namespace EasyBehaviorTree.Creator
         public EnumParamSet enumParamSet = new EnumParamSet();
         // =============================================================================================================================
 
+        
+        public static PropertyInfo[] GetNodeParamProperties(Type type)
+        {
+            return type.GetProperties().Where(pi => pi.GetCustomAttribute<NodeParamAttribute>(false) != null).ToArray();
+        }
 
         public NodeBase CreateNode()
         {
@@ -46,7 +53,12 @@ namespace EasyBehaviorTree.Creator
                     if(node != null)
                     {
                         node.name = displayName;
-                        var properties = t.GetProperties();
+                        node.fullName = string.Format("{0}({1})", node.name, node.GetType().Name);
+                        StringBuilder briefInfo = new StringBuilder();
+                        briefInfo.Append("{ ");
+
+                        var properties = GetNodeParamProperties(t);
+
                         foreach (var property in properties)
                         {
                             // =============================================================================================================================
@@ -56,7 +68,11 @@ namespace EasyBehaviorTree.Creator
                             boolParamSet.TrySetPropertyForType(property, node);
                             enumParamSet.TrySetPropertyForType(property, node);
                             // =============================================================================================================================
+
+                            briefInfo.Append(string.Format("{0}={1}  ", property.Name, property.GetValue(node)));
                         }
+                        briefInfo.Append("}");
+                        node.briefInfo = briefInfo.ToString();
                     }
 
                     return node;

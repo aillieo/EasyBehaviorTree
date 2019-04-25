@@ -9,13 +9,5 @@ namespace EasyBehaviorTree
     [Serializable]
     public abstract class NodeDecoratee : NodeBase, IDecoratee
     {
-        public NodeDecorator decorator
-        {
-            get;
-#if UNITY_EDITOR
-            set;
-#endif
-        }
-
     }
 }

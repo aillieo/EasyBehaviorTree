@@ -11,7 +11,7 @@ namespace EasyBehaviorTree
 
         protected BTState? lastState = null;
 
-        protected List<NodeBase> mChildren = new List<NodeBase>();
+        private List<NodeBase> mChildren = new List<NodeBase>();
 
         public IList<NodeBase> Children => mChildren.AsReadOnly();
 
@@ -21,31 +21,46 @@ namespace EasyBehaviorTree
         {
             mChildren.Add(node);
         }
+
+        public override bool Validate(out string error)
+        {
+            error = null;
+            if (Children.Count == 0)
+            {
+                error = "Not enough child nodes";
+                return false;
+            }
+            return true;
+        }
 #endif
 
         public override void Init()
         {
             base.Init();
 
-            lastState = null;
-
-            foreach(var n in mChildren)
+            foreach (var n in mChildren)
             {
-                Init(n,this.behaviorTree);
+                InitNode(n, this.behaviorTree);
             }
         }
 
 
-        public override void DumpNode(StringBuilder stringBuilder, int level = 0)
+        public override void Reset()
         {
-            if (stringBuilder == null)
-            {
-                return;
-            }
+            base.Reset();
 
-            stringBuilder.Append(new string('-', level));
-            stringBuilder.Append(ToString());
-            stringBuilder.AppendLine();
+            lastState = null;
+
+            foreach (var n in mChildren)
+            {
+                ResetNode(n);
+            }
+        }
+
+
+        public override void DumpNode(StringBuilder stringBuilder, bool withBriefInfo, int level = 0)
+        {
+            base.DumpNode(stringBuilder, withBriefInfo, level);
 
             if (null == mChildren)
             {
@@ -54,7 +69,7 @@ namespace EasyBehaviorTree
 
             foreach (var node in mChildren)
             {
-                node.DumpNode(stringBuilder, level + 1);
+                node.DumpNode(stringBuilder, withBriefInfo, level + 1);
             }
         }
 
