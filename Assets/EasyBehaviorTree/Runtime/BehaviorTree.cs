@@ -42,6 +42,7 @@ namespace EasyBehaviorTree
 
         [NonSerialized]
         private BaseLogger mLogger;
+
         public BaseLogger logger
         {
             get
@@ -60,6 +61,33 @@ namespace EasyBehaviorTree
         }
 
 #if UNITY_EDITOR
+        public bool Validate(out string error, out NodeBase errorNode)
+        {
+            return ValidateNodeAndChildren(root, out error, out errorNode);
+        }
+
+        private static bool ValidateNodeAndChildren(NodeBase node, out string error, out NodeBase errorNode)
+        {
+            errorNode = node;
+            if(!node.Validate(out error))
+            {
+                return false;
+            }
+
+            NodeParent nodeParent = node as NodeParent;
+            if(nodeParent != null)
+            {
+                foreach (var child in nodeParent.Children)
+                {
+                    if (!ValidateNodeAndChildren(child, out error, out errorNode))
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
 #else
         private BehaviorTree()
         { }

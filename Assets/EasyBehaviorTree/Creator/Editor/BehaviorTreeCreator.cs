@@ -35,6 +35,14 @@ namespace EasyBehaviorTree.Creator
 
             ProcessChildrenForTrans(root, behaviorTree.root);
 
+            string error = null;
+            NodeBase errorNode = null;
+            if(!behaviorTree.Validate(out error,out errorNode))
+            {
+                Debug.LogErrorFormat("Create tree failed: \nerror = {0}\nnode = {1}\nbriefInfo = {2} " ,error,errorNode.fullName,errorNode.briefInfo);
+                return null;
+            }
+
             string fullPath = GetFullPathForTree(go);
             SaveBehaviorTree(behaviorTree, fullPath);
 
@@ -55,23 +63,13 @@ namespace EasyBehaviorTree.Creator
                     continue;
                 }
 
-                NodeComposite composite = parentNode as NodeComposite;
-                if(composite != null)
+                NodeParent parent = parentNode as NodeParent;
+                if(parent != null)
                 {
-                    composite.AddChild(node);
+                    parent.AddChild(node);
                     ProcessChildrenForTrans(t, node);
                     continue;
                 }
-
-                NodeDecorator decorator = parentNode as NodeDecorator;
-                NodeDecoratee decoratee = node as NodeDecoratee;
-                if (decorator != null && decoratee != null)
-                {
-                    decorator.Child = decoratee;
-                    ProcessChildrenForTrans(t, node);
-                    continue;
-                }
-
             }
         }
 

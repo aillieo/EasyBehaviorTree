@@ -6,7 +6,7 @@ namespace EasyBehaviorTree
 {
 
     [Serializable]
-    public abstract class NodeAction : NodeDecoratee
+    public abstract class NodeAction : NodeBase
     {
 
         protected abstract BTState ExecuteTask(float deltaTime);

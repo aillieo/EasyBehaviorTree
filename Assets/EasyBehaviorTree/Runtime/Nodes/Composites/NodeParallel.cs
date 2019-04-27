@@ -44,7 +44,7 @@ namespace EasyBehaviorTree
                     error = "Not enough child nodes";
                 }
             }
-            return error != null;
+            return error == null;
         }
 #endif
 

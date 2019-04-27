@@ -27,7 +27,7 @@ namespace EasyBehaviorTree
             {
                 error = "Invalid passProbability";
             }
-            return error != null;
+            return error == null;
         }
 #endif
 

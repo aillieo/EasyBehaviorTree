@@ -26,7 +26,7 @@ namespace EasyBehaviorTree
             {
                 error = "Invalid time";
             }
-            return error != null;
+            return error == null;
         }
 #endif
 

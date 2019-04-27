@@ -5,7 +5,7 @@ using System;
 namespace EasyBehaviorTree
 {
     [Serializable]
-    public abstract class NodeCondition : NodeDecoratee
+    public abstract class NodeCondition : NodeBase
     {
 
         protected abstract bool CheckCondition(float deltaTime);

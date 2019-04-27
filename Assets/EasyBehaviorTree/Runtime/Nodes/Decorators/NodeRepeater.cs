@@ -34,7 +34,7 @@ namespace EasyBehaviorTree
             {
                 error = "Invalid repeatTimes";
             }
-            return error != null;
+            return error == null;
         }
 #endif
 
