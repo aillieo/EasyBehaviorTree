@@ -73,7 +73,7 @@ namespace EasyBehaviorTree
 
         private BTState CheckTarget()
         {
-            int pass = 0, fail = 0;
+            int pass = 0, fail = 0, rest = 0;
             foreach(var state in nodeStates)
             {
                 if(state.Value == BTState.Success)
@@ -83,6 +83,10 @@ namespace EasyBehaviorTree
                 else if (state.Value == BTState.Failure)
                 {
                     fail++;
+                }
+                else
+                {
+                    rest++;
                 }
             }
 
@@ -94,12 +98,20 @@ namespace EasyBehaviorTree
                         lastState = BTState.Success;
                         return BTState.Success;
                     }
+                    else if(rest == 0)
+                    {
+                        return BTState.Failure;
+                    }
                     break;
                 case ParallelStrategy.FailCertain:
                     if (fail >= targetCount)
                     {
                         lastState = BTState.Failure;
                         return BTState.Failure;
+                    }
+                    else if (rest == 0)
+                    {
+                        return BTState.Success;
                     }
                     break;
                 default:
