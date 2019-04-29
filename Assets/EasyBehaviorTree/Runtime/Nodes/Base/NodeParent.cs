@@ -53,9 +53,9 @@ namespace EasyBehaviorTree
         }
 
 
-        public override void DumpNode(StringBuilder stringBuilder, bool withBriefInfo, int level = 0)
+        public override void DumpNode(StringBuilder stringBuilder, INodeInfoFormatter formatter, int level = 0)
         {
-            base.DumpNode(stringBuilder, withBriefInfo, level);
+            base.DumpNode(stringBuilder, formatter, level);
 
             if (null == mChildren)
             {
@@ -64,7 +64,7 @@ namespace EasyBehaviorTree
 
             foreach (var node in mChildren)
             {
-                node.DumpNode(stringBuilder, withBriefInfo, level + 1);
+                node.DumpNode(stringBuilder, formatter, level + 1);
             }
         }
 

@@ -147,7 +147,7 @@ namespace EasyBehaviorTree
         public string DumpTree(bool withBriefInfo = false)
         {
             StringBuilder sb = new StringBuilder();
-            root.DumpNode(sb, withBriefInfo, 0);
+            root.DumpNode(sb, new DefaultFormatter(), 0);
             return sb.ToString();
         }
 
@@ -157,6 +157,7 @@ namespace EasyBehaviorTree
             {
                 return null;
             }
+
             BehaviorTree behaviorTree = null;
             using (Stream stream = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read))
             {

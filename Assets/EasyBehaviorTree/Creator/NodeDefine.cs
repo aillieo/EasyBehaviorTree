@@ -54,8 +54,7 @@ namespace EasyBehaviorTree.Creator
                     {
                         node.name = displayName;
                         node.fullName = string.Format("{0}({1})", node.name, node.GetType().Name);
-                        StringBuilder briefInfo = new StringBuilder();
-                        briefInfo.Append("{ ");
+                        List<string> briefInfo = new List<string>();
 
                         var properties = GetNodeParamProperties(t);
 
@@ -69,10 +68,11 @@ namespace EasyBehaviorTree.Creator
                             enumParamSet.TrySetPropertyForType(property, node);
                             // =============================================================================================================================
 
-                            briefInfo.Append(string.Format("{0}={1}  ", property.Name, property.GetValue(node)));
+                            briefInfo.Add(property.Name);
+                            string value = Convert.ToString(property.GetValue(node));
+                            briefInfo.Add(value != null ? value : string.Empty);
                         }
-                        briefInfo.Append("}");
-                        node.briefInfo = briefInfo.ToString();
+                        node.briefInfo = briefInfo.ToArray();
                     }
 
                     return node;

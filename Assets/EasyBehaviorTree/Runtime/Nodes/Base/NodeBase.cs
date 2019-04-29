@@ -16,25 +16,36 @@ namespace EasyBehaviorTree
 
         public string fullName;
 
-        public string briefInfo;
-
+        public string[] briefInfo;
+        
         protected NodeState nodeState { get; private set; } = NodeState.Raw;
 
-        public virtual void DumpNode(StringBuilder stringBuilder, bool withBriefInfo, int level = 0)
+        public virtual void DumpNode(StringBuilder stringBuilder, INodeInfoFormatter formatter, int level = 0)
         {
             if (stringBuilder == null)
             {
                 return;
             }
 
-            stringBuilder.Append(new string('-', level));
-            stringBuilder.Append(fullName);
-            if(withBriefInfo)
+            if (formatter == null)
             {
-                stringBuilder.Append(" ");
-                stringBuilder.Append(briefInfo);
+                return;
             }
-            stringBuilder.AppendLine();
+
+            stringBuilder.AppendLine(formatter.FormatNodeInfo(ExtractNodeInfo(level)));
+
+        }
+
+        public NodeInfo ExtractNodeInfo(int level)
+        {
+            return new NodeInfo()
+            {
+                name = this.name,
+                type = this.GetType(),
+                briefInfo = this.briefInfo,
+                nodeState = this.nodeState,
+                level = level,
+            };
         }
 
         public static void InitNode(NodeBase node, BehaviorTree behaviorTree)
