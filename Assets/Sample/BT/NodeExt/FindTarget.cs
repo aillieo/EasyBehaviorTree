@@ -15,21 +15,26 @@ public class FindTarget : NodeAction
 
     protected override BTState ExecuteTask(float deltaTime)
     {
-        Scene scene = SceneManager.GetActiveScene();
-        GameObject[] roots = scene.GetRootGameObjects();
         Hero self = behaviorTree.blackBoard["self"] as Hero;
-        foreach (var go in roots)
+        Hero target = null;
+        float sqrDis = float.MaxValue;
+        foreach (var hero in GameManager.Instance.GetHeroes())
         {
-            Hero[] heroes = go.GetComponentsInChildren<Hero>();
-            foreach(var h in heroes)
+            if (hero != null && hero.alive && hero != self)
             {
-                if(h != self)
+                float newSqrDis = (hero.transform.position - self.transform.position).sqrMagnitude;
+                if(newSqrDis < sqrDis)
                 {
-                    behaviorTree.blackBoard["target"] = h;
-                    return BTState.Success;
+                    sqrDis = newSqrDis;
+                    target = hero;
                 }
             }
+        }
 
+        if(target != null)
+        {
+            behaviorTree.blackBoard["target"] = target;
+            return BTState.Success;
         }
         return BTState.Failure;
     }

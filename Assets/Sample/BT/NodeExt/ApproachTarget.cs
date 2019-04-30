@@ -17,7 +17,10 @@ public class ApproachTarget : NodeAction
     {
         Hero self = behaviorTree.blackBoard["self"] as Hero;
         Hero target = behaviorTree.blackBoard["target"] as Hero;
-
+        if (self == null || target == null)
+        {
+            return BTState.Failure;
+        }
         Vector3 dir = target.transform.position - self.transform.position;
         dir.Normalize();
         Vector3 move = dir * self.speed * deltaTime;

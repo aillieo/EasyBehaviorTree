@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5576763332208004444}
-  - component: {fileID: 5576763332208004447}
+  - component: {fileID: 1436515416836189859}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5576763332208004447
+--- !u!114 &1436515416836189859
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   attackRange: 3
+  hp: 500
 --- !u!1 &5576763333107495629
 GameObject:
   m_ObjectHideFlags: 0

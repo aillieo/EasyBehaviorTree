@@ -6,11 +6,11 @@ using System;
 public class Bullet : MonoBehaviour
 {
 
-    public event Action OnArrive;
-
     public float speed = 3.0f;
 
-    public Vector3 target;
+    public int damage = 100;
+
+    private Vector3 target;
 
     public void SetTarget(Vector3 target)
     {
@@ -27,7 +27,7 @@ public class Bullet : MonoBehaviour
         }
         else
         {
-            OnArrive?.Invoke();
+            GameManager.Instance.SendDamage(transform.position, damage);
             GameManager.Instance.RecycleBullet(this);
         }
     }
