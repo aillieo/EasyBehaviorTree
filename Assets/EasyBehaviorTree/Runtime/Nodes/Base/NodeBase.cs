@@ -54,10 +54,6 @@ namespace EasyBehaviorTree
                 node.behaviorTree = behaviorTree;
                 node.Init();
             }
-            else
-            {
-                behaviorTree.logger.Warning("Trying to init node more than once! " + node.ToString());
-            }
         }
 
         public static BTState TickNode(NodeBase node, float deltaTime)
@@ -128,7 +124,11 @@ namespace EasyBehaviorTree
         public abstract void Cleanup();
 
 #if UNITY_EDITOR
-        public abstract bool Validate(out string error);
+        public virtual bool Validate(out string error)
+        {
+            error = null;
+            return true;
+        }
 #endif
     }
 

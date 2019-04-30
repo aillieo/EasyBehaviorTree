@@ -126,6 +126,7 @@ namespace EasyBehaviorTree.Creator
                 BinaryFormatter formatter = new BinaryFormatter();
                 formatter.Serialize(stream, behaviorTree);
                 stream.Close();
+                AssetDatabase.Refresh();
                 return true;
             }
         }

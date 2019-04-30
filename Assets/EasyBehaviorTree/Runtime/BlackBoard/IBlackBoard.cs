@@ -11,5 +11,9 @@ namespace EasyBehaviorTree
         {
             get; set;
         }
+
+        bool HasValue(string key);
+
+        void CleanUp();
     }
 }

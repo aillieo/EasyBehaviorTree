@@ -13,6 +13,8 @@ namespace EasyBehaviorTree
         public event Action<BehaviorTree> OnBehaviorTreeStarted;
         public event Action<BehaviorTree, BTState> OnBehaviorTreeCompleted;
 
+        private bool treeInited = false;
+
         public NodeBase root;
 
         public BlackBoard blackBoard { get; private set; }
@@ -93,15 +95,22 @@ namespace EasyBehaviorTree
         { }
 #endif
 
-        public void Init()
+        private void Init()
         {
             if (isRunning)
             {
                 return;
             }
+            
             this.blackBoard = new BlackBoard();
             this.random = new Random(DateTime.Now.Second);
+
             NodeBase.InitNode(root, this);
+        }
+
+        private void ResetNodes()
+        {
+            NodeBase.ResetNode(root);
         }
 
         public void Restart()
@@ -111,7 +120,13 @@ namespace EasyBehaviorTree
                 return;
             }
 
-            Init();
+            if(!treeInited)
+            {
+                Init();
+                treeInited = true;
+            }
+
+            ResetNodes();
 
             if(OnBehaviorTreeStarted != null)
             {
@@ -166,6 +181,11 @@ namespace EasyBehaviorTree
                 stream.Close();
             }
             return behaviorTree;
+        }
+
+        public void CleanUp()
+        {
+            this.blackBoard.CleanUp();
         }
     }
 }
