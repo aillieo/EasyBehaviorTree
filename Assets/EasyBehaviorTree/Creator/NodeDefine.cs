@@ -53,7 +53,6 @@ namespace EasyBehaviorTree.Creator
                     if(node != null)
                     {
                         node.name = displayName;
-                        node.fullName = string.Format("{0}({1})", node.name, node.GetType().Name);
                         List<string> briefInfo = new List<string>();
 
                         var properties = GetNodeParamProperties(t);

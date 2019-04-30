@@ -16,24 +16,41 @@ namespace EasyBehaviorTree.Creator
 
         [MenuItem("Assets/EasyBehaviorTree/CreateTreeAsset", false, 0)]
         [MenuItem("GameObject/EasyBehaviorTree/CreateTreeAsset", false, 0)]
-        public static BehaviorTree CreateTreeAsset()
+        private static BehaviorTree CreateTreeAsset()
         {
             GameObject go = Selection.activeGameObject;
-            if (null == go)
-            {
-                return null;
-            }
-
             BehaviorTreeCreator creator = new BehaviorTreeCreator();
             return creator.CreateTree(go);
         }
 
+        [MenuItem("Assets/EasyBehaviorTree/CreateTreeAsset", true, 0)]
+        [MenuItem("GameObject/EasyBehaviorTree/CreateTreeAsset", true, 0)]
+        private static bool CreateTreeAssetValidateFunction()
+        {
+            if (Selection.objects.Length != 1)
+            {
+                return false;
+            }
+
+            GameObject go = Selection.activeGameObject;
+            if (null == go)
+            {
+                return false;
+            }
+
+            NodeDefine  nodeDefine = go.GetComponent<NodeDefine>();
+            if(nodeDefine == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         private BehaviorTree CreateTree(GameObject go)
         {
-            Transform root = go.transform;
-
             BehaviorTree behaviorTree = new BehaviorTree();
-            NodeBase rootNode = GameObjectToNode(root.gameObject);
+            NodeBase rootNode = GameObjectToNode(go);
             if (rootNode == null)
             {
                 Debug.LogError("create root failed");
@@ -42,7 +59,7 @@ namespace EasyBehaviorTree.Creator
 
             behaviorTree.root = rootNode;
 
-            ProcessChildrenForTrans(root, behaviorTree.root);
+            ProcessChildrenForTrans(go.transform, behaviorTree.root);
 
             if (Validate())
             {
@@ -86,17 +103,19 @@ namespace EasyBehaviorTree.Creator
 
         private NodeBase GameObjectToNode(GameObject go)
         {
-            NodeDefine nodeDefine = go.GetComponent<NodeDefine>();
-            if (nodeDefine != null)
+            if(go != null)
             {
-                NodeBase node = nodeDefine.CreateNode();
-                if(node != null)
+                NodeDefine nodeDefine = go.GetComponent<NodeDefine>();
+                if (nodeDefine != null)
                 {
-                    nodeCreateInfo.Add(nodeDefine, node);
+                    NodeBase node = nodeDefine.CreateNode();
+                    if (node != null)
+                    {
+                        nodeCreateInfo.Add(nodeDefine, node);
+                    }
+                    return node;
                 }
-                return node;
             }
-
             return null;
         }
 
@@ -121,7 +140,7 @@ namespace EasyBehaviorTree.Creator
                 if(!pair.Value.Validate(out error))
                 {
                     valid = false;
-                    Debug.LogError(error,pair.Key.gameObject);
+                    Debug.LogError(string.Format("{0}: {1}({2})", error,pair.Value.name,pair.Key.gameObject.name), pair.Key.gameObject);
                 }
             }
 

@@ -14,8 +14,6 @@ namespace EasyBehaviorTree
 
         public string name;
 
-        public string fullName;
-
         public string[] briefInfo;
         
         protected NodeState nodeState { get; private set; } = NodeState.Raw;
