@@ -113,24 +113,67 @@ namespace EasyBehaviorTree.Creator
         {
             GUILayout.BeginHorizontal();
 
-            if(GUILayout.Button("GoName->NodeName"))
+            if(nodeDefine.IsRoot())
             {
-                displayName.stringValue = nodeDefine.gameObject.name;
-            }
+                if (GUILayout.Button("Tree GoName->NodeName"))
+                {
+                    TreeGoNameToNodeName();
+                }
 
-            if (GUILayout.Button("NodeName->GoName"))
-            {
-                nodeDefine.gameObject.name = displayName.stringValue;
-            }
-
-            /*
-            if (GUILayout.Button("Log"))
-            {
+                if (GUILayout.Button("Tree GoName<-NodeName"))
+                {
+                    TreeNodeNameToGoName();
+                }
 
             }
-            */
+            else
+            {
+                if (GUILayout.Button("GoName->NodeName"))
+                {
+                    displayName.stringValue = nodeDefine.gameObject.name;
+                }
+
+                if (GUILayout.Button("GoName<-NodeName"))
+                {
+                    nodeDefine.gameObject.name = displayName.stringValue;
+                }
+            }
 
             GUILayout.EndHorizontal();
+        }
+
+        private void TreeGoNameToNodeName()
+        {
+            Transform root = nodeDefine.transform;
+            var nds = root.gameObject.GetComponentsInChildren<NodeDefine>();
+            foreach (var nd in nds)
+            {
+                if (nd != nodeDefine)
+                {
+                    var so = new SerializedObject(nd);
+                    var dn = so.FindProperty("displayName");
+                    dn.stringValue = nd.gameObject.name;
+                    so.ApplyModifiedProperties();
+                }
+            }
+        }
+
+        private void TreeNodeNameToGoName()
+        {
+            Transform root = nodeDefine.transform;
+            var nds = root.gameObject.GetComponentsInChildren<NodeDefine>();
+            foreach (var nd in nds)
+            {
+                if(nd != nodeDefine)
+                {
+                    var soGO = new SerializedObject(nd.gameObject);
+                    var soND = new SerializedObject(nd);
+                    var nm = soGO.FindProperty("m_Name");
+                    var dn = soND.FindProperty("displayName");
+                    nm.stringValue = dn.stringValue;
+                    soGO.ApplyModifiedProperties();
+                }
+            }
         }
     }
 }

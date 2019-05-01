@@ -8,14 +8,18 @@ using System.Runtime.Serialization.Formatters.Binary;
 namespace EasyBehaviorTree
 {
     [Serializable]
-    public class BehaviorTree
+    public sealed class BehaviorTree
     {
         public event Action<BehaviorTree> OnBehaviorTreeStarted;
         public event Action<BehaviorTree, BTState> OnBehaviorTreeCompleted;
 
         private bool treeInited = false;
 
-        public NodeBase root;
+        public NodeBase root { get;
+#if UNITY_EDITOR
+            set;
+#endif
+        }
 
         public BlackBoard blackBoard { get; private set; }
 

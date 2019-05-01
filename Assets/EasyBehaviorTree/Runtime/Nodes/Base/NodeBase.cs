@@ -10,11 +10,11 @@ namespace EasyBehaviorTree
     public abstract class NodeBase : INode
     {
 
-        public BehaviorTree behaviorTree;
+        protected BehaviorTree behaviorTree;
 
         public string name;
 
-        public string[] briefInfo;
+        public string[] paramInfo;
         
         protected NodeState nodeState { get; private set; } = NodeState.Raw;
 
@@ -34,13 +34,13 @@ namespace EasyBehaviorTree
 
         }
 
-        public NodeInfo ExtractNodeInfo(int level)
+        private NodeInfo ExtractNodeInfo(int level)
         {
             return new NodeInfo()
             {
                 name = this.name,
                 type = this.GetType(),
-                briefInfo = this.briefInfo,
+                paramInfo = this.paramInfo,
                 nodeState = this.nodeState,
                 level = level,
             };

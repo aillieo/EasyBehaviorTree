@@ -8,6 +8,14 @@ namespace EasyBehaviorTree.Creator
     [InitializeOnLoad]
     public class HierarchyIconHelper
     {
+        static HierarchyIconHelper()
+        {
+            hiearchyItemCallback = new EditorApplication.HierarchyWindowItemCallback(HierarchyIconHelper.DrawHierarchyIcon);
+            EditorApplication.hierarchyWindowItemOnGUI = (EditorApplication.HierarchyWindowItemCallback)Delegate.Combine(
+                EditorApplication.hierarchyWindowItemOnGUI,
+                hiearchyItemCallback);
+        }
+
         private static readonly EditorApplication.HierarchyWindowItemCallback hiearchyItemCallback;
 
         private static Texture2D hierarchyNodeIcon;
@@ -21,14 +29,6 @@ namespace EasyBehaviorTree.Creator
                 }
                 return hierarchyNodeIcon;
             }
-        }
-
-        static HierarchyIconHelper()
-        {
-            hiearchyItemCallback = new EditorApplication.HierarchyWindowItemCallback(HierarchyIconHelper.DrawHierarchyIcon);
-            EditorApplication.hierarchyWindowItemOnGUI = (EditorApplication.HierarchyWindowItemCallback)Delegate.Combine(
-                EditorApplication.hierarchyWindowItemOnGUI,
-                hiearchyItemCallback);
         }
 
         private static void DrawHierarchyIcon(int instanceID, Rect selectionRect)

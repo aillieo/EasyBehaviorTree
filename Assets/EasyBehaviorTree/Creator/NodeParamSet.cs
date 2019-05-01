@@ -117,7 +117,7 @@ namespace EasyBehaviorTree.Creator
         }
 
 
-        public virtual void TrySetPropertyForType(PropertyInfo property, NodeBase node)
+        internal virtual void TrySetPropertyForType(PropertyInfo property, NodeBase node)
         {
             if (property.PropertyType == typeof(T))
             {

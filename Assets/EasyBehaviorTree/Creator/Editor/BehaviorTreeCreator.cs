@@ -94,7 +94,7 @@ namespace EasyBehaviorTree.Creator
             }
         }
 
-        static string GetFullPathForTree(GameObject prefab)
+        private static string GetFullPathForTree(GameObject prefab)
         {
             string prefabPath = AssetDatabase.GetAssetPath(prefab);
             string path = Path.GetDirectoryName(prefabPath);
@@ -119,7 +119,7 @@ namespace EasyBehaviorTree.Creator
             return null;
         }
 
-        static bool SaveBehaviorTree(BehaviorTree behaviorTree, string filename)
+        private static bool SaveBehaviorTree(BehaviorTree behaviorTree, string filename)
         {
             using (Stream stream = new FileStream(filename, FileMode.Create, FileAccess.Write, FileShare.None))
             {

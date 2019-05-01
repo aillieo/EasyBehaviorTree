@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeFullName: EasyBehaviorTree.NodeSequence
   assemblyName: Assembly-CSharp
-  displayName: 
+  displayName: seq
   nodeDescription: 
   stringParamSet:
     nodeParams: []
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeFullName: EasyBehaviorTree.NodeSequence
   assemblyName: Assembly-CSharp
-  displayName: logger
+  displayName: seq
   nodeDescription: 
   stringParamSet:
     nodeParams:
@@ -228,7 +228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeFullName: HasTarget
   assemblyName: Assembly-CSharp
-  displayName: rand
+  displayName: hasTar
   nodeDescription: 
   stringParamSet:
     nodeParams:
@@ -291,7 +291,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeFullName: EasyBehaviorTree.NodeSequence
   assemblyName: Assembly-CSharp
-  displayName: sel
+  displayName: seq
   nodeDescription: 
   stringParamSet:
     nodeParams:
@@ -354,7 +354,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeFullName: EasyBehaviorTree.NodeSelector
   assemblyName: Assembly-CSharp
-  displayName: logger2
+  displayName: sel
   nodeDescription: 
   stringParamSet:
     nodeParams:
@@ -537,7 +537,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeFullName: ApproachTarget
   assemblyName: Assembly-CSharp
-  displayName: 
+  displayName: move
   nodeDescription: 
   stringParamSet:
     nodeParams: []
@@ -659,7 +659,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeFullName: EasyBehaviorTree.NodeSelector
   assemblyName: Assembly-CSharp
-  displayName: wait
+  displayName: sel
   nodeDescription: 
   stringParamSet:
     nodeParams:

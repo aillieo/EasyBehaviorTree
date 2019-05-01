@@ -12,15 +12,15 @@ namespace EasyBehaviorTree.Creator
     [DisallowMultipleComponent]
     public class NodeDefine : MonoBehaviour
     {
-        [HideInInspector]
-        public string nodeFullName;
-        [HideInInspector]
-        public string assemblyName;
+        [SerializeField][HideInInspector]
+        private string nodeFullName;
+        [SerializeField][HideInInspector]
+        private string assemblyName;
 
-        [HideInInspector]
-        public string displayName;
-        [HideInInspector]
-        public string nodeDescription;
+        [SerializeField][HideInInspector]
+        private string displayName;
+        [SerializeField][HideInInspector]
+        private string nodeDescription;
 
         // =============================================================================================================================
         [HideInInspector][SerializeField]
@@ -53,7 +53,7 @@ namespace EasyBehaviorTree.Creator
                     if(node != null)
                     {
                         node.name = displayName;
-                        List<string> briefInfo = new List<string>();
+                        List<string> paramInfo = new List<string>();
 
                         var properties = GetNodeParamProperties(t);
 
@@ -67,17 +67,22 @@ namespace EasyBehaviorTree.Creator
                             enumParamSet.TrySetPropertyForType(property, node);
                             // =============================================================================================================================
 
-                            briefInfo.Add(property.Name);
+                            paramInfo.Add(property.Name);
                             string value = Convert.ToString(property.GetValue(node));
-                            briefInfo.Add(value != null ? value : string.Empty);
+                            paramInfo.Add(value != null ? value : string.Empty);
                         }
-                        node.briefInfo = briefInfo.ToArray();
+                        node.paramInfo = paramInfo.ToArray();
                     }
 
                     return node;
                 }
             }
             return null;
+        }
+
+        public bool IsRoot()
+        {
+            return transform.parent == null;
         }
     }
 }

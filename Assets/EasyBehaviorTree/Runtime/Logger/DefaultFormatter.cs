@@ -22,13 +22,13 @@ namespace EasyBehaviorTree
             stringBuilder.AppendFormat("{0}({1})", nodeInfo.name, nodeInfo.type.ToString());
             stringBuilder.Append(" ");
             stringBuilder.Append('{');
-            for (int i = 0, len = nodeInfo.briefInfo.Length; i < len; i += 2)
+            for (int i = 0, len = nodeInfo.paramInfo.Length; i < len; i += 2)
             {
                 if(i != 0)
                 {
                     stringBuilder.Append(',');
                 }
-                stringBuilder.AppendFormat("{0}={1}",nodeInfo.briefInfo[i],nodeInfo.briefInfo[i+1]);
+                stringBuilder.AppendFormat("{0}={1}",nodeInfo.paramInfo[i],nodeInfo.paramInfo[i+1]);
             }
             stringBuilder.Append('}');
         }

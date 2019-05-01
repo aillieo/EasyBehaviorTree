@@ -19,7 +19,7 @@ namespace EasyBehaviorTree.Creator
     {
 
 #if UNITY_EDITOR
-        public override void TrySetPropertyForType(PropertyInfo property, NodeBase node)
+        internal override void TrySetPropertyForType(PropertyInfo property, NodeBase node)
         {
             if (property.PropertyType.IsEnum)
             {

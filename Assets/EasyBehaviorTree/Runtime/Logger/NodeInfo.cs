@@ -8,7 +8,7 @@ namespace EasyBehaviorTree
     {
         public string name;
         public Type type;
-        public string[] briefInfo;
+        public string[] paramInfo;
 
         public NodeState nodeState;
 
