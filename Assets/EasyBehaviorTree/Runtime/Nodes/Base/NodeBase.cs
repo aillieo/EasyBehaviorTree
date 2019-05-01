@@ -100,6 +100,11 @@ namespace EasyBehaviorTree
             node.Reset();
         }
 
+        public virtual void OnTreeCleanUp()
+        {
+            Cleanup();
+        }
+
         public virtual void Init()
         {
             behaviorTree.logger.Debug(ToString() + " : Init");

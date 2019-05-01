@@ -8,10 +8,10 @@ namespace EasyBehaviorTree
 {
 
     [Serializable]
-    public class NodeConditionRandom : NodeCondition
+    public class NodeConditionHasSharedValue : NodeCondition
     {
         [NodeParam]
-        public float passProbability { get; set; }
+        public string key { get; set; }
 
         public override void Cleanup()
         {
@@ -22,14 +22,14 @@ namespace EasyBehaviorTree
 #if UNITY_EDITOR
         public override bool Validate(out string error)
         {
-            if(!base.Validate(out error))
+            if (!base.Validate(out error))
             {
                 return false;
             }
 
-            if(passProbability > 1f || passProbability < 0f)
+            if (string.IsNullOrEmpty(key))
             {
-                error = "Invalid passProbability";
+                error = "Invalid key";
             }
             return error == null;
         }
@@ -37,8 +37,7 @@ namespace EasyBehaviorTree
 
         protected override bool CheckCondition(float deltaTime)
         {
-            return behaviorTree.random.NextDouble() < passProbability;
+            return BehaviorTree.sharedBlackBoard.HasValue(key);
         }
-
     }
 }

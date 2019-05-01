@@ -57,18 +57,21 @@ namespace EasyBehaviorTree
         {
             base.DumpNode(stringBuilder, formatter, level);
 
-            if (null == mChildren)
-            {
-                return;
-            }
-
             foreach (var node in mChildren)
             {
                 node.DumpNode(stringBuilder, formatter, level + 1);
             }
         }
 
+        public override void OnTreeCleanUp()
+        {
+            base.OnTreeCleanUp();
 
+            foreach (var node in mChildren)
+            {
+                node.OnTreeCleanUp();
+            }
+        }
 
     }
 }

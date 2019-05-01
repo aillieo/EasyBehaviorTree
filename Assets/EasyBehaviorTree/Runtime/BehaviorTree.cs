@@ -19,6 +19,8 @@ namespace EasyBehaviorTree
 
         public BlackBoard blackBoard { get; private set; }
 
+        public static BlackBoard sharedBlackBoard { get; private set; } = new BlackBoard();
+
         public Random random { get; private set; }
 
         public bool debugLogging
@@ -185,6 +187,7 @@ namespace EasyBehaviorTree
 
         public void CleanUp()
         {
+            root.OnTreeCleanUp();
             this.blackBoard.CleanUp();
         }
     }
