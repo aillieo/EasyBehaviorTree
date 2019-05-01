@@ -13,6 +13,18 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Hero hero;
 
+    [SerializeField]
+    private Pool pool;
+
+    [SerializeField]
+    private GameObject mapObj;
+
+    [SerializeField]
+    private Transform sceneRoot;
+
+    [SerializeField]
+    private Camera cam;
+
     public int heroCount = 2;
 
     public int mapSize = 100;
@@ -36,8 +48,7 @@ public class GameManager : MonoBehaviour
 
     public Bullet GetBullet(Transform transformToAlign = null)
     {
-        Bullet b = GameObject.Instantiate(bullet, Instance.transform);
-        // b.transform.SetParent(Instance.transform);
+        Bullet b = pool.Get(bullet, sceneRoot);
         if (transformToAlign)
         {
             b.transform.position = transformToAlign.position;
@@ -64,12 +75,12 @@ public class GameManager : MonoBehaviour
 
     public void RecycleBullet(Bullet bullet)
     {
-        GameObject.Destroy(bullet.gameObject);
+        pool.Recycle(bullet);
     }
 
     public Hero SpawnHero()
     {
-        Hero h = GameObject.Instantiate(hero, Instance.transform);
+        Hero h = pool.Get(hero, sceneRoot);
         h.transform.position =
             Vector3.right * UnityEngine.Random.Range(- mapSize/2, mapSize/2) +
             Vector3.forward * UnityEngine.Random.Range(-mapSize / 2, mapSize / 2);
@@ -79,7 +90,7 @@ public class GameManager : MonoBehaviour
 
     public void RemoveHero(Hero hero)
     {
-        GameObject.Destroy(hero.gameObject);
+        pool.Recycle(hero);
     }
 
     public ReadOnlyCollection<Hero> GetHeroes()
@@ -89,6 +100,9 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        mapObj.transform.localScale = new Vector3(mapSize, mapSize, 1f);
+        cam.transform.localPosition = new Vector3(0, 5f, 7.5f) * mapSize / 10;
+
         for (int i = 0; i < heroCount; ++i)
         {
             SpawnHero();

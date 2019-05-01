@@ -15,6 +15,7 @@ public class Bullet : MonoBehaviour
     public void SetTarget(Vector3 target)
     {
         this.target = target;
+        this.gameObject.SetActive(true);
     }
 
     private void Update()
@@ -28,6 +29,7 @@ public class Bullet : MonoBehaviour
         else
         {
             GameManager.Instance.SendDamage(transform.position, damage);
+            this.gameObject.SetActive(false);
             GameManager.Instance.RecycleBullet(this);
         }
     }
