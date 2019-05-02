@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using System;
 
 [Serializable]
+[NodeIcon("Assets/Sample/BT/NodeExt/AttackTarget.png")]
 public class AttackTarget : NodeAction
 {
     public override void Cleanup()
