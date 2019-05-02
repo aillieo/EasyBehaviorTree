@@ -103,10 +103,10 @@ namespace EasyBehaviorTree.Creator
         }
 
 
-        protected SerializedProperty GetSerializedValue(SerializedProperty nodeParamSet, string propertyName)
+        protected SerializedProperty GetSerializedValue(SerializedProperty nodeParamSet, string fieldName)
         {
             var array = nodeParamSet.FindPropertyRelative("nodeParams");
-            var index = GetIndexOfKey(propertyName);
+            var index = GetIndexOfKey(fieldName);
             if (array.arraySize <= index)
             {
                 nodeParamSet.serializedObject.Update();

@@ -57,7 +57,7 @@ namespace EasyBehaviorTree.Creator
         {
         }
 
-        private void DrawNodeProperties()
+        private void DrawNodeFields()
         {
             var fields = NodeDefine.GetNodeParamFields(nodeTypes[selected]);
 
@@ -90,7 +90,7 @@ namespace EasyBehaviorTree.Creator
                 OnSelectIndexChanged();
             }
 
-            DrawNodeProperties();
+            DrawNodeFields();
 
             GUILayout.EndVertical();
 

@@ -38,10 +38,8 @@ namespace EasyBehaviorTree.Creator
         
         public static FieldInfo[] GetNodeParamFields(Type type)
         {
-            return type.GetFields(
-            BindingFlags.Public| BindingFlags.NonPublic | BindingFlags.GetProperty | BindingFlags.SetProperty|BindingFlags.Instance
-
-                ).Where(pi => pi.GetCustomAttribute<NodeParamAttribute>(false) != null).ToArray();
+            return type.GetFields(BindingFlags.Public| BindingFlags.NonPublic|BindingFlags.Instance)
+            .Where(pi => pi.GetCustomAttribute<NodeParamAttribute>(false) != null).ToArray();
         }
 
         public NodeBase CreateNode()
