@@ -6,7 +6,7 @@ namespace EasyBehaviorTree.Creator
 {
 
     [InitializeOnLoad]
-    public class HierarchyIconHelper
+    public static class HierarchyIconHelper
     {
         static HierarchyIconHelper()
         {

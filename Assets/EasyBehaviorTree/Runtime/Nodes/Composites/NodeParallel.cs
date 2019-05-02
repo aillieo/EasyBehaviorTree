@@ -15,10 +15,10 @@ namespace EasyBehaviorTree
         }
 
         [NodeParam]
-        public ParallelStrategy strategy { get; set; }
+        private ParallelStrategy strategy;
 
         [NodeParam]
-        public int targetCount { get; set; }
+        private int targetCount;
 
         private Dictionary<int, BTState> nodeStates = new Dictionary<int, BTState>();
 

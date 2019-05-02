@@ -19,26 +19,26 @@ namespace EasyBehaviorTree.Creator
     {
 
 #if UNITY_EDITOR
-        internal override void TrySetPropertyForType(PropertyInfo property, NodeBase node)
+        internal override void TrySetFieldForType(FieldInfo field, NodeBase node)
         {
-            if (property.PropertyType.IsEnum)
+            if (field.FieldType.IsEnum)
             {
-                property.SetValue(node, Enum.ToObject(property.PropertyType, this[property.Name]));
+                field.SetValue(node, Enum.ToObject(field.FieldType, this[field.Name]));
             }
         }
 
-        public override void TryDrawPropertyForType(PropertyInfo property, SerializedProperty serializedProperty)
+        public override void TryDrawFieldForType(FieldInfo field, SerializedProperty serializedProperty)
         {
-            if (property.PropertyType.IsEnum)
+            if (field.FieldType.IsEnum)
             {
-                string propertyName = property.Name;
+                string fieldName = field.Name;
                 GUILayout.BeginVertical("Box");
-                var paramValue = GetSerializedValue(serializedProperty, propertyName);
-                if (!Enum.IsDefined(property.PropertyType, paramValue.intValue))
+                var paramValue = GetSerializedValue(serializedProperty, fieldName);
+                if (!Enum.IsDefined(field.FieldType, paramValue.intValue))
                 {
-                    paramValue.intValue = (int)Enum.GetValues(property.PropertyType).GetValue(0);
+                    paramValue.intValue = (int)Enum.GetValues(field.FieldType).GetValue(0);
                 }
-                paramValue.intValue = EditorGUILayout.Popup(new GUIContent(propertyName), paramValue.intValue, property.PropertyType.GetEnumNames());
+                paramValue.intValue = EditorGUILayout.Popup(new GUIContent(fieldName), paramValue.intValue, field.FieldType.GetEnumNames());
                 GUILayout.EndVertical();
             }
         }

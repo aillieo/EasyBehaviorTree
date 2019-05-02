@@ -25,7 +25,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Camera cam;
 
-    public int heroCount = 2;
+    public int initHeroCount = 20;
+
+    public float heroCreateInterval = 2f;
 
     public int mapSize = 100;
 
@@ -85,6 +87,7 @@ public class GameManager : MonoBehaviour
             Vector3.right * UnityEngine.Random.Range(- mapSize/2, mapSize/2) +
             Vector3.forward * UnityEngine.Random.Range(-mapSize / 2, mapSize / 2);
         heroes.Add(h);
+        h.Restart();
         return h;
     }
 
@@ -103,8 +106,18 @@ public class GameManager : MonoBehaviour
         mapObj.transform.localScale = new Vector3(mapSize, mapSize, 1f);
         cam.transform.localPosition = new Vector3(0, 5f, 7.5f) * mapSize / 10;
 
-        for (int i = 0; i < heroCount; ++i)
+        for (int i = 0; i < initHeroCount; ++i)
         {
+            SpawnHero();
+        }
+        StartCoroutine(KeepCreatingNewHero(new WaitForSeconds(heroCreateInterval)));
+    }
+
+    private IEnumerator KeepCreatingNewHero(WaitForSeconds wait)
+    {
+        while(true)
+        {
+            yield return wait;
             SpawnHero();
         }
     }

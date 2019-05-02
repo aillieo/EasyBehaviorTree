@@ -59,16 +59,16 @@ namespace EasyBehaviorTree.Creator
 
         private void DrawNodeProperties()
         {
-            var properties = NodeDefine.GetNodeParamProperties(nodeTypes[selected]);
+            var fields = NodeDefine.GetNodeParamFields(nodeTypes[selected]);
 
-            foreach(var property in properties)
+            foreach(var field in fields)
             {
                 // =============================================================================================================================
-                nodeDefine.stringParamSet.TryDrawPropertyForType(property, this.serializedObject.FindProperty("stringParamSet"));
-                nodeDefine.floatParamSet.TryDrawPropertyForType(property, this.serializedObject.FindProperty("floatParamSet"));
-                nodeDefine.intParamSet.TryDrawPropertyForType(property, this.serializedObject.FindProperty("intParamSet"));
-                nodeDefine.boolParamSet.TryDrawPropertyForType(property, this.serializedObject.FindProperty("boolParamSet"));
-                nodeDefine.enumParamSet.TryDrawPropertyForType(property, this.serializedObject.FindProperty("enumParamSet"));
+                nodeDefine.stringParamSet.TryDrawFieldForType(field, this.serializedObject.FindProperty("stringParamSet"));
+                nodeDefine.floatParamSet.TryDrawFieldForType(field, this.serializedObject.FindProperty("floatParamSet"));
+                nodeDefine.intParamSet.TryDrawFieldForType(field, this.serializedObject.FindProperty("intParamSet"));
+                nodeDefine.boolParamSet.TryDrawFieldForType(field, this.serializedObject.FindProperty("boolParamSet"));
+                nodeDefine.enumParamSet.TryDrawFieldForType(field, this.serializedObject.FindProperty("enumParamSet"));
                 // =============================================================================================================================
             }
         }
@@ -145,15 +145,16 @@ namespace EasyBehaviorTree.Creator
         private void TreeGoNameToNodeName()
         {
             Transform root = nodeDefine.transform;
-            var nds = root.gameObject.GetComponentsInChildren<NodeDefine>();
-            foreach (var nd in nds)
+            var nodeDefines = root.gameObject.GetComponentsInChildren<NodeDefine>();
+            foreach (var nd in nodeDefines)
             {
+                // exclude self
                 if (nd != nodeDefine)
                 {
-                    var so = new SerializedObject(nd);
-                    var dn = so.FindProperty("displayName");
-                    dn.stringValue = nd.gameObject.name;
-                    so.ApplyModifiedProperties();
+                    var ndSerializedObject = new SerializedObject(nd);
+                    var displayNameProperty = ndSerializedObject.FindProperty("displayName");
+                    displayNameProperty.stringValue = nd.gameObject.name;
+                    ndSerializedObject.ApplyModifiedProperties();
                 }
             }
         }
@@ -161,17 +162,18 @@ namespace EasyBehaviorTree.Creator
         private void TreeNodeNameToGoName()
         {
             Transform root = nodeDefine.transform;
-            var nds = root.gameObject.GetComponentsInChildren<NodeDefine>();
-            foreach (var nd in nds)
+            var nodeDefines = root.gameObject.GetComponentsInChildren<NodeDefine>();
+            foreach (var nd in nodeDefines)
             {
-                if(nd != nodeDefine)
+                // exclude self
+                if (nd != nodeDefine)
                 {
-                    var soGO = new SerializedObject(nd.gameObject);
-                    var soND = new SerializedObject(nd);
-                    var nm = soGO.FindProperty("m_Name");
-                    var dn = soND.FindProperty("displayName");
-                    nm.stringValue = dn.stringValue;
-                    soGO.ApplyModifiedProperties();
+                    var goSerializedObject = new SerializedObject(nd.gameObject);
+                    var ndSerializedObject = new SerializedObject(nd);
+                    var nameProperty = goSerializedObject.FindProperty("m_Name");
+                    var displayNameProperty = ndSerializedObject.FindProperty("displayName");
+                    nameProperty.stringValue = displayNameProperty.stringValue;
+                    goSerializedObject.ApplyModifiedProperties();
                 }
             }
         }

@@ -11,7 +11,7 @@ namespace EasyBehaviorTree
     public class NodeConditionRandom : NodeCondition
     {
         [NodeParam]
-        public float passProbability { get; set; }
+        private float passProbability;
 
         public override void Cleanup()
         {

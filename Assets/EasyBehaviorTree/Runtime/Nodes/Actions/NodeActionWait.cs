@@ -9,7 +9,7 @@ namespace EasyBehaviorTree
     public class NodeActionWait : NodeAction
     {
         [NodeParam]
-        public float time { get; set; }
+        private float time;
 
         private float timer;
 

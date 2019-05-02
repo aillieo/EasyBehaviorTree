@@ -36,9 +36,12 @@ namespace EasyBehaviorTree.Creator
         // =============================================================================================================================
 
         
-        public static PropertyInfo[] GetNodeParamProperties(Type type)
+        public static FieldInfo[] GetNodeParamFields(Type type)
         {
-            return type.GetProperties().Where(pi => pi.GetCustomAttribute<NodeParamAttribute>(false) != null).ToArray();
+            return type.GetFields(
+            BindingFlags.Public| BindingFlags.NonPublic | BindingFlags.GetProperty | BindingFlags.SetProperty|BindingFlags.Instance
+
+                ).Where(pi => pi.GetCustomAttribute<NodeParamAttribute>(false) != null).ToArray();
         }
 
         public NodeBase CreateNode()
@@ -55,20 +58,20 @@ namespace EasyBehaviorTree.Creator
                         node.name = displayName;
                         List<string> paramInfo = new List<string>();
 
-                        var properties = GetNodeParamProperties(t);
+                        var fields = GetNodeParamFields(t);
 
-                        foreach (var property in properties)
+                        foreach (var field in fields)
                         {
                             // =============================================================================================================================
-                            stringParamSet.TrySetPropertyForType(property, node);
-                            floatParamSet.TrySetPropertyForType(property, node);
-                            intParamSet.TrySetPropertyForType(property, node);
-                            boolParamSet.TrySetPropertyForType(property, node);
-                            enumParamSet.TrySetPropertyForType(property, node);
+                            stringParamSet.TrySetFieldForType(field, node);
+                            floatParamSet.TrySetFieldForType(field, node);
+                            intParamSet.TrySetFieldForType(field, node);
+                            boolParamSet.TrySetFieldForType(field, node);
+                            enumParamSet.TrySetFieldForType(field, node);
                             // =============================================================================================================================
 
-                            paramInfo.Add(property.Name);
-                            string value = Convert.ToString(property.GetValue(node));
+                            paramInfo.Add(field.Name);
+                            string value = Convert.ToString(field.GetValue(node));
                             paramInfo.Add(value != null ? value : string.Empty);
                         }
                         node.paramInfo = paramInfo.ToArray();

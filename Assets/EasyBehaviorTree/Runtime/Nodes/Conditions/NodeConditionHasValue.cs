@@ -11,7 +11,7 @@ namespace EasyBehaviorTree
     public class NodeConditionHasValue : NodeCondition
     {
         [NodeParam]
-        public string key { get; set; }
+        private string key;
 
         public override void Cleanup()
         {

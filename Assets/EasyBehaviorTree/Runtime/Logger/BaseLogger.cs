@@ -35,10 +35,7 @@ namespace EasyBehaviorTree
             if ((this.filter & logLevel) > 0)
             {
                 Log(logLevel, message);
-                if (OnLog != null)
-                {
-                    OnLog(logLevel, message);
-                }
+                OnLog?.Invoke(logLevel, message);
             }
         }
 

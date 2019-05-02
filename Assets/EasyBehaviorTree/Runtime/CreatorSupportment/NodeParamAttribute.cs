@@ -2,7 +2,8 @@ using System;
 
 namespace EasyBehaviorTree
 {
-    public class NodeParamAttribute:Attribute
+    [AttributeUsage(AttributeTargets.Field, Inherited = false, AllowMultiple = false)]
+    public class NodeParamAttribute : Attribute
     {
 
     }

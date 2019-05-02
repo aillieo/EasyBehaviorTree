@@ -11,7 +11,7 @@ namespace EasyBehaviorTree
     {
 
         [NodeParam]
-        public string logStr { get; set; }
+        private string logStr;
 
         public override void Cleanup()
         {
@@ -26,10 +26,6 @@ namespace EasyBehaviorTree
 
         protected override BTState ExecuteTask(float deltaTime)
         {
-            if (string.IsNullOrEmpty(logStr))
-            {
-                return BTState.Failure;
-            }
             behaviorTree.logger.Log(logStr);
             return BTState.Success;
         }

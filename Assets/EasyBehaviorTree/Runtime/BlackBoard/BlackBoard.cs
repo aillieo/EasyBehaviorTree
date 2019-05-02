@@ -18,7 +18,7 @@ namespace EasyBehaviorTree
                 {
                     return dict[key];
                 }
-                return default(IBlackBoardData);
+                return default;
             }
             set
             {

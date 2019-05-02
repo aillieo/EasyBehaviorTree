@@ -8,10 +8,10 @@ namespace EasyBehaviorTree
     public class NodeRepeater : NodeDecorator
     {
         [NodeParam]
-        public int repeatTimes { get; set; }
+        private int repeatTimes;
 
         [NodeParam]
-        public bool ignoringFailure { get; set; }
+        private bool ignoringFailure;
 
         private int finishedTimes;
 

@@ -10,11 +10,14 @@ public class Hero : MonoBehaviour, IBlackBoardData
     public float speed = 1.0f;
     public float attackRange = 3.0f;
     public int hp = 500;
+    private int hpCurrent;
 
-    public bool alive { get; private set; } = true;
+    public bool alive { get { return hpCurrent >= 0; } }
 
-    void Start()
+    public void Restart()
     {
+        hpCurrent = hp;
+
         string fullPath = Application.dataPath + "/Sample/BT/BT_Hero.bt";
         behaviorTree = BehaviorTree.LoadBehaviorTree(fullPath);
 
@@ -29,10 +32,9 @@ public class Hero : MonoBehaviour, IBlackBoardData
 
     public void OnDamage(int damage)
     {
-        hp -= damage;
-        if(hp <= 0 && alive)
+        hpCurrent -= damage;
+        if(!alive)
         {
-            alive = false;
             behaviorTree.CleanUp();
             behaviorTree = null;
             GameManager.Instance.RemoveHero(this);
@@ -41,7 +43,7 @@ public class Hero : MonoBehaviour, IBlackBoardData
 
     void Update()
     {
-        if(behaviorTree != null)
+        if(behaviorTree != null && alive)
         {
             behaviorTree.Tick(Time.deltaTime);
         }
