@@ -9,7 +9,6 @@ namespace EasyBehaviorTree
     [Serializable]
     public class NodeActionLog : NodeAction
     {
-
         [NodeParam]
         private string logStr;
 

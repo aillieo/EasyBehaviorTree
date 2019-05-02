@@ -463,7 +463,8 @@ MonoBehaviour:
   mapObj: {fileID: 57026532}
   sceneRoot: {fileID: 954224057}
   cam: {fileID: 1110509291}
-  heroCount: 30
+  initHeroCount: 20
+  heroCreateInterval: 2
   mapSize: 30
 --- !u!4 &1424741720
 Transform:
