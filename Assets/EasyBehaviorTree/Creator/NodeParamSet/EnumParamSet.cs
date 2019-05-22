@@ -12,37 +12,46 @@ namespace EasyBehaviorTree.Creator
     [Serializable]
     public class EnumParam : NodeParam<int>
     {
+        public string enumType;
     }
 
     [Serializable]
     public class EnumParamSet : NodeParamSet<EnumParam, int>
     {
 
-#if UNITY_EDITOR
-        internal override void TrySetFieldForType(FieldInfo field, NodeBase node)
+        public override bool TrySetFieldForType(FieldInfo field, NodeBase node)
         {
             if (field.FieldType.IsEnum)
             {
-                field.SetValue(node, Enum.ToObject(field.FieldType, this[field.Name]));
+                if(GetIndexOfKey(field.Name) < 0)
+                {
+                    AddDefaultValue(field.Name, "enumType", field.FieldType.FullName);
+                }
+                field.SetValue(node, Enum.ToObject(field.FieldType, GetValueForKey(field.Name)));
+                return true;
             }
+            return false;
         }
 
-        public override void TryDrawFieldForType(FieldInfo field, SerializedProperty serializedProperty)
+        public override SerializedProperty TryGetSerializedParam(SerializedProperty nodeParamSet, FieldInfo field)
         {
             if (field.FieldType.IsEnum)
             {
                 string fieldName = field.Name;
-                GUILayout.BeginVertical("Box");
-                var paramValue = GetSerializedValue(serializedProperty, fieldName);
-                if (!Enum.IsDefined(field.FieldType, paramValue.intValue))
+                var index = GetIndexOfKey(fieldName);
+                if(index < 0)
                 {
-                    paramValue.intValue = (int)Enum.GetValues(field.FieldType).GetValue(0);
+                    index = AddDefaultValue(fieldName, "enumType", field.FieldType.FullName);
                 }
-                paramValue.intValue = EditorGUILayout.Popup(new GUIContent(fieldName), paramValue.intValue, field.FieldType.GetEnumNames());
-                GUILayout.EndVertical();
+                var array = nodeParamSet.FindPropertyRelative("nodeParams");
+                if (array.arraySize <= index)
+                {
+                    nodeParamSet.serializedObject.Update();
+                }
+                var param = array.GetArrayElementAtIndex(index);
+                return param;
             }
+            return null;
         }
-
-#endif
     }
 }

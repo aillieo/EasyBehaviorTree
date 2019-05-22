@@ -9,8 +9,16 @@ using System.Text;
 
 namespace EasyBehaviorTree.Creator
 {
+
+    struct NodeParamSetAndName
+    {
+        public INodeParamSet set;
+        public string name;
+    }
+
+
     [DisallowMultipleComponent]
-    public class NodeDefine : MonoBehaviour
+    public partial class NodeDefine : MonoBehaviour
     {
         [SerializeField][HideInInspector]
         private string nodeFullName;
@@ -22,20 +30,10 @@ namespace EasyBehaviorTree.Creator
         [SerializeField][HideInInspector]
         private string nodeDescription;
 
-        // =============================================================================================================================
-        [HideInInspector][SerializeField]
-        public StringParamSet stringParamSet = new StringParamSet();
-        [HideInInspector][SerializeField]
-        public FloatParamSet floatParamSet = new FloatParamSet();
-        [HideInInspector][SerializeField]
-        public IntParamSet intParamSet = new IntParamSet();
-        [HideInInspector][SerializeField]
-        public BoolParamSet boolParamSet = new BoolParamSet();
-        [HideInInspector][SerializeField]
-        public EnumParamSet enumParamSet = new EnumParamSet();
-        // =============================================================================================================================
+        Action ensureCachedMappingsImpl;
 
-        
+        private Dictionary<Type, NodeParamSetAndName> cachedMappings;
+
         public static FieldInfo[] GetNodeParamFields(Type type)
         {
             return type.GetFields(BindingFlags.Public| BindingFlags.NonPublic|BindingFlags.Instance)
@@ -53,6 +51,12 @@ namespace EasyBehaviorTree.Creator
             return null;
         }
 
+        public bool IsRoot()
+        {
+            return transform.parent == null;
+        }
+
+
         public NodeBase CreateNode()
         {
             Type t = GetNodeType();
@@ -66,16 +70,16 @@ namespace EasyBehaviorTree.Creator
 
                     var fields = GetNodeParamFields(t);
 
+                    ensureCachedMappingsImpl?.Invoke();
+
                     foreach (var field in fields)
                     {
-                        // =============================================================================================================================
-                        stringParamSet.TrySetFieldForType(field, node);
-                        floatParamSet.TrySetFieldForType(field, node);
-                        intParamSet.TrySetFieldForType(field, node);
-                        boolParamSet.TrySetFieldForType(field, node);
-                        enumParamSet.TrySetFieldForType(field, node);
-                        // =============================================================================================================================
-
+                        Type type = field.FieldType;
+                        if (type.IsEnum)
+                        {
+                            type = typeof(Enum);
+                        }
+                        cachedMappings[type].set.TrySetFieldForType(field, node);
                         paramInfo.Add(field.Name);
                         string value = Convert.ToString(field.GetValue(node));
                         paramInfo.Add(value != null ? value : string.Empty);
@@ -87,9 +91,24 @@ namespace EasyBehaviorTree.Creator
             return null;
         }
 
-        public bool IsRoot()
+        public void TryDrawFields(FieldInfo[] fields, SerializedObject serializedObject)
         {
-            return transform.parent == null;
+            ensureCachedMappingsImpl?.Invoke();
+            foreach (var field in fields)
+            {
+                Type type = field.FieldType;
+                if(type.IsEnum)
+                {
+                    type = typeof(Enum);
+                }
+                NodeParamSetAndName nodeParamSetAndName = cachedMappings[type];
+                SerializedProperty nodeParamSet = serializedObject.FindProperty(nodeParamSetAndName.name);
+                SerializedProperty param = nodeParamSetAndName.set.TryGetSerializedParam(nodeParamSet, field);
+                if (param != null)
+                {
+                    EditorGUILayout.PropertyField(param);
+                }
+            }
         }
     }
 }

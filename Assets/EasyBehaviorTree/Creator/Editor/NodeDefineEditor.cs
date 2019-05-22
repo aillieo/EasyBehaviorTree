@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 using System;
 using System.Reflection;
 using System.Linq;
-using UnityEditorInternal;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
+#if UNITY_EDITOR
 
 namespace EasyBehaviorTree.Creator
 {
@@ -57,21 +60,7 @@ namespace EasyBehaviorTree.Creator
         {
         }
 
-        private void DrawNodeFields()
-        {
-            var fields = NodeDefine.GetNodeParamFields(nodeTypes[selected]);
-
-            foreach(var field in fields)
-            {
-                // =============================================================================================================================
-                nodeDefine.stringParamSet.TryDrawFieldForType(field, this.serializedObject.FindProperty("stringParamSet"));
-                nodeDefine.floatParamSet.TryDrawFieldForType(field, this.serializedObject.FindProperty("floatParamSet"));
-                nodeDefine.intParamSet.TryDrawFieldForType(field, this.serializedObject.FindProperty("intParamSet"));
-                nodeDefine.boolParamSet.TryDrawFieldForType(field, this.serializedObject.FindProperty("boolParamSet"));
-                nodeDefine.enumParamSet.TryDrawFieldForType(field, this.serializedObject.FindProperty("enumParamSet"));
-                // =============================================================================================================================
-            }
-        }
+       
 
         public override void OnInspectorGUI()
         {
@@ -92,12 +81,12 @@ namespace EasyBehaviorTree.Creator
 
             DrawNodeFields();
 
-            GUILayout.EndVertical();
-
             DrawButtons();
 
             GUILayout.Label("Description");
             nodeDescription.stringValue = EditorGUILayout.TextArea(nodeDescription.stringValue,GUILayout.MinHeight(50));
+            GUILayout.Space(5);
+            GUILayout.EndVertical();
 
             serializedObject.ApplyModifiedProperties();
         }
@@ -106,7 +95,13 @@ namespace EasyBehaviorTree.Creator
         {
             nodeFullName.stringValue = nodeNames[selected];
             assemblyName.stringValue = assemNames[selected];
+
             serializedObject.ApplyModifiedProperties();
+        }
+
+        private void DrawNodeFields()
+        {
+            nodeDefine.TryDrawFields(NodeDefine.GetNodeParamFields(nodeTypes[selected]),serializedObject);
         }
 
         private void DrawButtons()
@@ -177,5 +172,7 @@ namespace EasyBehaviorTree.Creator
                 }
             }
         }
+
     }
 }
+#endif
