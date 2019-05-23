@@ -13,52 +13,50 @@ namespace EasyBehaviorTree.Creator
         // =============================================================================================================================
 
         [HideInInspector][SerializeField]
-        public EnumParamSet enumParamSet = new EnumParamSet();
+        public EnumParamSet mEnumParamSet = new EnumParamSet();
         [HideInInspector][SerializeField]
-        public StringParamSet stringParamSet = new StringParamSet();
+        public StringParamSet mStringParamSet = new StringParamSet();
         [HideInInspector][SerializeField]
-        public IntParamSet intParamSet = new IntParamSet();
+        public StringArrayParamSet mStringArrayParamSet = new StringArrayParamSet();
         [HideInInspector][SerializeField]
-        public FloatParamSet floatParamSet = new FloatParamSet();
+        public IntParamSet mIntParamSet = new IntParamSet();
         [HideInInspector][SerializeField]
-        public BoolParamSet boolParamSet = new BoolParamSet();
+        public IntArrayParamSet mIntArrayParamSet = new IntArrayParamSet();
         [HideInInspector][SerializeField]
-        public StringArrayParamSet stringArrayParamSet = new StringArrayParamSet();
+        public FloatParamSet mFloatParamSet = new FloatParamSet();
         [HideInInspector][SerializeField]
-        public IntArrayParamSet intArrayParamSet = new IntArrayParamSet();
+        public FloatArrayParamSet mFloatArrayParamSet = new FloatArrayParamSet();
         [HideInInspector][SerializeField]
-        public FloatArrayParamSet floatArrayParamSet = new FloatArrayParamSet();
+        public BoolParamSet mBoolParamSet = new BoolParamSet();
         [HideInInspector][SerializeField]
-        public BoolArrayParamSet boolArrayParamSet = new BoolArrayParamSet();
+        public BoolArrayParamSet mBoolArrayParamSet = new BoolArrayParamSet();
+        [HideInInspector][SerializeField]
+        public LongParamSet mLongParamSet = new LongParamSet();
+        [HideInInspector][SerializeField]
+        public LongArrayParamSet mLongArrayParamSet = new LongArrayParamSet();
 
         // =============================================================================================================================
 
         private NodeDefine()
         {
-            ensureCachedMappingsImpl = EnsureCachedMappings;
-        }
-
-        private void EnsureCachedMappings()
-        {
-            if(cachedMappings == null)
+            cachedMappings = new Dictionary<Type, NodeParamSetAndName>()
             {
-                cachedMappings = new Dictionary<Type, NodeParamSetAndName>()
-                {
-                    // =============================================================================================================================
+                // =============================================================================================================================
 
-                    {typeof(Enum),new NodeParamSetAndName() { set = enumParamSet,name = "enumParamSet" } },
-                    {typeof(string),new NodeParamSetAndName(){set=stringParamSet,name = "stringParamSet" } },
-                    {typeof(int),new NodeParamSetAndName(){set=intParamSet,name = "intParamSet" } },
-                    {typeof(float),new NodeParamSetAndName(){set=floatParamSet,name = "floatParamSet" } },
-                    {typeof(bool),new NodeParamSetAndName(){set=boolParamSet,name = "boolParamSet" } },
-                    {typeof(string[]),new NodeParamSetAndName(){set=stringArrayParamSet,name = "stringArrayParamSet" } },
-                    {typeof(int[]),new NodeParamSetAndName(){set=intArrayParamSet,name = "intArrayParamSet" } },
-                    {typeof(float[]),new NodeParamSetAndName(){set=floatArrayParamSet,name = "floatArrayParamSet" } },
-                    {typeof(bool[]),new NodeParamSetAndName(){set=boolArrayParamSet,name = "boolArrayParamSet" } },
+                {typeof(Enum),new NodeParamSetAndName() { set = mEnumParamSet,name = "mEnumParamSet" } },
+                {typeof(string),new NodeParamSetAndName(){set=mStringParamSet,name = "mStringParamSet" } },
+                {typeof(string[]),new NodeParamSetAndName(){set=mStringArrayParamSet,name = "mStringArrayParamSet" } },
+                {typeof(int),new NodeParamSetAndName(){set=mIntParamSet,name = "mIntParamSet" } },
+                {typeof(int[]),new NodeParamSetAndName(){set=mIntArrayParamSet,name = "mIntArrayParamSet" } },
+                {typeof(float),new NodeParamSetAndName(){set=mFloatParamSet,name = "mFloatParamSet" } },
+                {typeof(float[]),new NodeParamSetAndName(){set=mFloatArrayParamSet,name = "mFloatArrayParamSet" } },
+                {typeof(bool),new NodeParamSetAndName(){set=mBoolParamSet,name = "mBoolParamSet" } },
+                {typeof(bool[]),new NodeParamSetAndName(){set=mBoolArrayParamSet,name = "mBoolArrayParamSet" } },
+                {typeof(long),new NodeParamSetAndName(){set=mLongParamSet,name = "mLongParamSet" } },
+                {typeof(long[]),new NodeParamSetAndName(){set=mLongArrayParamSet,name = "mLongArrayParamSet" } },
 
-                    // =============================================================================================================================
-                };
-            }
+                // =============================================================================================================================
+            };
         }
     }
 }

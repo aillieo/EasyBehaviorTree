@@ -41,28 +41,20 @@ namespace EasyBehaviorTree.Creator
         // =============================================================================================================================
 
         [HideInInspector][SerializeField]
-        public EnumParamSet enumParamSet = new EnumParamSet();
+        public EnumParamSet mEnumParamSet = new EnumParamSet();
 {0}
         // =============================================================================================================================
 
         private NodeDefine()
         {{
-            ensureCachedMappingsImpl = EnsureCachedMappings;
-        }}
-
-        private void EnsureCachedMappings()
-        {{
-            if(cachedMappings == null)
+            cachedMappings = new Dictionary<Type, NodeParamSetAndName>()
             {{
-                cachedMappings = new Dictionary<Type, NodeParamSetAndName>()
-                {{
-                    // =============================================================================================================================
+                // =============================================================================================================================
 
-                    {{typeof(Enum),new NodeParamSetAndName() {{ set = enumParamSet,name = ""enumParamSet"" }} }},
+                {{typeof(Enum),new NodeParamSetAndName() {{ set = mEnumParamSet,name = ""mEnumParamSet"" }} }},
 {1}
-                    // =============================================================================================================================
-                }};
-            }}
+                // =============================================================================================================================
+            }};
         }}
     }}
 }}
@@ -76,7 +68,7 @@ namespace EasyBehaviorTree.Creator
 
 
         public static readonly string nodeDefineTemplate2 =
-            @"                    {{typeof({2}),new NodeParamSetAndName(){{set={1}ParamSet,name = ""{1}ParamSet"" }} }},
+            @"                {{typeof({2}),new NodeParamSetAndName(){{set={1}ParamSet,name = ""{1}ParamSet"" }} }},
 ";
 
     }

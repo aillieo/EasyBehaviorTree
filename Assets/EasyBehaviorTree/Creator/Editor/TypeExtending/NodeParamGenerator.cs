@@ -11,24 +11,32 @@ using System.IO;
 
 namespace EasyBehaviorTree.Creator
 {
-    public static class NodeParamGenerator
+    internal static class NodeParamGenerator
     {
 
-        public static void CreateNodeDefine(string folder, string[] typeNames)
+        internal static void CreateNodeDefine(string folder, IList<NodeParamConfigEntry> entries)
         {
 
             StringBuilder stringBuilder1 = new StringBuilder();
             StringBuilder stringBuilder2 = new StringBuilder();
 
-            foreach (var typeName in typeNames)
+            foreach (var entry in entries)
             {
-                if (IsValidType(typeName))
+                if (IsValidType(entry) && entry.willGenerate)
                 {
-                    string str0 = GetTypeName(typeName, true);
-                    string str1 = GetTypeName(typeName, false);
-
+                    string str0 = entry.paramTypeName;
+                    string str1 = "m" + entry.paramTypeName;
                     stringBuilder1.AppendFormat(CodeTemplate.nodeDefineTemplate1, str0, str1);
-                    stringBuilder2.AppendFormat(CodeTemplate.nodeDefineTemplate2, str0, str1, typeName);
+                    stringBuilder2.AppendFormat(CodeTemplate.nodeDefineTemplate2, str0, str1, entry.typeName);
+
+                    if (entry.includeArrayType)
+                    {
+                        NodeParamConfigEntry arrayEntry = entry.MakeArrayTypeEntry();
+                        str0 = arrayEntry.paramTypeName;
+                        str1 = "m" + arrayEntry.paramTypeName;
+                        stringBuilder1.AppendFormat(CodeTemplate.nodeDefineTemplate1, str0, str1);
+                        stringBuilder2.AppendFormat(CodeTemplate.nodeDefineTemplate2, str0, str1, arrayEntry.typeName);
+                    }
                 }
             }
 
@@ -46,10 +54,10 @@ namespace EasyBehaviorTree.Creator
 
         }
 
-        public static void CreateOneFile(string folder, string typeName)
+        internal static void CreateOneFile(string folder, NodeParamConfigEntry nodeParamConfigEntry)
         {
-            string str0 = typeName;
-            string str1 = GetTypeName(typeName, true);
+            string str0 = nodeParamConfigEntry.typeName;
+            string str1 = nodeParamConfigEntry.paramTypeName;
 
             string filePath = Path.Combine(folder, string.Format(CodeTemplate.filename, str1));
 
@@ -64,33 +72,14 @@ namespace EasyBehaviorTree.Creator
             }
         }
 
-        private static string GetTypeName(string input, bool upper)
-        {
-            string ret = input.Trim(' ', '\n', '\r', '\t');
-            ret = ret.Replace("[]", "Array");
-            int lastDot = ret.LastIndexOf('.');
-            if (lastDot != -1)
-            {
-                ret = ret.Substring(lastDot + 1);
-            }
-            if (upper)
-            {
-                ret = ret.Substring(0, 1).ToUpper() + ret.Substring(1);
-            }
-            else
-            {
-                ret = ret.Substring(0, 1).ToLower() + ret.Substring(1);
-            }
-            return ret;
-        }
 
-        public static bool IsValidType(string typeName)
+        internal static bool IsValidType(NodeParamConfigEntry nodeParamConfigEntry)
         {
             return true;
         }
 
         [MenuItem("EasyBehaviorTree/Regenerate Node Params")]
-        public static void RegenerateScriptFiles()
+        internal static void RegenerateScriptFiles()
         {
             NodeParamConfig nodeParamConfig = NodeParamConfig.instance;
             if (nodeParamConfig.folder != null)
@@ -100,14 +89,24 @@ namespace EasyBehaviorTree.Creator
                 {
                     FileUtil.DeleteFileOrDirectory(path);
                     Directory.CreateDirectory(path);
-                    foreach (var typeName in nodeParamConfig.typeNames)
+                    List<NodeParamConfigEntry> entries = new List<NodeParamConfigEntry>();
+                    entries.AddRange(nodeParamConfig.defaultTypes);
+                    entries.AddRange(nodeParamConfig.extendedTypes);
+
+                    foreach (var entry in entries)
                     {
-                        if (IsValidType(typeName))
+                        if (IsValidType(entry) && entry.willGenerate)
                         {
-                            CreateOneFile(path, typeName);
+                            CreateOneFile(path, entry);
+
+                            if(entry.includeArrayType)
+                            {
+                                CreateOneFile(path, entry.MakeArrayTypeEntry());
+                            }
                         }
                     }
-                    CreateNodeDefine(path, nodeParamConfig.typeNames);
+                    
+                    CreateNodeDefine(path, entries);
                     AssetDatabase.Refresh();
                 }
             }

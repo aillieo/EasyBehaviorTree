@@ -49,15 +49,27 @@ MonoBehaviour:
   assemblyName: Assembly-CSharp
   displayName: seq
   nodeDescription: 
-  stringParamSet:
+  mEnumParamSet:
     nodeParams: []
-  floatParamSet:
+  mStringParamSet:
     nodeParams: []
-  intParamSet:
+  mStringArrayParamSet:
     nodeParams: []
-  boolParamSet:
+  mIntParamSet:
     nodeParams: []
-  enumParamSet:
+  mIntArrayParamSet:
+    nodeParams: []
+  mFloatParamSet:
+    nodeParams: []
+  mFloatArrayParamSet:
+    nodeParams: []
+  mBoolParamSet:
+    nodeParams: []
+  mBoolArrayParamSet:
+    nodeParams: []
+  mLongParamSet:
+    nodeParams: []
+  mLongArrayParamSet:
     nodeParams: []
 --- !u!1 &390500512716528126
 GameObject:
@@ -106,19 +118,27 @@ MonoBehaviour:
   assemblyName: Assembly-CSharp
   displayName: inRange
   nodeDescription: 
-  stringParamSet:
-    nodeParams:
-    - key: logStr
-      value: xixixi again
-  floatParamSet:
-    nodeParams:
-    - key: passProbability
-      value: 0.5
-  intParamSet:
+  mEnumParamSet:
     nodeParams: []
-  boolParamSet:
+  mStringParamSet:
     nodeParams: []
-  enumParamSet:
+  mStringArrayParamSet:
+    nodeParams: []
+  mIntParamSet:
+    nodeParams: []
+  mIntArrayParamSet:
+    nodeParams: []
+  mFloatParamSet:
+    nodeParams: []
+  mFloatArrayParamSet:
+    nodeParams: []
+  mBoolParamSet:
+    nodeParams: []
+  mBoolArrayParamSet:
+    nodeParams: []
+  mLongParamSet:
+    nodeParams: []
+  mLongArrayParamSet:
     nodeParams: []
 --- !u!1 &524446370117698833
 GameObject:
@@ -169,19 +189,27 @@ MonoBehaviour:
   assemblyName: Assembly-CSharp
   displayName: seq
   nodeDescription: 
-  stringParamSet:
-    nodeParams:
-    - key: logStr
-      value: xixixi
-  floatParamSet:
-    nodeParams:
-    - key: time
-      value: 3
-  intParamSet:
+  mEnumParamSet:
     nodeParams: []
-  boolParamSet:
+  mStringParamSet:
     nodeParams: []
-  enumParamSet:
+  mStringArrayParamSet:
+    nodeParams: []
+  mIntParamSet:
+    nodeParams: []
+  mIntArrayParamSet:
+    nodeParams: []
+  mFloatParamSet:
+    nodeParams: []
+  mFloatArrayParamSet:
+    nodeParams: []
+  mBoolParamSet:
+    nodeParams: []
+  mBoolArrayParamSet:
+    nodeParams: []
+  mLongParamSet:
+    nodeParams: []
+  mLongArrayParamSet:
     nodeParams: []
 --- !u!1 &2694959127662684527
 GameObject:
@@ -230,19 +258,27 @@ MonoBehaviour:
   assemblyName: Assembly-CSharp
   displayName: hasTar
   nodeDescription: 
-  stringParamSet:
-    nodeParams:
-    - key: logStr
-      value: 
-  floatParamSet:
-    nodeParams:
-    - key: passProbability
-      value: 0.5
-  intParamSet:
+  mEnumParamSet:
     nodeParams: []
-  boolParamSet:
+  mStringParamSet:
     nodeParams: []
-  enumParamSet:
+  mStringArrayParamSet:
+    nodeParams: []
+  mIntParamSet:
+    nodeParams: []
+  mIntArrayParamSet:
+    nodeParams: []
+  mFloatParamSet:
+    nodeParams: []
+  mFloatArrayParamSet:
+    nodeParams: []
+  mBoolParamSet:
+    nodeParams: []
+  mBoolArrayParamSet:
+    nodeParams: []
+  mLongParamSet:
+    nodeParams: []
+  mLongArrayParamSet:
     nodeParams: []
 --- !u!1 &3091194340361083576
 GameObject:
@@ -293,19 +329,27 @@ MonoBehaviour:
   assemblyName: Assembly-CSharp
   displayName: seq
   nodeDescription: 
-  stringParamSet:
-    nodeParams:
-    - key: logStr
-      value: xixixi again
-  floatParamSet:
-    nodeParams:
-    - key: passProbability
-      value: 0.5
-  intParamSet:
+  mEnumParamSet:
     nodeParams: []
-  boolParamSet:
+  mStringParamSet:
     nodeParams: []
-  enumParamSet:
+  mStringArrayParamSet:
+    nodeParams: []
+  mIntParamSet:
+    nodeParams: []
+  mIntArrayParamSet:
+    nodeParams: []
+  mFloatParamSet:
+    nodeParams: []
+  mFloatArrayParamSet:
+    nodeParams: []
+  mBoolParamSet:
+    nodeParams: []
+  mBoolArrayParamSet:
+    nodeParams: []
+  mLongParamSet:
+    nodeParams: []
+  mLongArrayParamSet:
     nodeParams: []
 --- !u!1 &4024296256866472905
 GameObject:
@@ -356,19 +400,27 @@ MonoBehaviour:
   assemblyName: Assembly-CSharp
   displayName: sel
   nodeDescription: 
-  stringParamSet:
-    nodeParams:
-    - key: logStr
-      value: xixixi again
-  floatParamSet:
-    nodeParams:
-    - key: passProbability
-      value: 0.5
-  intParamSet:
+  mEnumParamSet:
     nodeParams: []
-  boolParamSet:
+  mStringParamSet:
     nodeParams: []
-  enumParamSet:
+  mStringArrayParamSet:
+    nodeParams: []
+  mIntParamSet:
+    nodeParams: []
+  mIntArrayParamSet:
+    nodeParams: []
+  mFloatParamSet:
+    nodeParams: []
+  mFloatArrayParamSet:
+    nodeParams: []
+  mBoolParamSet:
+    nodeParams: []
+  mBoolArrayParamSet:
+    nodeParams: []
+  mLongParamSet:
+    nodeParams: []
+  mLongArrayParamSet:
     nodeParams: []
 --- !u!1 &4258583553955009579
 GameObject:
@@ -417,21 +469,29 @@ MonoBehaviour:
   assemblyName: Assembly-CSharp
   displayName: wait
   nodeDescription: 
-  stringParamSet:
+  mEnumParamSet:
+    nodeParams: []
+  mStringParamSet:
+    nodeParams: []
+  mStringArrayParamSet:
+    nodeParams: []
+  mIntParamSet:
+    nodeParams: []
+  mIntArrayParamSet:
+    nodeParams: []
+  mFloatParamSet:
     nodeParams:
-    - key: logStr
-      value: xixixi again
-  floatParamSet:
-    nodeParams:
-    - key: passProbability
-      value: 0.5
     - key: time
       value: 1
-  intParamSet:
+  mFloatArrayParamSet:
     nodeParams: []
-  boolParamSet:
+  mBoolParamSet:
     nodeParams: []
-  enumParamSet:
+  mBoolArrayParamSet:
+    nodeParams: []
+  mLongParamSet:
+    nodeParams: []
+  mLongArrayParamSet:
     nodeParams: []
 --- !u!1 &5212268213413486706
 GameObject:
@@ -480,17 +540,27 @@ MonoBehaviour:
   assemblyName: Assembly-CSharp
   displayName: find
   nodeDescription: 
-  stringParamSet:
-    nodeParams:
-    - key: logStr
-      value: after invert
-  floatParamSet:
+  mEnumParamSet:
     nodeParams: []
-  intParamSet:
+  mStringParamSet:
     nodeParams: []
-  boolParamSet:
+  mStringArrayParamSet:
     nodeParams: []
-  enumParamSet:
+  mIntParamSet:
+    nodeParams: []
+  mIntArrayParamSet:
+    nodeParams: []
+  mFloatParamSet:
+    nodeParams: []
+  mFloatArrayParamSet:
+    nodeParams: []
+  mBoolParamSet:
+    nodeParams: []
+  mBoolArrayParamSet:
+    nodeParams: []
+  mLongParamSet:
+    nodeParams: []
+  mLongArrayParamSet:
     nodeParams: []
 --- !u!1 &5745398602456458304
 GameObject:
@@ -539,15 +609,27 @@ MonoBehaviour:
   assemblyName: Assembly-CSharp
   displayName: move
   nodeDescription: 
-  stringParamSet:
+  mEnumParamSet:
     nodeParams: []
-  floatParamSet:
+  mStringParamSet:
     nodeParams: []
-  intParamSet:
+  mStringArrayParamSet:
     nodeParams: []
-  boolParamSet:
+  mIntParamSet:
     nodeParams: []
-  enumParamSet:
+  mIntArrayParamSet:
+    nodeParams: []
+  mFloatParamSet:
+    nodeParams: []
+  mFloatArrayParamSet:
+    nodeParams: []
+  mBoolParamSet:
+    nodeParams: []
+  mBoolArrayParamSet:
+    nodeParams: []
+  mLongParamSet:
+    nodeParams: []
+  mLongArrayParamSet:
     nodeParams: []
 --- !u!1 &6330730763159732533
 GameObject:
@@ -596,21 +678,27 @@ MonoBehaviour:
   assemblyName: Assembly-CSharp
   displayName: atk
   nodeDescription: 
-  stringParamSet:
-    nodeParams:
-    - key: logStr
-      value: xixixi again
-  floatParamSet:
-    nodeParams:
-    - key: passProbability
-      value: 0.5
-    - key: time
-      value: 1
-  intParamSet:
+  mEnumParamSet:
     nodeParams: []
-  boolParamSet:
+  mStringParamSet:
     nodeParams: []
-  enumParamSet:
+  mStringArrayParamSet:
+    nodeParams: []
+  mIntParamSet:
+    nodeParams: []
+  mIntArrayParamSet:
+    nodeParams: []
+  mFloatParamSet:
+    nodeParams: []
+  mFloatArrayParamSet:
+    nodeParams: []
+  mBoolParamSet:
+    nodeParams: []
+  mBoolArrayParamSet:
+    nodeParams: []
+  mLongParamSet:
+    nodeParams: []
+  mLongArrayParamSet:
     nodeParams: []
 --- !u!1 &7250049149516005805
 GameObject:
@@ -661,19 +749,27 @@ MonoBehaviour:
   assemblyName: Assembly-CSharp
   displayName: sel
   nodeDescription: 
-  stringParamSet:
-    nodeParams:
-    - key: logStr
-      value: 
-  floatParamSet:
-    nodeParams:
-    - key: time
-      value: 0.3
-  intParamSet:
+  mEnumParamSet:
     nodeParams: []
-  boolParamSet:
+  mStringParamSet:
     nodeParams: []
-  enumParamSet:
+  mStringArrayParamSet:
+    nodeParams: []
+  mIntParamSet:
+    nodeParams: []
+  mIntArrayParamSet:
+    nodeParams: []
+  mFloatParamSet:
+    nodeParams: []
+  mFloatArrayParamSet:
+    nodeParams: []
+  mBoolParamSet:
+    nodeParams: []
+  mBoolArrayParamSet:
+    nodeParams: []
+  mLongParamSet:
+    nodeParams: []
+  mLongArrayParamSet:
     nodeParams: []
 --- !u!1 &9013434109520092283
 GameObject:
@@ -723,21 +819,29 @@ MonoBehaviour:
   assemblyName: Assembly-CSharp
   displayName: root
   nodeDescription: test root
-  stringParamSet:
-    nodeParams:
-    - key: logStr
-      value: EWEW
-  floatParamSet:
-    nodeParams:
-    - key: time
-      value: 6
-  intParamSet:
+  mEnumParamSet:
+    nodeParams: []
+  mStringParamSet:
+    nodeParams: []
+  mStringArrayParamSet:
+    nodeParams: []
+  mIntParamSet:
     nodeParams:
     - key: repeatTimes
-      value: 5
-  boolParamSet:
+      value: 0
+  mIntArrayParamSet:
+    nodeParams: []
+  mFloatParamSet:
+    nodeParams: []
+  mFloatArrayParamSet:
+    nodeParams: []
+  mBoolParamSet:
     nodeParams:
     - key: ignoringFailure
-      value: 1
-  enumParamSet:
+      value: 0
+  mBoolArrayParamSet:
+    nodeParams: []
+  mLongParamSet:
+    nodeParams: []
+  mLongArrayParamSet:
     nodeParams: []
