@@ -24,16 +24,16 @@ namespace EasyBehaviorTree.Creator
             {
                 if (IsValidType(entry) && entry.willGenerate)
                 {
-                    string str0 = entry.paramTypeName;
-                    string str1 = "m" + entry.paramTypeName;
+                    string str0 = entry.safeParamTypeName;
+                    string str1 = "m" + entry.safeParamTypeName;
                     stringBuilder1.AppendFormat(CodeTemplate.nodeDefineTemplate1, str0, str1);
                     stringBuilder2.AppendFormat(CodeTemplate.nodeDefineTemplate2, str0, str1, entry.typeName);
 
                     if (entry.includeArrayType)
                     {
                         NodeParamConfigEntry arrayEntry = entry.MakeArrayTypeEntry();
-                        str0 = arrayEntry.paramTypeName;
-                        str1 = "m" + arrayEntry.paramTypeName;
+                        str0 = arrayEntry.safeParamTypeName;
+                        str1 = "m" + arrayEntry.safeParamTypeName;
                         stringBuilder1.AppendFormat(CodeTemplate.nodeDefineTemplate1, str0, str1);
                         stringBuilder2.AppendFormat(CodeTemplate.nodeDefineTemplate2, str0, str1, arrayEntry.typeName);
                     }
@@ -57,7 +57,7 @@ namespace EasyBehaviorTree.Creator
         internal static void CreateOneFile(string folder, NodeParamConfigEntry nodeParamConfigEntry)
         {
             string str0 = nodeParamConfigEntry.typeName;
-            string str1 = nodeParamConfigEntry.paramTypeName;
+            string str1 = nodeParamConfigEntry.safeParamTypeName;
 
             string filePath = Path.Combine(folder, string.Format(CodeTemplate.filename, str1));
 

@@ -36,10 +36,21 @@ namespace EasyBehaviorTree.Creator
         internal NodeParamConfigEntry MakeArrayTypeEntry()
         {
             NodeParamConfigEntry ret = new NodeParamConfigEntry(typeName + "[]");
-            ret.paramTypeName = paramTypeName + "Array";
+            ret.paramTypeName = safeParamTypeName + "Array";
             return ret;
         }
 
+        internal string safeParamTypeName
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(paramTypeName))
+                {
+                    paramTypeName = GetDefaultParamTypeName(typeName);
+                }
+                return paramTypeName;
+            }
+        }
     }
 
     internal class NodeParamConfig : ScriptableSingleton<NodeParamConfig>

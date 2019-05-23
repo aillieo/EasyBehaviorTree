@@ -34,6 +34,14 @@ namespace EasyBehaviorTree.Creator
         public LongParamSet mLongParamSet = new LongParamSet();
         [HideInInspector][SerializeField]
         public LongArrayParamSet mLongArrayParamSet = new LongArrayParamSet();
+        [HideInInspector][SerializeField]
+        public UnityEngine_Vector3ParamSet mUnityEngine_Vector3ParamSet = new UnityEngine_Vector3ParamSet();
+        [HideInInspector][SerializeField]
+        public UnityEngine_Vector3ArrayParamSet mUnityEngine_Vector3ArrayParamSet = new UnityEngine_Vector3ArrayParamSet();
+        [HideInInspector][SerializeField]
+        public UnityEngine_Vector2ParamSet mUnityEngine_Vector2ParamSet = new UnityEngine_Vector2ParamSet();
+        [HideInInspector][SerializeField]
+        public UnityEngine_Vector2ArrayParamSet mUnityEngine_Vector2ArrayParamSet = new UnityEngine_Vector2ArrayParamSet();
 
         // =============================================================================================================================
 
@@ -54,6 +62,10 @@ namespace EasyBehaviorTree.Creator
                 {typeof(bool[]),new NodeParamSetAndName(){set=mBoolArrayParamSet,name = "mBoolArrayParamSet" } },
                 {typeof(long),new NodeParamSetAndName(){set=mLongParamSet,name = "mLongParamSet" } },
                 {typeof(long[]),new NodeParamSetAndName(){set=mLongArrayParamSet,name = "mLongArrayParamSet" } },
+                {typeof(UnityEngine.Vector3),new NodeParamSetAndName(){set=mUnityEngine_Vector3ParamSet,name = "mUnityEngine_Vector3ParamSet" } },
+                {typeof(UnityEngine.Vector3[]),new NodeParamSetAndName(){set=mUnityEngine_Vector3ArrayParamSet,name = "mUnityEngine_Vector3ArrayParamSet" } },
+                {typeof(UnityEngine.Vector2),new NodeParamSetAndName(){set=mUnityEngine_Vector2ParamSet,name = "mUnityEngine_Vector2ParamSet" } },
+                {typeof(UnityEngine.Vector2[]),new NodeParamSetAndName(){set=mUnityEngine_Vector2ArrayParamSet,name = "mUnityEngine_Vector2ArrayParamSet" } },
 
                 // =============================================================================================================================
             };

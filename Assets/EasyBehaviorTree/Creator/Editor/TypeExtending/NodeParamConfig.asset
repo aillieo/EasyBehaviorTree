@@ -13,7 +13,15 @@ MonoBehaviour:
   m_Name: NodeParamConfig
   m_EditorClassIdentifier: 
   folder: {fileID: 102900000, guid: 80369ce6b27964760912bfe919ebc508, type: 3}
-  extendedTypes: []
+  extendedTypes:
+  - typeName: UnityEngine.Vector3
+    paramTypeName: 
+    includeArrayType: 1
+    willGenerate: 1
+  - typeName: UnityEngine.Vector2
+    paramTypeName: 
+    includeArrayType: 1
+    willGenerate: 1
   defaultTypes:
   - typeName: string
     paramTypeName: String

@@ -21,12 +21,12 @@ namespace EasyBehaviorTree.Creator
             float y = position.y;
             float width = position.width;
             float height = position.height;
-            float widthUnit = width / 4;
+            float widthUnit = width / 12;
 
-            EditorGUI.PropertyField(new Rect(x, y, widthUnit, height), property.FindPropertyRelative("typeName"), GUIContent.none);
-            EditorGUI.PropertyField(new Rect(x + widthUnit, y, widthUnit, height), property.FindPropertyRelative("paramTypeName"), GUIContent.none);
-            EditorGUI.PropertyField(new Rect(x + widthUnit * 2, y, widthUnit, height), property.FindPropertyRelative("includeArrayType"), GUIContent.none);
-            EditorGUI.PropertyField(new Rect(x + widthUnit * 3, y, widthUnit, height), property.FindPropertyRelative("willGenerate"), GUIContent.none);
+            EditorGUI.PropertyField(new Rect(x, y, widthUnit * 5, height), property.FindPropertyRelative("typeName"), GUIContent.none);
+            EditorGUI.PropertyField(new Rect(x + widthUnit * 5, y, widthUnit * 5, height), property.FindPropertyRelative("paramTypeName"), GUIContent.none);
+            EditorGUI.PropertyField(new Rect(x + widthUnit * 10, y, widthUnit, height), property.FindPropertyRelative("includeArrayType"), GUIContent.none);
+            EditorGUI.PropertyField(new Rect(x + widthUnit * 11, y, widthUnit, height), property.FindPropertyRelative("willGenerate"), GUIContent.none);
         }
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
@@ -52,6 +52,16 @@ namespace EasyBehaviorTree.Creator
             reorderableListDefault = InitiReorderableList(serializedObject.FindProperty("defaultTypes"));
             reorderableListExtended = InitiReorderableList(serializedObject.FindProperty("extendedTypes"));
 
+            cachedValidState = new Dictionary<string, bool>();
+            foreach(var entry in targetNodeParamConfig.defaultTypes)
+            {
+                cachedValidState.Add(entry.typeName,true);
+            }
+        }
+
+        private void OnDestroy()
+        {
+            cachedValidState.Clear();
         }
 
         public override void OnInspectorGUI()
@@ -60,16 +70,15 @@ namespace EasyBehaviorTree.Creator
 
             serializedObject.Update();
 
-            EditorGUI.BeginDisabledGroup(false);
+            EditorGUI.BeginDisabledGroup(true);
             reorderableListDefault.DoLayoutList();
             EditorGUI.EndDisabledGroup();
 
             reorderableListExtended.DoLayoutList();
 
-
             serializedObject.ApplyModifiedProperties();
 
-            if(GUILayout.Button("Regenerate!"))
+            if (GUILayout.Button("Regenerate!"))
             {
                 NodeParamGenerator.RegenerateScriptFiles();
             }
@@ -92,31 +101,45 @@ namespace EasyBehaviorTree.Creator
             float y = rect.y;
             float width = rect.width;
             float height = rect.height;
-            float widthUnit = width / 4;
-            GUI.Label(new Rect(x, y, widthUnit, height), "typeName");
-            GUI.Label(new Rect(x + widthUnit, y, widthUnit, height), "paramTypeName");
-            GUI.Label(new Rect(x + widthUnit * 2, y, widthUnit, height), "includeArrayType");
-            GUI.Label(new Rect(x + widthUnit * 3, y, widthUnit, height), "willGenerate");
+            float widthUnit = width / 12;
+            GUI.Label(new Rect(x, y, widthUnit * 5, height), "Type");
+            GUI.Label(new Rect(x + widthUnit * 5, y, widthUnit * 5, height), "ParamName");
+            GUI.Label(new Rect(x + widthUnit * 10, y, widthUnit, height), "Array?");
+            GUI.Label(new Rect(x + widthUnit * 11, y, widthUnit, height), "Gen?");
         }
 
         private void DrawOneProperty(SerializedProperty serializedProperty, Rect rect, int index, bool isActive, bool isFocused)
         {
             var element = serializedProperty.GetArrayElementAtIndex(index);
             Color original = GUI.color;
-            //if(!NodeParamGenerator.IsValidType(serializedProperty.GetArrayElementAtIndex(index).stringValue))
-            //{
-            //    GUI.color = Color.red;
-            //}
+            if(!IsTypeNameValid(serializedProperty.GetArrayElementAtIndex(index).FindPropertyRelative("typeName").stringValue))
+            {
+                GUI.color = Color.red;
+            }
             EditorGUI.PropertyField(rect, element, GUIContent.none);
             GUI.color = original;
         }
 
 
-        private void ValidateTypes()
+        Dictionary<string, bool> cachedValidState = new Dictionary<string, bool>();
+        private bool IsTypeNameValid(string typeName)
         {
-
+            if(!cachedValidState.ContainsKey(typeName))
+            {
+                Type t = null;
+                var ass = AppDomain.CurrentDomain.GetAssemblies();
+                foreach(var a in ass)
+                {
+                    t = a.GetType(typeName);
+                    if(t!=null)
+                    { 
+                        break; 
+                    }
+                }
+                cachedValidState.Add(typeName, t!= null);
+            }
+            return cachedValidState[typeName];
         }
-
     }
 #endif
 }
