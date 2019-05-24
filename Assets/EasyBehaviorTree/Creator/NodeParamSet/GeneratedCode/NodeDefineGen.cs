@@ -10,6 +10,9 @@ namespace EasyBehaviorTree.Creator
 {
     public partial class NodeDefine : MonoBehaviour
     {
+
+#if UNITY_EDITOR
+
         // =============================================================================================================================
 
         [HideInInspector][SerializeField]
@@ -70,5 +73,8 @@ namespace EasyBehaviorTree.Creator
                 // =============================================================================================================================
             };
         }
+
+#endif
+
     }
 }

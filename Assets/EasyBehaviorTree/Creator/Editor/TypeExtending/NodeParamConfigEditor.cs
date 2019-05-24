@@ -53,10 +53,6 @@ namespace EasyBehaviorTree.Creator
             reorderableListExtended = InitiReorderableList(serializedObject.FindProperty("extendedTypes"));
 
             cachedValidState = new Dictionary<string, bool>();
-            foreach(var entry in targetNodeParamConfig.defaultTypes)
-            {
-                cachedValidState.Add(entry.typeName,true);
-            }
         }
 
         private void OnDestroy()
@@ -126,17 +122,7 @@ namespace EasyBehaviorTree.Creator
         {
             if(!cachedValidState.ContainsKey(typeName))
             {
-                Type t = null;
-                var ass = AppDomain.CurrentDomain.GetAssemblies();
-                foreach(var a in ass)
-                {
-                    t = a.GetType(typeName);
-                    if(t!=null)
-                    { 
-                        break; 
-                    }
-                }
-                cachedValidState.Add(typeName, t!= null);
+                cachedValidState.Add(typeName, NodeParamGenerator.IsTypeNameValid(typeName));
             }
             return cachedValidState[typeName];
         }

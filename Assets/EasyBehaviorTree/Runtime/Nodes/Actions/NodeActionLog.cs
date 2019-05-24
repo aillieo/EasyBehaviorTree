@@ -17,11 +17,14 @@ namespace EasyBehaviorTree
 
         }
 
+#if UNITY_EDITOR
         public override bool Validate(out string error)
         {
             error = null;
             return !string.IsNullOrEmpty(logStr);
         }
+
+#endif
 
         protected override BTState ExecuteTask(float deltaTime)
         {

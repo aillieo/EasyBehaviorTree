@@ -19,6 +19,8 @@ namespace EasyBehaviorTree.Creator
     public class EnumParamSet : NodeParamSet<EnumParam, int>
     {
 
+#if UNITY_EDITOR
+
         public override bool TrySetFieldForType(FieldInfo field, NodeBase node)
         {
             if (field.FieldType.IsEnum)
@@ -53,5 +55,7 @@ namespace EasyBehaviorTree.Creator
             }
             return null;
         }
+
+#endif
     }
 }

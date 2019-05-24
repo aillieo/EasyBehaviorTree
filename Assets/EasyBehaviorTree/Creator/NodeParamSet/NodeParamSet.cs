@@ -11,8 +11,10 @@ namespace EasyBehaviorTree.Creator
 {
     public interface INodeParamSet
     {
+#if UNITY_EDITOR
         bool TrySetFieldForType(FieldInfo field, NodeBase node);
         SerializedProperty TryGetSerializedParam(SerializedProperty nodeParamSet, FieldInfo field);
+#endif
     }
 
     [Serializable]

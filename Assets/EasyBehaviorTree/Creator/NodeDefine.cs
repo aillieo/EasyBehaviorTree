@@ -20,6 +20,8 @@ namespace EasyBehaviorTree.Creator
     [DisallowMultipleComponent]
     public partial class NodeDefine : MonoBehaviour
     {
+#if UNITY_EDITOR
+
         [SerializeField][HideInInspector]
         private string nodeFullName;
         [SerializeField][HideInInspector]
@@ -110,5 +112,7 @@ namespace EasyBehaviorTree.Creator
                 }
             }
         }
+
+#endif
     }
 }

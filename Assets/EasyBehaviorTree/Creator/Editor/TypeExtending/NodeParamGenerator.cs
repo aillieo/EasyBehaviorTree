@@ -14,6 +14,26 @@ namespace EasyBehaviorTree.Creator
     internal static class NodeParamGenerator
     {
 
+        private static HashSet<string> csTypes = new HashSet<string>()
+        {
+            "bool",
+            "byte",
+            "char",
+            "decimal",
+            "double",
+            "float",
+            "int",
+            "long",
+            "object",
+            "sbyte",
+            "short",
+            "string",
+            "uint",
+            "ulong",
+            "ushort",
+        };
+
+
         internal static void CreateNodeDefine(string folder, IList<NodeParamConfigEntry> entries)
         {
 
@@ -22,7 +42,7 @@ namespace EasyBehaviorTree.Creator
 
             foreach (var entry in entries)
             {
-                if (IsValidType(entry) && entry.willGenerate)
+                if (IsTypeNameValid(entry.typeName) && entry.willGenerate)
                 {
                     string str0 = entry.safeParamTypeName;
                     string str1 = "m" + entry.safeParamTypeName;
@@ -73,10 +93,26 @@ namespace EasyBehaviorTree.Creator
         }
 
 
-        internal static bool IsValidType(NodeParamConfigEntry nodeParamConfigEntry)
+        internal static bool IsTypeNameValid(string typeName)
         {
-            return true;
+            if(csTypes.Contains(typeName))
+            {
+                return true;
+            }
+
+            Type t = null;
+            var ass = AppDomain.CurrentDomain.GetAssemblies();
+            foreach (var a in ass)
+            {
+                t = a.GetType(typeName);
+                if (t != null)
+                {
+                    break;
+                }
+            }
+            return t != null;
         }
+
 
         [MenuItem("EasyBehaviorTree/Regenerate Node Params")]
         internal static void RegenerateScriptFiles()
@@ -95,7 +131,7 @@ namespace EasyBehaviorTree.Creator
 
                     foreach (var entry in entries)
                     {
-                        if (IsValidType(entry) && entry.willGenerate)
+                        if (IsTypeNameValid(entry.typeName) && entry.willGenerate)
                         {
                             CreateOneFile(path, entry);
 
