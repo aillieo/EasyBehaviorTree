@@ -65,7 +65,7 @@ namespace EasyBehaviorTree.Creator
             {
                 string fullPath = GetFullPathForTree(go);
                 SaveBehaviorTree(behaviorTree, fullPath);
-                Debug.Log("Created successfully!\n" + fullPath + "\n" + behaviorTree.DumpTree(true));
+                Debug.Log("Created successfully!\n" + fullPath + "\n" + behaviorTree.DumpTree());
                 return behaviorTree;
             }
             else

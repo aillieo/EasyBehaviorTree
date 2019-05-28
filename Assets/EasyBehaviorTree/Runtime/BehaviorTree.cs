@@ -165,7 +165,7 @@ namespace EasyBehaviorTree
         }
 
 
-        public string DumpTree(bool withBriefInfo = false)
+        public string DumpTree()
         {
             StringBuilder sb = new StringBuilder();
             root.DumpNode(sb, new DefaultFormatter(), 0);
