@@ -95,7 +95,12 @@ namespace EasyBehaviorTree.Creator
 
         internal static bool IsTypeNameValid(string typeName)
         {
-            if(csTypes.Contains(typeName))
+            if (string.IsNullOrWhiteSpace(typeName))
+            {
+                return false;
+            }
+
+            if (csTypes.Contains(typeName))
             {
                 return true;
             }
