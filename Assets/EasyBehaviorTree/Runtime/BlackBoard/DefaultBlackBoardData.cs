@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-namespace EasyBehaviorTree
+namespace AillieoUtils.EasyBehaviorTree
 {
     [StructLayout(LayoutKind.Explicit, Size = 8)]
     public struct BBValue : IBlackBoardData

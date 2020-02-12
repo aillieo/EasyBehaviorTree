@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using System;
 
-namespace EasyBehaviorTree
+namespace AillieoUtils.EasyBehaviorTree
 {
     [Serializable]
     public class NodeRepeater : NodeDecorator
@@ -65,7 +63,7 @@ namespace EasyBehaviorTree
                     }
                 }
 
-                var ret = TickNode(Child, deltaTime);
+                var ret = NodeTick(Child, deltaTime);
                 switch (ret)
                 {
                     case BTState.Success:

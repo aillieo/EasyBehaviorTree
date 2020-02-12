@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using EasyBehaviorTree;
+using AillieoUtils.EasyBehaviorTree;
 using System;
 
 [Serializable]

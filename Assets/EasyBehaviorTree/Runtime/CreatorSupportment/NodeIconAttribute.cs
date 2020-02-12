@@ -1,6 +1,6 @@
 using System;
 
-namespace EasyBehaviorTree
+namespace AillieoUtils.EasyBehaviorTree
 {
     [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
     public class NodeIconAttribute : Attribute

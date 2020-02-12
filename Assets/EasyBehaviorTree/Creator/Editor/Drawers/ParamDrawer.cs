@@ -1,12 +1,10 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 using System.Reflection;
 
-namespace EasyBehaviorTree.Creator
+namespace AillieoUtils.EasyBehaviorTree.Creator
 {
 
     enum ParamType

@@ -1,4 +1,4 @@
-namespace EasyBehaviorTree.Creator
+namespace AillieoUtils.EasyBehaviorTree.Creator
 {
     public static class CodeTemplate
     {
@@ -11,7 +11,7 @@ namespace EasyBehaviorTree.Creator
         public static readonly string filename = @"{0}ParamSet.cs";
 
         public static readonly string nodeParamTempate =
-            @"namespace EasyBehaviorTree.Creator
+            @"namespace AillieoUtils.EasyBehaviorTree.Creator
 {{
 
     [System.Serializable]
@@ -34,7 +34,7 @@ using UnityEditor;
 using System;
 using System.Reflection;
 
-namespace EasyBehaviorTree.Creator
+namespace AillieoUtils.EasyBehaviorTree.Creator
 {{
     public partial class NodeDefine : MonoBehaviour
     {{

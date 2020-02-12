@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using System;
 
-namespace EasyBehaviorTree
+namespace AillieoUtils.EasyBehaviorTree
 {
     [Serializable]
     public class NodeSelector : NodeComposite
@@ -33,7 +31,7 @@ namespace EasyBehaviorTree
             while (curIndex < nodeCount)
             {
                 var node = Children[curIndex];
-                var ret = TickNode(node, deltaTime);
+                var ret = NodeTick(node, deltaTime);
                 switch (ret)
                 {
                 case BTState.Success:

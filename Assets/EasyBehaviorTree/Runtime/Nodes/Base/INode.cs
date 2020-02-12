@@ -1,9 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using System;
-using System.Text;
-
-namespace EasyBehaviorTree
+namespace AillieoUtils.EasyBehaviorTree
 {
 
     public interface INode

@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using System;
 using System.Text;
 
-namespace EasyBehaviorTree
+namespace AillieoUtils.EasyBehaviorTree
 {
 
     [Serializable]
@@ -15,7 +13,7 @@ namespace EasyBehaviorTree
         public string name;
 
         public string[] paramInfo;
-        
+
         protected NodeState nodeState { get; private set; } = NodeState.Raw;
 
         public virtual void DumpNode(StringBuilder stringBuilder, INodeInfoFormatter formatter, int level = 0)
@@ -56,16 +54,16 @@ namespace EasyBehaviorTree
             }
         }
 
-        public static BTState TickNode(NodeBase node, float deltaTime)
+        public static BTState NodeTick(NodeBase node, float deltaTime)
         {
             if (node.nodeState == NodeState.Raw)
             {
-                throw new Exception("Trying to tick a raw node!");
+                throw new Exception("A raw node can not tick!");
             }
 
             if (node.nodeState == NodeState.Visited)
             {
-                throw new Exception("Trying to tick a visited node!");
+                throw new Exception("A visited node can not tick!");
             }
 
             // first time

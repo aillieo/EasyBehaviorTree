@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Text;
 using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace EasyBehaviorTree
+namespace AillieoUtils.EasyBehaviorTree
 {
     [Serializable]
     public sealed class BehaviorTree
@@ -149,7 +147,7 @@ namespace EasyBehaviorTree
                 return;
             }
 
-            BTState ret = NodeBase.TickNode(root, deltaTime);
+            BTState ret = NodeBase.NodeTick(root, deltaTime);
 
             if (ret != BTState.Running)
             {

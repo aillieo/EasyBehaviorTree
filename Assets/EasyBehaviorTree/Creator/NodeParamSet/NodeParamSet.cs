@@ -7,7 +7,7 @@ using System.Reflection;
 using UnityEditor;
 #endif
 
-namespace EasyBehaviorTree.Creator
+namespace AillieoUtils.EasyBehaviorTree.Creator
 {
     public interface INodeParamSet
     {

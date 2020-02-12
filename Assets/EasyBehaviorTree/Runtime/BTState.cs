@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-
-namespace EasyBehaviorTree
+namespace AillieoUtils.EasyBehaviorTree
 {
     public enum BTState
     {

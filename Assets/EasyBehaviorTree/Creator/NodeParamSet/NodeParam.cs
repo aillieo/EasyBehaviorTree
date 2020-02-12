@@ -1,14 +1,10 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
-using System.Reflection;
-
 #if UNITY_EDITOR
-using UnityEditor;
-using UnityEditorInternal;
+
 #endif
 
-namespace EasyBehaviorTree.Creator
+namespace AillieoUtils.EasyBehaviorTree.Creator
 {
 
     [Serializable]

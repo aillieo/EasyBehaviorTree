@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Text;
 
-namespace EasyBehaviorTree
+namespace AillieoUtils.EasyBehaviorTree
 {
     public interface INodeInfoFormatter
     {

@@ -1,8 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 
-namespace EasyBehaviorTree
+namespace AillieoUtils
 {
     public abstract class BaseLogger : ILogger
     {

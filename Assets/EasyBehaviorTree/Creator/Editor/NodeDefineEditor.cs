@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System;
-using System.Reflection;
 using System.Linq;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -10,7 +7,7 @@ using UnityEditor;
 
 #if UNITY_EDITOR
 
-namespace EasyBehaviorTree.Creator
+namespace AillieoUtils.EasyBehaviorTree.Creator
 {
 
     [CustomEditor(typeof(NodeDefine))]

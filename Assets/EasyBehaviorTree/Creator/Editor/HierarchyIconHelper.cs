@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
 
-namespace EasyBehaviorTree.Creator
+namespace AillieoUtils.EasyBehaviorTree.Creator
 {
 
     [InitializeOnLoad]

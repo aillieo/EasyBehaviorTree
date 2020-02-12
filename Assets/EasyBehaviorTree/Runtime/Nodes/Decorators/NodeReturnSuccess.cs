@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using System;
 
-namespace EasyBehaviorTree
+namespace AillieoUtils.EasyBehaviorTree
 {
     [Serializable]
     public class NodeReturnSuccess : NodeDecorator
@@ -14,7 +12,7 @@ namespace EasyBehaviorTree
 
         public override BTState Update(float deltaTime)
         {
-            var ret = TickNode(Child, deltaTime);
+            var ret = NodeTick(Child, deltaTime);
             if(ret == BTState.Running)
             {
                 return ret;

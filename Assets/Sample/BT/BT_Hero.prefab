@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feb5477fb5ae48f49b6c170e3613c8fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nodeFullName: EasyBehaviorTree.NodeSequence
+  nodeFullName: AillieoUtils.EasyBehaviorTree.NodeSequence
   assemblyName: Assembly-CSharp
   displayName: seq
   nodeDescription: 
@@ -185,7 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feb5477fb5ae48f49b6c170e3613c8fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nodeFullName: EasyBehaviorTree.NodeSequence
+  nodeFullName: AillieoUtils.EasyBehaviorTree.NodeSequence
   assemblyName: Assembly-CSharp
   displayName: seq
   nodeDescription: 
@@ -325,7 +325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feb5477fb5ae48f49b6c170e3613c8fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nodeFullName: EasyBehaviorTree.NodeSequence
+  nodeFullName: AillieoUtils.EasyBehaviorTree.NodeSequence
   assemblyName: Assembly-CSharp
   displayName: seq
   nodeDescription: 
@@ -396,7 +396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feb5477fb5ae48f49b6c170e3613c8fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nodeFullName: EasyBehaviorTree.NodeSelector
+  nodeFullName: AillieoUtils.EasyBehaviorTree.NodeSelector
   assemblyName: Assembly-CSharp
   displayName: sel
   nodeDescription: 
@@ -465,7 +465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feb5477fb5ae48f49b6c170e3613c8fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nodeFullName: EasyBehaviorTree.NodeActionWait
+  nodeFullName: AillieoUtils.EasyBehaviorTree.NodeActionWait
   assemblyName: Assembly-CSharp
   displayName: wait
   nodeDescription: 
@@ -745,7 +745,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feb5477fb5ae48f49b6c170e3613c8fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nodeFullName: EasyBehaviorTree.NodeSelector
+  nodeFullName: AillieoUtils.EasyBehaviorTree.NodeSelector
   assemblyName: Assembly-CSharp
   displayName: sel
   nodeDescription: 
@@ -815,7 +815,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feb5477fb5ae48f49b6c170e3613c8fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nodeFullName: EasyBehaviorTree.NodeRepeater
+  nodeFullName: AillieoUtils.EasyBehaviorTree.NodeRepeater
   assemblyName: Assembly-CSharp
   displayName: root
   nodeDescription: test root

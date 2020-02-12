@@ -1,11 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Text;
-#if UNITY_EDITOR
-using UnityEngine;
-#endif
+﻿using System.Text;
 
-namespace EasyBehaviorTree
+namespace AillieoUtils.EasyBehaviorTree
 {
     public class DefaultFormatter : INodeInfoFormatter
     {

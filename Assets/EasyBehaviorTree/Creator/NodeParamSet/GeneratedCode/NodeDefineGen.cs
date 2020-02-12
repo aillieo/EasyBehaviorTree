@@ -6,7 +6,7 @@ using UnityEditor;
 using System;
 using System.Reflection;
 
-namespace EasyBehaviorTree.Creator
+namespace AillieoUtils.EasyBehaviorTree.Creator
 {
     public partial class NodeDefine : MonoBehaviour
     {
@@ -73,7 +73,6 @@ namespace EasyBehaviorTree.Creator
                 // =============================================================================================================================
             };
         }
-
 #endif
 
     }

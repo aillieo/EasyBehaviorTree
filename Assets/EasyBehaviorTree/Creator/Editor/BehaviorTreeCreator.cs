@@ -1,13 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using System;
-using System.Reflection;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace EasyBehaviorTree.Creator
+namespace AillieoUtils.EasyBehaviorTree.Creator
 {
     public class BehaviorTreeCreator
     {

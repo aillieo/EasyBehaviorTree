@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using EasyBehaviorTree;
 using System;
 
-namespace EasyBehaviorTree
+namespace AillieoUtils.EasyBehaviorTree
 {
     [Serializable]
     public class NodeActionWait : NodeAction

@@ -1,8 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using System;
 
-namespace EasyBehaviorTree
+namespace AillieoUtils.EasyBehaviorTree
 {
     [Serializable]
     public class NodeParallel : NodeComposite
@@ -60,7 +59,7 @@ namespace EasyBehaviorTree
             {
                 if (!nodeStates.ContainsKey(i))
                 {
-                    var ret = TickNode(Children[i], deltaTime);
+                    var ret = NodeTick(Children[i], deltaTime);
                     if(ret != BTState.Running)
                     {
                         nodeStates.Add(i, ret);

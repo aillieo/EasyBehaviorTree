@@ -1,15 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
-using System.Text;
 #if UNITY_EDITOR
 using UnityEditor;
 using UnityEditorInternal;
 #endif
-using System.IO;
 
-namespace EasyBehaviorTree.Creator
+namespace AillieoUtils.EasyBehaviorTree.Creator
 {
 
     [CustomPropertyDrawer(typeof(NodeParamConfigEntry))]
