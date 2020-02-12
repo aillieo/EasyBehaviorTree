@@ -13,6 +13,9 @@ namespace EasyBehaviorTree
         [NodeParam]
         private bool ignoringFailure;
 
+        [NodeParam]
+        private bool oncePerTick;
+
         private int finishedTimes;
 
         public override void Reset()
@@ -45,37 +48,39 @@ namespace EasyBehaviorTree
                 return BTState.Success;
             }
 
-            bool needReset = false;
+            bool firstTimeInLoop = true;
 
             while (finishedTimes < repeatTimes)
             {
-                if(needReset)
+                if(firstTimeInLoop)
                 {
-                    needReset = false;
-                    ResetNode(Child);
+                    firstTimeInLoop = false;
                 }
-                
+                else
+                {
+                    ResetNode(Child);
+                    if(oncePerTick)
+                    {
+                        return BTState.Running;
+                    }
+                }
+
                 var ret = TickNode(Child, deltaTime);
                 switch (ret)
                 {
                     case BTState.Success:
-                        ++finishedTimes;
-                        needReset = true;
-                        continue;
+                        break;
                     case BTState.Running:
                         return BTState.Running;
                     case BTState.Failure:
-                        if (ignoringFailure)
-                        {
-                            ++finishedTimes;
-                            needReset = true;
-                            continue;
-                        }
-                        else
+                        if (!ignoringFailure)
                         {
                             return BTState.Failure;
                         }
+                        break;
                 }
+
+                ++finishedTimes;
             }
             return BTState.Success;
         }

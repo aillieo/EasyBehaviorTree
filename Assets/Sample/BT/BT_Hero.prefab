@@ -828,7 +828,7 @@ MonoBehaviour:
   mIntParamSet:
     nodeParams:
     - key: repeatTimes
-      value: 0
+      value: 100
   mIntArrayParamSet:
     nodeParams: []
   mFloatParamSet:
@@ -839,6 +839,8 @@ MonoBehaviour:
     nodeParams:
     - key: ignoringFailure
       value: 0
+    - key: oncePerTick
+      value: 1
   mBoolArrayParamSet:
     nodeParams: []
   mLongParamSet:

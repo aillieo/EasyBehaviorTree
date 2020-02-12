@@ -105,7 +105,7 @@ The project is created with Unity 2018.3.6f, any other older or newer versions a
 and the tree information with `DefaultFormatter`:
 
     ```
-    root(EasyBehaviorTree.NodeRepeater) {repeatTimes=0,ignoringFailure=False}
+    root(EasyBehaviorTree.NodeRepeater) {repeatTimes=100,ignoringFailure=False,oncePerTick=True}
     -sel(EasyBehaviorTree.NodeSelector) {}
     --seq(EasyBehaviorTree.NodeSequence) {}
     ---hasTar(HasTarget) {}
