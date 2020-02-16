@@ -22,31 +22,24 @@ namespace AillieoUtils.EasyBehaviorTree.Creator
 
         [SerializeField][HideInInspector]
         private string nodeFullName;
-        [SerializeField][HideInInspector]
-        private string assemblyName;
 
         [SerializeField][HideInInspector]
         private string displayName;
         [SerializeField][HideInInspector]
         private string nodeDescription;
 
-        Action ensureCachedMappingsImpl;
-
         private Dictionary<Type, NodeParamSetAndName> cachedMappings;
-
-        public static FieldInfo[] GetNodeParamFields(Type type)
-        {
-            return type.GetFields(BindingFlags.Public| BindingFlags.NonPublic|BindingFlags.Instance)
-            .Where(fi => fi.GetCustomAttribute<NodeParamAttribute>(false) != null).ToArray();
-        }
 
         public Type GetNodeType()
         {
-            Assembly ass = Assembly.Load(assemblyName);
-            if (ass != null)
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            foreach (var assembly in assemblies)
             {
-                Type t = ass.GetType(nodeFullName);
-                return t;
+                Type t = assembly.GetType(nodeFullName);
+                if (t != null)
+                {
+                    return t;
+                }
             }
             return null;
         }
@@ -66,11 +59,8 @@ namespace AillieoUtils.EasyBehaviorTree.Creator
                 if (node != null)
                 {
                     node.name = displayName;
-                    List<string> paramInfo = new List<string>();
 
-                    var fields = GetNodeParamFields(t);
-
-                    ensureCachedMappingsImpl?.Invoke();
+                    var fields = ReflectionUtils.GetNodeParamFields(t);
 
                     foreach (var field in fields)
                     {
@@ -80,11 +70,7 @@ namespace AillieoUtils.EasyBehaviorTree.Creator
                             type = typeof(Enum);
                         }
                         cachedMappings[type].set.TrySetFieldForType(field, node);
-                        paramInfo.Add(field.Name);
-                        string value = Convert.ToString(field.GetValue(node));
-                        paramInfo.Add(value != null ? value : string.Empty);
                     }
-                    node.paramInfo = paramInfo.ToArray();
                 }
                 return node;
             }
@@ -93,7 +79,6 @@ namespace AillieoUtils.EasyBehaviorTree.Creator
 
         public void TryDrawFields(FieldInfo[] fields, SerializedObject serializedObject)
         {
-            ensureCachedMappingsImpl?.Invoke();
             foreach (var field in fields)
             {
                 Type type = field.FieldType;

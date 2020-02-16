@@ -1,18 +1,20 @@
 using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace AillieoUtils.EasyBehaviorTree
 {
 
     [Serializable]
-    public abstract class NodeBase : INode
+    public abstract class NodeBase
     {
 
         protected BehaviorTree behaviorTree;
 
         public string name;
 
-        public string[] paramInfo;
+        [NonSerialized]
+        public ParamInfo[] paramInfo;
 
         protected NodeState nodeState { get; private set; } = NodeState.Raw;
 
@@ -32,8 +34,31 @@ namespace AillieoUtils.EasyBehaviorTree
 
         }
 
+        internal int ExtractParamInfo()
+        {
+            if (paramInfo == null)
+            {
+                List<ParamInfo> paramInfo = new List<ParamInfo>();
+
+                var fields = ReflectionUtils.GetNodeParamFields(this.GetType());
+
+                foreach (var field in fields)
+                {
+                    paramInfo.Add(new ParamInfo
+                    {
+                        name = field.Name,
+                        type = field.FieldType,
+                        serializedValue = ParamInfoProcessor.Save(field.FieldType,field.GetValue(this))
+                    });
+                }
+                this.paramInfo = paramInfo.ToArray();
+            }
+            return paramInfo.Length;
+        }
+
         private NodeInfo ExtractNodeInfo(int level)
         {
+            ExtractParamInfo();
             return new NodeInfo()
             {
                 name = this.name,
@@ -44,7 +69,7 @@ namespace AillieoUtils.EasyBehaviorTree
             };
         }
 
-        public static void InitNode(NodeBase node, BehaviorTree behaviorTree)
+        internal static void InitNode(NodeBase node, BehaviorTree behaviorTree)
         {
             if(node.nodeState == NodeState.Raw)
             {
@@ -54,7 +79,7 @@ namespace AillieoUtils.EasyBehaviorTree
             }
         }
 
-        public static BTState NodeTick(NodeBase node, float deltaTime)
+        internal static BTState NodeTick(NodeBase node, float deltaTime)
         {
             if (node.nodeState == NodeState.Raw)
             {
@@ -75,6 +100,7 @@ namespace AillieoUtils.EasyBehaviorTree
 
             // regular tick
             BTState ret = node.Update(deltaTime);
+            node.behaviorTree.logger.Debug(node.ToString() + " : " + ret);
             if (ret == BTState.Running)
             {
                 return ret;
@@ -86,7 +112,7 @@ namespace AillieoUtils.EasyBehaviorTree
             return ret;
         }
 
-        public static void ResetNode(NodeBase node)
+        internal static void ResetNode(NodeBase node)
         {
             if(node.nodeState == NodeState.Raw)
             {
@@ -105,34 +131,28 @@ namespace AillieoUtils.EasyBehaviorTree
 
         public virtual void Init()
         {
-            behaviorTree.logger.Debug(ToString() + " : Init");
         }
 
         public virtual void Reset()
         {
-            behaviorTree.logger.Debug(ToString() + " : Reset");
         }
 
         public virtual void OnEnter()
         {
-            behaviorTree.logger.Debug(ToString() + " : OnEnter");
         }
 
         public virtual void OnExit()
         {
-            behaviorTree.logger.Debug(ToString() + " : OnExit");
         }
 
         public abstract BTState Update(float deltaTime);
         public abstract void Cleanup();
 
-#if UNITY_EDITOR
         public virtual bool Validate(out string error)
         {
             error = null;
             return true;
         }
-#endif
     }
 
 }

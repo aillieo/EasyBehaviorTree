@@ -13,10 +13,17 @@ namespace AillieoUtils.EasyBehaviorTree
         public override BTState Update(float deltaTime)
         {
             var ret = NodeTick(Child, deltaTime);
-            if(ret == BTState.Success)
+            switch (ret)
             {
+            case BTState.Success:
                 return BTState.Success;
+            case BTState.Running:
+                break;
+            case BTState.Failure:
+                ResetNode(Child);
+                break;
             }
+
             return BTState.Running;
         }
     }

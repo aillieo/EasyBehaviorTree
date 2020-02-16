@@ -6,13 +6,13 @@ namespace AillieoUtils.EasyBehaviorTree
     public class NodeRepeater : NodeDecorator
     {
         [NodeParam]
-        private int repeatTimes;
+        public readonly int repeatTimes;
 
         [NodeParam]
-        private bool ignoringFailure;
+        public readonly bool ignoringFailure;
 
         [NodeParam]
-        private bool oncePerTick;
+        public readonly bool oncePerTick;
 
         private int finishedTimes;
 
@@ -27,7 +27,6 @@ namespace AillieoUtils.EasyBehaviorTree
 
         }
 
-#if UNITY_EDITOR
         public override bool Validate(out string error)
         {
             error = null;
@@ -37,7 +36,6 @@ namespace AillieoUtils.EasyBehaviorTree
             }
             return error == null;
         }
-#endif
 
         public override BTState Update(float deltaTime)
         {

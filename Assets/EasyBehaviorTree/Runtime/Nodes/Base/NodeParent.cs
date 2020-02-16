@@ -5,15 +5,13 @@ using System.Text;
 namespace AillieoUtils.EasyBehaviorTree
 {
     [Serializable]
-    public abstract class NodeParent : NodeBase, IParent
+    public abstract class NodeParent : NodeBase
     {
         private List<NodeBase> mChildren = new List<NodeBase>();
 
         public IList<NodeBase> Children => mChildren.AsReadOnly();
 
-#if UNITY_EDITOR
-
-        public void AddChild(NodeBase node)
+        internal void AddChild(NodeBase node)
         {
             mChildren.Add(node);
         }
@@ -28,7 +26,6 @@ namespace AillieoUtils.EasyBehaviorTree
             }
             return true;
         }
-#endif
 
         public override void Init()
         {
@@ -44,7 +41,7 @@ namespace AillieoUtils.EasyBehaviorTree
         public override void Reset()
         {
             base.Reset();
-            
+
             foreach (var n in mChildren)
             {
                 ResetNode(n);

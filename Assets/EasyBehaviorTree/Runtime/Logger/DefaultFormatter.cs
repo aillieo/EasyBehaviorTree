@@ -23,7 +23,7 @@ namespace AillieoUtils.EasyBehaviorTree
                 {
                     stringBuilder.Append(',');
                 }
-                stringBuilder.AppendFormat("{0}={1}",nodeInfo.paramInfo[i],nodeInfo.paramInfo[i+1]);
+                stringBuilder.AppendFormat("{0}={1}",nodeInfo.paramInfo[i].name,nodeInfo.paramInfo[i].serializedValue);
             }
             stringBuilder.Append('}');
         }

@@ -12,11 +12,7 @@ namespace AillieoUtils.EasyBehaviorTree
         {
             get
             {
-                if (dict.ContainsKey(key))
-                {
-                    return dict[key];
-                }
-                return default;
+                return dict[key];
             }
             set
             {
@@ -32,6 +28,22 @@ namespace AillieoUtils.EasyBehaviorTree
         public bool HasValue(string key)
         {
             return dict.ContainsKey(key);
+        }
+
+        public bool Remove(string key)
+        {
+            return this.dict.Remove(key);
+        }
+
+        public IBlackBoardData SafeGet(string key, IBlackBoardData fallback = default)
+        {
+            IBlackBoardData ret = default;
+            if (this.dict.TryGetValue(key, out ret))
+            {
+                return ret;
+            }
+
+            return fallback;
         }
     }
 }

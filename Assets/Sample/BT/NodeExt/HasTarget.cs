@@ -11,7 +11,7 @@ public class HasTarget : NodeCondition
 
     protected override bool CheckCondition(float deltaTime)
     {
-        Hero target = behaviorTree.blackBoard["target"] as Hero;
+        Hero target = behaviorTree.blackBoard.SafeGet("target") as Hero;
         return target != null && target.alive;
     }
 }

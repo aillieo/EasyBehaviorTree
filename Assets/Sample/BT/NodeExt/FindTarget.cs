@@ -32,11 +32,6 @@ public class FindTarget : NodeAction
         if(target != null)
         {
             behaviorTree.blackBoard["target"] = target;
-            Vector3 dir = target.transform.position - self.transform.position;
-            if(dir.sqrMagnitude >0)
-            {
-                self.transform.forward = dir;
-            }
             return BTState.Success;
         }
         return BTState.Failure;

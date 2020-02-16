@@ -3,12 +3,12 @@ using UnityEngine;
 using UnityEditor;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Xml;
 
 namespace AillieoUtils.EasyBehaviorTree.Creator
 {
     public class BehaviorTreeCreator
     {
-
         private Dictionary<NodeDefine, NodeBase> nodeCreateInfo = new Dictionary<NodeDefine, NodeBase>();
 
         [MenuItem("Assets/EasyBehaviorTree/CreateTreeAsset", false, 0)]
@@ -46,7 +46,6 @@ namespace AillieoUtils.EasyBehaviorTree.Creator
 
         private BehaviorTree CreateTree(GameObject go)
         {
-            BehaviorTree behaviorTree = new BehaviorTree();
             NodeBase rootNode = GameObjectToNode(go);
             if (rootNode == null)
             {
@@ -54,14 +53,14 @@ namespace AillieoUtils.EasyBehaviorTree.Creator
                 return null;
             }
 
-            behaviorTree.root = rootNode;
+            ProcessChildrenForTrans(go.transform, rootNode);
 
-            ProcessChildrenForTrans(go.transform, behaviorTree.root);
+            BehaviorTree behaviorTree = CreatorUtils.NewBehaviorTree(rootNode);
 
             if (Validate())
             {
                 string fullPath = GetFullPathForTree(go);
-                SaveBehaviorTree(behaviorTree, fullPath);
+                SaveBehaviorTree(behaviorTree, new BytesAssetProcessor(), fullPath);
                 Debug.Log("Created successfully!\n" + fullPath + "\n" + behaviorTree.DumpTree());
                 return behaviorTree;
             }
@@ -84,7 +83,7 @@ namespace AillieoUtils.EasyBehaviorTree.Creator
                 NodeParent parent = parentNode as NodeParent;
                 if(parent != null)
                 {
-                    parent.AddChild(node);
+                    CreatorUtils.AddChild(parent,node);
                     ProcessChildrenForTrans(t, node);
                     continue;
                 }
@@ -116,16 +115,14 @@ namespace AillieoUtils.EasyBehaviorTree.Creator
             return null;
         }
 
-        private static bool SaveBehaviorTree(BehaviorTree behaviorTree, string filename)
+        private static bool SaveBehaviorTree(BehaviorTree behaviorTree, IBTAssetProcessor assetProcessor ,string filename)
         {
-            using (Stream stream = new FileStream(filename, FileMode.Create, FileAccess.Write, FileShare.None))
+            if (assetProcessor.Save(behaviorTree,filename))
             {
-                BinaryFormatter formatter = new BinaryFormatter();
-                formatter.Serialize(stream, behaviorTree);
-                stream.Close();
                 AssetDatabase.Refresh();
                 return true;
             }
+            return false;
         }
 
         private bool Validate()

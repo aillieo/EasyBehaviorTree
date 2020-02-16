@@ -8,15 +8,13 @@ namespace AillieoUtils.EasyBehaviorTree
     public class NodeConditionRandom : NodeCondition
     {
         [NodeParam]
-        private float passProbability;
+        public readonly float passProbability;
 
         public override void Cleanup()
         {
 
         }
 
-
-#if UNITY_EDITOR
         public override bool Validate(out string error)
         {
             if(!base.Validate(out error))
@@ -30,7 +28,6 @@ namespace AillieoUtils.EasyBehaviorTree
             }
             return error == null;
         }
-#endif
 
         protected override bool CheckCondition(float deltaTime)
         {

@@ -14,10 +14,10 @@ namespace AillieoUtils.EasyBehaviorTree
         }
 
         [NodeParam]
-        private ParallelStrategy strategy;
+        public readonly ParallelStrategy strategy;
 
         [NodeParam]
-        private int targetCount;
+        public readonly int targetCount;
 
         private Dictionary<int, BTState> nodeStates = new Dictionary<int, BTState>();
 
@@ -32,7 +32,6 @@ namespace AillieoUtils.EasyBehaviorTree
 
         }
 
-#if UNITY_EDITOR
         public override bool Validate(out string error)
         {
             bool ret = base.Validate(out error);
@@ -45,7 +44,6 @@ namespace AillieoUtils.EasyBehaviorTree
             }
             return error == null;
         }
-#endif
 
         public override BTState Update(float deltaTime)
         {

@@ -20,6 +20,11 @@ public class ApproachTarget : NodeAction
             return BTState.Failure;
         }
         Vector3 dir = target.transform.position - self.transform.position;
+        if(dir.sqrMagnitude >0)
+        {
+            self.transform.forward = dir;
+        }
+
         dir.Normalize();
         Vector3 move = dir * self.speed * deltaTime;
 

@@ -6,7 +6,7 @@ namespace AillieoUtils.EasyBehaviorTree
     public class NodeActionWait : NodeAction
     {
         [NodeParam]
-        private float time;
+        public readonly float time;
 
         private float timer;
 
@@ -15,7 +15,6 @@ namespace AillieoUtils.EasyBehaviorTree
 
         }
 
-#if UNITY_EDITOR
         public override bool Validate(out string error)
         {
             error = null;
@@ -25,7 +24,6 @@ namespace AillieoUtils.EasyBehaviorTree
             }
             return error == null;
         }
-#endif
 
         public override void Reset()
         {

@@ -9,6 +9,8 @@ namespace AillieoUtils.EasyBehaviorTree
 
         bool HasValue(string key);
 
+        bool Remove(string key);
+
         void CleanUp();
     }
 }

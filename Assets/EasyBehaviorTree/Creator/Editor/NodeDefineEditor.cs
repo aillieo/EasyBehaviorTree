@@ -21,7 +21,6 @@ namespace AillieoUtils.EasyBehaviorTree.Creator
         NodeDefine nodeDefine;
 
         private SerializedProperty nodeFullName;
-        private SerializedProperty assemblyName;
         private SerializedProperty displayName;
         private SerializedProperty nodeDescription;
 
@@ -29,7 +28,6 @@ namespace AillieoUtils.EasyBehaviorTree.Creator
         {
             nodeTypes = AppDomain.CurrentDomain.GetAssemblies().SelectMany(a => a.GetTypes().Where(t => t.IsSubclassOf(typeof(NodeBase)) && !t.IsAbstract)).ToArray();
             nodeNames = nodeTypes.Select(t => t.FullName).ToArray();
-            assemNames = nodeTypes.Select(t => t.Assembly.GetName().Name).ToArray();
         }
 
         private void OnEnable()
@@ -37,14 +35,12 @@ namespace AillieoUtils.EasyBehaviorTree.Creator
             Collect();
             nodeDefine = serializedObject.targetObject as NodeDefine;
             nodeFullName = this.serializedObject.FindProperty("nodeFullName");
-            assemblyName = this.serializedObject.FindProperty("assemblyName");
             displayName = this.serializedObject.FindProperty("displayName");
             nodeDescription = this.serializedObject.FindProperty("nodeDescription");
 
             for (int i = 0, len = nodeTypes.Length; i < len; ++i)
             {
-                if (nodeNames[i] == nodeFullName.stringValue &&
-                    assemNames[i] == assemblyName.stringValue)
+                if (nodeNames[i] == nodeFullName.stringValue)
                 {
                     selected = i;
                 }
@@ -57,7 +53,7 @@ namespace AillieoUtils.EasyBehaviorTree.Creator
         {
         }
 
-       
+
 
         public override void OnInspectorGUI()
         {
@@ -91,14 +87,13 @@ namespace AillieoUtils.EasyBehaviorTree.Creator
         private void OnSelectIndexChanged()
         {
             nodeFullName.stringValue = nodeNames[selected];
-            assemblyName.stringValue = assemNames[selected];
 
             serializedObject.ApplyModifiedProperties();
         }
 
         private void DrawNodeFields()
         {
-            nodeDefine.TryDrawFields(NodeDefine.GetNodeParamFields(nodeTypes[selected]),serializedObject);
+            nodeDefine.TryDrawFields(ReflectionUtils.GetNodeParamFields(nodeTypes[selected]).ToArray(),serializedObject);
         }
 
         private void DrawButtons()

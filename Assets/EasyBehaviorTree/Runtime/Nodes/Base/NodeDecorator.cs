@@ -5,9 +5,6 @@ namespace AillieoUtils.EasyBehaviorTree
     [Serializable]
     public abstract class NodeDecorator : NodeParent
     {
-
-#if UNITY_EDITOR
-
         public override bool Validate(out string error)
         {
             error = null;
@@ -21,7 +18,6 @@ namespace AillieoUtils.EasyBehaviorTree
             }
             return error == null;
         }
-#endif
 
         protected NodeBase Child
         {

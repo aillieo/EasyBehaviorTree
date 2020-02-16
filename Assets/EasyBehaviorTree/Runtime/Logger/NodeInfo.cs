@@ -6,7 +6,7 @@ namespace AillieoUtils.EasyBehaviorTree
     {
         public string name;
         public Type type;
-        public string[] paramInfo;
+        public ParamInfo[] paramInfo;
 
         public NodeState nodeState;
 

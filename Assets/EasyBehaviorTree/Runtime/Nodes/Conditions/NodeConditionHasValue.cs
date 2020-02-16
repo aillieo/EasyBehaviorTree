@@ -8,15 +8,13 @@ namespace AillieoUtils.EasyBehaviorTree
     public class NodeConditionHasValue : NodeCondition
     {
         [NodeParam]
-        private string key;
+        public readonly string key;
 
         public override void Cleanup()
         {
 
         }
 
-
-#if UNITY_EDITOR
         public override bool Validate(out string error)
         {
             if (!base.Validate(out error))
@@ -30,7 +28,6 @@ namespace AillieoUtils.EasyBehaviorTree
             }
             return error == null;
         }
-#endif
 
         protected override bool CheckCondition(float deltaTime)
         {

@@ -1,7 +1,6 @@
 using System.Text;
 using System;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
+using Random = System.Random;
 
 namespace AillieoUtils.EasyBehaviorTree
 {
@@ -13,11 +12,7 @@ namespace AillieoUtils.EasyBehaviorTree
 
         private bool treeInited = false;
 
-        public NodeBase root { get;
-#if UNITY_EDITOR
-            set;
-#endif
-        }
+        internal NodeBase root { get; private set; }
 
         public BlackBoard blackBoard { get; private set; }
 
@@ -66,7 +61,6 @@ namespace AillieoUtils.EasyBehaviorTree
             }
         }
 
-#if UNITY_EDITOR
         public bool Validate(out string error, out NodeBase errorNode)
         {
             return ValidateNodeAndChildren(root, out error, out errorNode);
@@ -94,10 +88,10 @@ namespace AillieoUtils.EasyBehaviorTree
             return true;
         }
 
-#else
-        private BehaviorTree()
-        { }
-#endif
+        internal BehaviorTree(NodeBase root)
+        {
+            this.root = root;
+        }
 
         private void Init()
         {
@@ -105,7 +99,7 @@ namespace AillieoUtils.EasyBehaviorTree
             {
                 return;
             }
-            
+
             this.blackBoard = new BlackBoard();
             this.random = new Random(DateTime.Now.Second);
 
@@ -153,38 +147,24 @@ namespace AillieoUtils.EasyBehaviorTree
             {
                 isRunning = false;
 
+                logger.Debug("Tree complete : " + ret);
+
                 if (OnBehaviorTreeCompleted != null)
                 {
                     OnBehaviorTreeCompleted.Invoke(this, ret);
                 }
             }
-
-            logger.Debug("tree ret = " + ret);
         }
 
-
-        public string DumpTree()
+        public string DumpTree(INodeInfoFormatter formatter = null)
         {
             StringBuilder sb = new StringBuilder();
-            root.DumpNode(sb, new DefaultFormatter(), 0);
+            if (formatter == null)
+            {
+                formatter = new DefaultFormatter();
+            }
+            root.DumpNode(sb, formatter, 0);
             return sb.ToString();
-        }
-
-        public static BehaviorTree LoadBehaviorTree(string filename)
-        {
-            if (!File.Exists(filename))
-            {
-                return null;
-            }
-
-            BehaviorTree behaviorTree = null;
-            using (Stream stream = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read))
-            {
-                BinaryFormatter formatter = new BinaryFormatter();
-                behaviorTree = formatter.Deserialize(stream) as BehaviorTree;
-                stream.Close();
-            }
-            return behaviorTree;
         }
 
         public void CleanUp()
