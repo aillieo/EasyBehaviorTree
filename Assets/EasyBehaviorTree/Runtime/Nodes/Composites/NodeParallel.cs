@@ -47,11 +47,6 @@ namespace AillieoUtils.EasyBehaviorTree
 
         public override BTState Update(float deltaTime)
         {
-            if (lastState != null)
-            {
-                return lastState.Value;
-            }
-
             int nodeCount = Children.Count;
             for(int i = 0; i < nodeCount; ++i)
             {
@@ -92,7 +87,6 @@ namespace AillieoUtils.EasyBehaviorTree
                 case ParallelStrategy.PassCertain:
                     if(pass >= targetCount)
                     {
-                        lastState = BTState.Success;
                         return BTState.Success;
                     }
                     else if(rest == 0)
@@ -103,7 +97,6 @@ namespace AillieoUtils.EasyBehaviorTree
                 case ParallelStrategy.FailCertain:
                     if (fail >= targetCount)
                     {
-                        lastState = BTState.Failure;
                         return BTState.Failure;
                     }
                     else if (rest == 0)

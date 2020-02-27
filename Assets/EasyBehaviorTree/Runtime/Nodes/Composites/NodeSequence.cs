@@ -21,11 +21,6 @@ namespace AillieoUtils.EasyBehaviorTree
 
         public override BTState Update(float deltaTime)
         {
-            if (lastState != null)
-            {
-                return lastState.Value;
-            }
-
             int nodeCount = Children.Count;
 
             while (curIndex < nodeCount)
@@ -40,13 +35,11 @@ namespace AillieoUtils.EasyBehaviorTree
                     case BTState.Running:
                         return BTState.Running;
                     case BTState.Failure:
-                        lastState = BTState.Failure;
                         return BTState.Failure;
                 }
 
             }
 
-            lastState = BTState.Success;
             return BTState.Success;
         }
     }
