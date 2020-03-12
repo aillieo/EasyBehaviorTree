@@ -9,7 +9,7 @@ namespace AillieoUtils.EasyBehaviorTree
     {
         private List<NodeBase> mChildren = new List<NodeBase>();
 
-        public IList<NodeBase> Children => mChildren.AsReadOnly();
+        internal IList<NodeBase> Children => mChildren;
 
         internal void AddChild(NodeBase node)
         {
