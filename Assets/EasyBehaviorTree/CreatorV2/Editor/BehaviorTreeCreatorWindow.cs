@@ -19,7 +19,7 @@ namespace AillieoUtils.EasyBehaviorTree.Creator
 
         private Graph<BehaviorTreeAssetWrapper,NodeWrapper> graph = new Graph<BehaviorTreeAssetWrapper,NodeWrapper>(new Vector2(1280f, 640f));
 
-        private string filePath = "Assets/Sample/BT/BT_Hero.bt";
+        private string filePath = "Assets/Sample/BT/BT_Hero.asset";
 
         private void OnGUI()
         {
@@ -56,17 +56,16 @@ namespace AillieoUtils.EasyBehaviorTree.Creator
 
             if (GUILayout.Button("Save"))
             {
-                BehaviorTreeAssetWrapper asset = new BehaviorTreeAssetWrapper();
+                BehaviorTreeAssetWrapper asset = BehaviorTreeAssetWrapper.CreateInstance<BehaviorTreeAssetWrapper>();
                 graph.Save(asset);
-                BehaviorTree behaviorTree = asset.behaviorTree;
-                BytesAssetProcessor.SaveBehaviorTree(behaviorTree,Application.dataPath + "/../" + filePath);
+                AssetDatabase.CreateAsset(asset, filePath);
+                AssetDatabase.SaveAssets();
+                AssetDatabase.Refresh();
             }
 
             if (GUILayout.Button("Load"))
             {
-                BehaviorTree behaviorTree = BytesAssetProcessor.LoadBehaviorTree(Application.dataPath + "/../" + filePath);
-                BehaviorTreeAssetWrapper asset = new BehaviorTreeAssetWrapper();
-                asset.behaviorTree = behaviorTree;
+                BehaviorTreeAssetWrapper asset = AssetDatabase.LoadAssetAtPath<BehaviorTreeAssetWrapper>(filePath);
                 Graph<BehaviorTreeAssetWrapper,NodeWrapper> newGraph = null;
                 if (Graph<BehaviorTreeAssetWrapper,NodeWrapper>.Load(asset, out newGraph))
                 {
@@ -81,12 +80,20 @@ namespace AillieoUtils.EasyBehaviorTree.Creator
 
             if (GUILayout.Button("Import Bytes"))
             {
-
+                Graph<BehaviorTreeAssetWrapper, NodeWrapper> newGraph = ImportAndLoad(BTAssetType.Bytes);
+                if(newGraph != null)
+                {
+                    graph = newGraph;
+                }
             }
 
             if (GUILayout.Button("Import Xml"))
             {
-
+                Graph<BehaviorTreeAssetWrapper, NodeWrapper> newGraph = ImportAndLoad(BTAssetType.XML);
+                if (newGraph != null)
+                {
+                    graph = newGraph;
+                }
             }
 
             GUILayout.EndVertical();
@@ -96,17 +103,17 @@ namespace AillieoUtils.EasyBehaviorTree.Creator
 
             if (GUILayout.Button("Export Bytes"))
             {
-                
+                ExportFromGraph(graph, BTAssetType.Bytes);
             }
 
             if (GUILayout.Button("Export Xml"))
             {
-
+                ExportFromGraph(graph, BTAssetType.XML);
             }
 
             if (GUILayout.Button("Export Builder.cs"))
             {
-
+                ExportFromGraph(graph, BTAssetType.CSBuilder);
             }
 
             GUILayout.EndVertical();
@@ -116,9 +123,44 @@ namespace AillieoUtils.EasyBehaviorTree.Creator
             GUILayout.EndArea();
         }
 
+        private string GetFileExt(BTAssetType assetType)
+        {
+            switch(assetType)
+            {
+                case BTAssetType.Bytes:
+                    return "bytes";
+                case BTAssetType.XML:
+                    return "xml";
+                case BTAssetType.CSBuilder:
+                    return "cs";
+            }
+            return string.Empty;
+        }
+
+        private bool ExportFromGraph(Graph<BehaviorTreeAssetWrapper, NodeWrapper> graph, BTAssetType assetType)
+        {
+            BehaviorTreeAssetWrapper asset = new BehaviorTreeAssetWrapper();
+            graph.Save(asset);
+            BehaviorTree behaviorTree = asset.behaviorTree;
+            return ExportBehaviorTree(assetType, behaviorTree);
+        }
+
+        private Graph<BehaviorTreeAssetWrapper, NodeWrapper> ImportAndLoad(BTAssetType assetType)
+        {
+            BehaviorTree behaviorTree = ImportBehaviorTree(assetType);
+            BehaviorTreeAssetWrapper asset = new BehaviorTreeAssetWrapper();
+            asset.behaviorTree = behaviorTree;
+            Graph<BehaviorTreeAssetWrapper, NodeWrapper> newGraph = null;
+            if (Graph<BehaviorTreeAssetWrapper, NodeWrapper>.Load(asset, out newGraph))
+            {
+                return newGraph;
+            }
+            return null;
+        }
+
         private bool ExportBehaviorTree(BTAssetType assetType, BehaviorTree behaviorTree)
         {
-            string filePath = EditorUtility.SaveFilePanel("存到哪里", ".", "bt", "bytes");
+            string filePath = EditorUtility.SaveFilePanel("存到哪里", ".", "bt", GetFileExt(assetType));
             if (File.Exists(filePath))
             {
                 Debug.LogError("文件已存在 即将覆盖");
@@ -141,7 +183,7 @@ namespace AillieoUtils.EasyBehaviorTree.Creator
 
         private BehaviorTree ImportBehaviorTree(BTAssetType assetType)
         {
-            string filePath = EditorUtility.OpenFilePanel("where to load?", ".", "bytes");
+            string filePath = EditorUtility.OpenFilePanel("where to load?", ".", GetFileExt(assetType));
             if (!File.Exists(filePath))
             {
                 Debug.LogError("文件不存在");
