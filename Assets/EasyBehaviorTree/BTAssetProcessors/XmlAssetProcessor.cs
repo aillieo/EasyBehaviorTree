@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Reflection;
 using System.Xml;
@@ -46,7 +46,7 @@ namespace AillieoUtils.EasyBehaviorTree
         private static NodeBase XmlElementToBTNode(XmlElement xmlEle, NodeParent nodeParent = null)
         {
             string type = xmlEle.GetAttribute("type");
-            Type t = Type.GetType(type);
+            Type t = ReflectionUtils.GetType(type);
             if (t == null)
             {
                 return null;
@@ -81,7 +81,7 @@ namespace AillieoUtils.EasyBehaviorTree
                                     string name = xe.Name;
                                     string typeInfo = xe.GetAttribute("type");
                                     string serializedValue = xe.GetAttribute("value");
-                                    object value = ParamInfoProcessor.Load(Type.GetType(typeInfo), serializedValue);
+                                    object value = ParamInfoProcessor.Load(ReflectionUtils.GetType(typeInfo), serializedValue);
                                     node.GetType().GetField(name,BindingFlags.Instance|BindingFlags.NonPublic|BindingFlags.Public).SetValue(node,value);
                                 }
                             }
@@ -108,19 +108,24 @@ namespace AillieoUtils.EasyBehaviorTree
 
         private static XmlElement BTNodeToXmlElement(XmlDocument xmlDoc, NodeBase node)
         {
-            XmlElement xmlEle = xmlDoc.CreateElement(node.name);
+            string nodeName = node.name;
+            if (string.IsNullOrWhiteSpace(nodeName))
+            {
+                nodeName = node.GetType().Name;
+            }
+            XmlElement xmlEle = xmlDoc.CreateElement(nodeName);
             xmlEle.SetAttribute("type", node.GetType().FullName);
 
-            node.ExtractParamInfo();
-            if (node.paramInfo.Length > 0)
+            ParamInfo[] paramInfo = CreatorUtils.ExtractParamInfo(node);
+            if (paramInfo.Length > 0)
             {
                 XmlElement xmlEleParam = xmlDoc.CreateElement("param");
                 xmlEle.AppendChild(xmlEleParam);
-                foreach (var param in node.paramInfo)
+                foreach (var param in paramInfo)
                 {
                     XmlElement xmlEleOneParam = xmlDoc.CreateElement(param.name);
                     xmlEleOneParam.SetAttribute("type", param.type.FullName);
-                    xmlEleOneParam.SetAttribute("value", param.serializedValue);
+                    xmlEleOneParam.SetAttribute("value", ParamInfoProcessor.Save(param.type,param.value));
                     xmlEleParam.AppendChild(xmlEleOneParam);
                 }
             }

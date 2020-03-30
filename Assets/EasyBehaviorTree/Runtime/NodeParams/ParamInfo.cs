@@ -1,12 +1,11 @@
-﻿using System;
+using System;
 
 namespace AillieoUtils.EasyBehaviorTree
 {
-    [Serializable]
-    public struct ParamInfo
+    public class ParamInfo
     {
         public string name;
         public Type type;
-        public string serializedValue;
+        public object value;
     }
 }

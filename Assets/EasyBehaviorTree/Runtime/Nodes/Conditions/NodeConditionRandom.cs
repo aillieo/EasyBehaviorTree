@@ -10,12 +10,12 @@ namespace AillieoUtils.EasyBehaviorTree
         [NodeParam]
         public readonly float passProbability;
 
-        public override void Cleanup()
+        protected override void Cleanup()
         {
 
         }
 
-        public override bool Validate(out string error)
+        protected internal override bool Validate(out string error)
         {
             if(!base.Validate(out error))
             {

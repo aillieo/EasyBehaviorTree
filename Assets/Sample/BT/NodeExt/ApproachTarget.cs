@@ -6,7 +6,7 @@ using System;
 [NodeIcon("Assets/Sample/BT/NodeExt/ApproachTarget.png")]
 public class ApproachTarget : NodeAction
 {
-    public override void Cleanup()
+    protected override void Cleanup()
     {
 
     }

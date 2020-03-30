@@ -5,7 +5,7 @@ namespace AillieoUtils.EasyBehaviorTree
     [Serializable]
     public abstract class NodeDecorator : NodeParent
     {
-        public override bool Validate(out string error)
+        protected internal override bool Validate(out string error)
         {
             error = null;
             if (base.Validate(out error))

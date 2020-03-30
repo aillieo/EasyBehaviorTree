@@ -1,0 +1,39 @@
+<root type="AillieoUtils.EasyBehaviorTree.NodeRepeater">
+  <param>
+    <repeatTimes type="System.Int32" value="100" />
+    <ignoringFailure type="System.Boolean" value="False" />
+    <oncePerTick type="System.Boolean" value="True" />
+  </param>
+  <children>
+    <sel type="AillieoUtils.EasyBehaviorTree.NodeSelector">
+      <children>
+        <seq type="AillieoUtils.EasyBehaviorTree.NodeSequence">
+          <children>
+            <hasTar type="HasTarget" />
+            <sel type="AillieoUtils.EasyBehaviorTree.NodeSelector">
+              <children>
+                <seq type="AillieoUtils.EasyBehaviorTree.NodeSequence">
+                  <children>
+                    <inRange type="InAttackRange" />
+                    <seq type="AillieoUtils.EasyBehaviorTree.NodeSequence">
+                      <children>
+                        <atk type="AttackTarget" />
+                        <wait type="AillieoUtils.EasyBehaviorTree.NodeActionWait">
+                          <param>
+                            <time type="System.Single" value="1" />
+                          </param>
+                        </wait>
+                      </children>
+                    </seq>
+                  </children>
+                </seq>
+                <move type="ApproachTarget" />
+              </children>
+            </sel>
+          </children>
+        </seq>
+        <find type="FindTarget" />
+      </children>
+    </sel>
+  </children>
+</root>

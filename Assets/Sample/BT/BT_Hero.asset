@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b39e2101c7a6142f6bcd9bb231bc3d57, type: 3}
+  m_Name: BT_Hero
+  m_EditorClassIdentifier: 
+  serializedCanvasSize: {x: 1920, y: 1080}
+  serializedNodes:
+  - canvasPos: {x: 0, y: 0}
+    name: root
+    nodeType: AillieoUtils.EasyBehaviorTree.NodeRepeater
+    param:
+    - name: repeatTimes
+      paramType: System.Int32
+      serializedValue: 100
+    - name: ignoringFailure
+      paramType: System.Boolean
+      serializedValue: False
+    - name: oncePerTick
+      paramType: System.Boolean
+      serializedValue: True
+  - canvasPos: {x: 160, y: 0}
+    name: sel
+    nodeType: AillieoUtils.EasyBehaviorTree.NodeSelector
+    param: []
+  - canvasPos: {x: 320, y: 0}
+    name: seq
+    nodeType: AillieoUtils.EasyBehaviorTree.NodeSequence
+    param: []
+  - canvasPos: {x: 480, y: 0}
+    name: hasTar
+    nodeType: HasTarget
+    param: []
+  - canvasPos: {x: 480, y: 90}
+    name: sel
+    nodeType: AillieoUtils.EasyBehaviorTree.NodeSelector
+    param: []
+  - canvasPos: {x: 640, y: 90}
+    name: seq
+    nodeType: AillieoUtils.EasyBehaviorTree.NodeSequence
+    param: []
+  - canvasPos: {x: 800, y: 90}
+    name: inRange
+    nodeType: InAttackRange
+    param: []
+  - canvasPos: {x: 800, y: 180}
+    name: seq
+    nodeType: AillieoUtils.EasyBehaviorTree.NodeSequence
+    param: []
+  - canvasPos: {x: 960, y: 180}
+    name: atk
+    nodeType: AttackTarget
+    param: []
+  - canvasPos: {x: 960, y: 270}
+    name: wait
+    nodeType: AillieoUtils.EasyBehaviorTree.NodeActionWait
+    param:
+    - name: time
+      paramType: System.Single
+      serializedValue: 1
+  - canvasPos: {x: 640, y: 180}
+    name: move
+    nodeType: ApproachTarget
+    param: []
+  - canvasPos: {x: 320, y: 90}
+    name: find
+    nodeType: FindTarget
+    param: []
+  serializedRoutes:
+  - fromIndex: 2
+    toIndex: 3
+  - fromIndex: 5
+    toIndex: 6
+  - fromIndex: 7
+    toIndex: 8
+  - fromIndex: 7
+    toIndex: 9
+  - fromIndex: 5
+    toIndex: 7
+  - fromIndex: 4
+    toIndex: 5
+  - fromIndex: 4
+    toIndex: 10
+  - fromIndex: 2
+    toIndex: 4
+  - fromIndex: 1
+    toIndex: 2
+  - fromIndex: 1
+    toIndex: 11
+  - fromIndex: 0
+    toIndex: 1

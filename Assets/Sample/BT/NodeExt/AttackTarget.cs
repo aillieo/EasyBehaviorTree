@@ -6,7 +6,7 @@ using UnityEngine;
 [NodeIcon("Assets/Sample/BT/NodeExt/AttackTarget.png")]
 public class AttackTarget : NodeAction
 {
-    public override void Cleanup()
+    protected override void Cleanup()
     {
 
     }

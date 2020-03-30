@@ -1,4 +1,4 @@
-﻿namespace AillieoUtils.EasyBehaviorTree
+namespace AillieoUtils.EasyBehaviorTree
 {
     public interface IBTAssetProcessor
     {

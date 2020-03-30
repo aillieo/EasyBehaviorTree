@@ -9,12 +9,12 @@ namespace AillieoUtils.EasyBehaviorTree
         [NodeParam]
         public readonly string logStr;
 
-        public override void Cleanup()
+        protected override void Cleanup()
         {
 
         }
 
-        public override bool Validate(out string error)
+        protected internal override bool Validate(out string error)
         {
             error = null;
             return !string.IsNullOrEmpty(logStr);

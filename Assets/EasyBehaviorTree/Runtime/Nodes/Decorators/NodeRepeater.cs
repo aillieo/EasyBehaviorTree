@@ -16,18 +16,19 @@ namespace AillieoUtils.EasyBehaviorTree
 
         private int finishedTimes;
 
-        public override void Reset()
+        protected override void Reset()
         {
             base.Reset();
             finishedTimes = 0;
+
         }
 
-        public override void Cleanup()
+        protected override void Cleanup()
         {
 
         }
 
-        public override bool Validate(out string error)
+        protected internal override bool Validate(out string error)
         {
             error = null;
             if(repeatTimes < 0)
@@ -37,7 +38,7 @@ namespace AillieoUtils.EasyBehaviorTree
             return error == null;
         }
 
-        public override BTState Update(float deltaTime)
+        protected override BTState Update(float deltaTime)
         {
             if (finishedTimes >= repeatTimes)
             {

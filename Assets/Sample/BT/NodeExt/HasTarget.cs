@@ -4,7 +4,7 @@ using System;
 [Serializable]
 public class HasTarget : NodeCondition
 {
-    public override void Cleanup()
+    protected override void Cleanup()
     {
 
     }

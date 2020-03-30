@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace AillieoUtils.EasyBehaviorTree
@@ -13,10 +14,9 @@ namespace AillieoUtils.EasyBehaviorTree
 
         public string name;
 
-        [NonSerialized]
-        public ParamInfo[] paramInfo;
+        private ParamInfo[] paramInfo;
 
-        protected NodeState nodeState { get; private set; } = NodeState.Raw;
+        protected internal NodeState nodeState { get; private set; } = NodeState.Raw;
 
         public virtual void DumpNode(StringBuilder stringBuilder, INodeInfoFormatter formatter, int level = 0)
         {
@@ -34,31 +34,19 @@ namespace AillieoUtils.EasyBehaviorTree
 
         }
 
-        internal int ExtractParamInfo()
-        {
-            if (paramInfo == null)
-            {
-                List<ParamInfo> paramInfo = new List<ParamInfo>();
-
-                var fields = ReflectionUtils.GetNodeParamFields(this.GetType());
-
-                foreach (var field in fields)
-                {
-                    paramInfo.Add(new ParamInfo
-                    {
-                        name = field.Name,
-                        type = field.FieldType,
-                        serializedValue = ParamInfoProcessor.Save(field.FieldType,field.GetValue(this))
-                    });
-                }
-                this.paramInfo = paramInfo.ToArray();
-            }
-            return paramInfo.Length;
-        }
-
         private NodeInfo ExtractNodeInfo(int level)
         {
-            ExtractParamInfo();
+            if(paramInfo == null)
+            {
+                paramInfo = ReflectionUtils.GetNodeParamFields(this.GetType()).Select(f => {
+                    return new ParamInfo()
+                    {
+                        name = f.Name,
+                        type = f.FieldType,
+                        value = f.GetValue(this)
+                    };
+                }).ToArray();
+            }
             return new NodeInfo()
             {
                 name = this.name,
@@ -120,35 +108,53 @@ namespace AillieoUtils.EasyBehaviorTree
                 node.Init();
             }
 
+            if (node.nodeState == NodeState.Visiting)
+            {
+                node.behaviorTree.logger.Warning("Reset a running node may lead to unexpected result");
+            }
+
             node.nodeState = NodeState.Ready;
             node.Reset();
         }
 
-        public virtual void OnTreeCleanUp()
+        internal virtual void OnTreeCleanUp()
         {
             Cleanup();
         }
 
-        public virtual void Init()
+        protected internal static void ForceExit(NodeBase node)
+        {
+            if(node.nodeState == NodeState.Visiting)
+            {
+                node.OnExit();
+                node.nodeState = NodeState.Visited;
+            }
+        }
+
+        // invoked when tree init (only once in tree life cycle)
+        protected virtual void Init()
         {
         }
 
-        public virtual void Reset()
+        protected virtual void Reset()
         {
         }
 
-        public virtual void OnEnter()
+        protected virtual void OnEnter()
         {
         }
 
-        public virtual void OnExit()
+        protected virtual void OnExit()
         {
         }
 
-        public abstract BTState Update(float deltaTime);
-        public abstract void Cleanup();
+        // invoked every tick
+        protected abstract BTState Update(float deltaTime);
 
-        public virtual bool Validate(out string error)
+        // invoked when tree cleanup (only once in tree life cycle)
+        protected abstract void Cleanup();
+
+        protected internal virtual bool Validate(out string error)
         {
             error = null;
             return true;

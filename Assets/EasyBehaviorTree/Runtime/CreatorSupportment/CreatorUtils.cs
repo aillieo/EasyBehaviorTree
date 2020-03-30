@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.Linq;
 
 namespace AillieoUtils.EasyBehaviorTree
 {
@@ -56,5 +57,26 @@ namespace AillieoUtils.EasyBehaviorTree
         {
             return behaviorTree.root;
         }
+
+        public static ParamInfo[] ExtractParamInfo(NodeBase node)
+        {
+            return ReflectionUtils.GetNodeParamFields(node.GetType()).Select(f => {
+                return new ParamInfo()
+                {
+                    name = f.Name,
+                    type = f.FieldType,
+                    value = f.GetValue(node)
+                };
+            }).ToArray();
+        }
+
+        public static void ApplyParamInfo(NodeBase node, ParamInfo[] paramInfo)
+        {
+            foreach(var p in paramInfo)
+            {
+                ReflectionUtils.GetNodeParamField(node.GetType(), p.name).SetValue(node, p.value);
+            }
+        }
+
     }
 }

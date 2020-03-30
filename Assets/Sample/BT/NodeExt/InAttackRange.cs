@@ -5,7 +5,7 @@ using System;
 [Serializable]
 public class InAttackRange : NodeCondition
 {
-    public override void Cleanup()
+    protected override void Cleanup()
     {
 
     }

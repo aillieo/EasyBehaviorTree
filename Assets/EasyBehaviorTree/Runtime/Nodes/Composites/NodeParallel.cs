@@ -21,18 +21,18 @@ namespace AillieoUtils.EasyBehaviorTree
 
         private Dictionary<int, BTState> nodeStates = new Dictionary<int, BTState>();
 
-        public override void Reset()
+        protected override void Reset()
         {
             base.Reset();
             nodeStates.Clear();
         }
 
-        public override void Cleanup()
+        protected override void Cleanup()
         {
 
         }
 
-        public override bool Validate(out string error)
+        protected internal override bool Validate(out string error)
         {
             bool ret = base.Validate(out error);
             if(ret)
@@ -45,7 +45,7 @@ namespace AillieoUtils.EasyBehaviorTree
             return error == null;
         }
 
-        public override BTState Update(float deltaTime)
+        protected override BTState Update(float deltaTime)
         {
             int nodeCount = Children.Count;
             for(int i = 0; i < nodeCount; ++i)

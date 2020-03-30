@@ -16,7 +16,7 @@ namespace AillieoUtils.EasyBehaviorTree
             mChildren.Add(node);
         }
 
-        public override bool Validate(out string error)
+        protected internal override bool Validate(out string error)
         {
             error = null;
             if (Children.Count == 0)
@@ -27,7 +27,7 @@ namespace AillieoUtils.EasyBehaviorTree
             return true;
         }
 
-        public override void Init()
+        protected override void Init()
         {
             base.Init();
 
@@ -38,7 +38,7 @@ namespace AillieoUtils.EasyBehaviorTree
         }
 
 
-        public override void Reset()
+        protected override void Reset()
         {
             base.Reset();
 
@@ -48,6 +48,18 @@ namespace AillieoUtils.EasyBehaviorTree
             }
         }
 
+        protected override void OnExit()
+        {
+            foreach (var n in mChildren)
+            {
+                if(n.nodeState == NodeState.Visiting)
+                {
+                    ForceExit(n);
+                }
+            }
+
+            base.OnExit();
+        }
 
         public override void DumpNode(StringBuilder stringBuilder, INodeInfoFormatter formatter, int level = 0)
         {
@@ -59,7 +71,7 @@ namespace AillieoUtils.EasyBehaviorTree
             }
         }
 
-        public override void OnTreeCleanUp()
+        internal override void OnTreeCleanUp()
         {
             base.OnTreeCleanUp();
 

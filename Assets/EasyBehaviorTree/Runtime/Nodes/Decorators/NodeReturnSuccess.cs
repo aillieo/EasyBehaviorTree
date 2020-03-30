@@ -5,12 +5,12 @@ namespace AillieoUtils.EasyBehaviorTree
     [Serializable]
     public class NodeReturnSuccess : NodeDecorator
     {
-        public override void Cleanup()
+        protected override void Cleanup()
         {
 
         }
 
-        public override BTState Update(float deltaTime)
+        protected override BTState Update(float deltaTime)
         {
             var ret = NodeTick(Child, deltaTime);
             if(ret == BTState.Running)

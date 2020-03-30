@@ -8,7 +8,7 @@ namespace AillieoUtils.EasyBehaviorTree
 
         protected abstract bool CheckCondition(float deltaTime);
 
-        public override BTState Update(float deltaTime)
+        protected override BTState Update(float deltaTime)
         {
             if(CheckCondition(deltaTime))
             {

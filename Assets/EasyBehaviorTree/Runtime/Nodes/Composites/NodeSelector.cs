@@ -8,18 +8,18 @@ namespace AillieoUtils.EasyBehaviorTree
 
         private int curIndex;
 
-        public override void Reset()
+        protected override void Reset()
         {
             base.Reset();
             curIndex = 0;
         }
 
-        public override void Cleanup()
+        protected override void Cleanup()
         {
 
         }
 
-        public override BTState Update(float deltaTime)
+        protected override BTState Update(float deltaTime)
         {
             int nodeCount = Children.Count;
 

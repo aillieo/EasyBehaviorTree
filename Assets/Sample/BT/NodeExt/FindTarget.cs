@@ -6,7 +6,7 @@ using System;
 [NodeIcon("Assets/Sample/BT/NodeExt/FindTarget.png")]
 public class FindTarget : NodeAction
 {
-    public override void Cleanup()
+    protected override void Cleanup()
     {
 
     }

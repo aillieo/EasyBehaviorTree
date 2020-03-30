@@ -17,7 +17,7 @@ namespace AillieoUtils.EasyBehaviorTree.Creator
             EditorWindow.GetWindow<BehaviorTreeCreatorWindow>("Easy Graph Window");
         }
 
-        private Graph<BehaviorTreeAssetWrapper,NodeWrapper> graph = new Graph<BehaviorTreeAssetWrapper,NodeWrapper>(new Vector2(1280f, 640f));
+        private Graph<SerializedBehaviorTree,NodeWrapper> graph = new Graph<SerializedBehaviorTree,NodeWrapper>(new Vector2(1920, 1080));
 
         private string filePath = "Assets/Sample/BT/BT_Hero.asset";
 
@@ -56,7 +56,7 @@ namespace AillieoUtils.EasyBehaviorTree.Creator
 
             if (GUILayout.Button("Save"))
             {
-                BehaviorTreeAssetWrapper asset = BehaviorTreeAssetWrapper.CreateInstance<BehaviorTreeAssetWrapper>();
+                SerializedBehaviorTree asset = SerializedBehaviorTree.CreateInstance<SerializedBehaviorTree>();
                 graph.Save(asset);
                 AssetDatabase.CreateAsset(asset, filePath);
                 AssetDatabase.SaveAssets();
@@ -65,9 +65,9 @@ namespace AillieoUtils.EasyBehaviorTree.Creator
 
             if (GUILayout.Button("Load"))
             {
-                BehaviorTreeAssetWrapper asset = AssetDatabase.LoadAssetAtPath<BehaviorTreeAssetWrapper>(filePath);
-                Graph<BehaviorTreeAssetWrapper,NodeWrapper> newGraph = null;
-                if (Graph<BehaviorTreeAssetWrapper,NodeWrapper>.Load(asset, out newGraph))
+                SerializedBehaviorTree asset = AssetDatabase.LoadAssetAtPath<SerializedBehaviorTree>(filePath);
+                Graph<SerializedBehaviorTree,NodeWrapper> newGraph = null;
+                if (Graph<SerializedBehaviorTree,NodeWrapper>.Load(asset, out newGraph))
                 {
                     graph = newGraph;
                 }
@@ -80,7 +80,7 @@ namespace AillieoUtils.EasyBehaviorTree.Creator
 
             if (GUILayout.Button("Import Bytes"))
             {
-                Graph<BehaviorTreeAssetWrapper, NodeWrapper> newGraph = ImportAndLoad(BTAssetType.Bytes);
+                Graph<SerializedBehaviorTree, NodeWrapper> newGraph = ImportAndLoad(BTAssetType.Bytes);
                 if(newGraph != null)
                 {
                     graph = newGraph;
@@ -89,7 +89,7 @@ namespace AillieoUtils.EasyBehaviorTree.Creator
 
             if (GUILayout.Button("Import Xml"))
             {
-                Graph<BehaviorTreeAssetWrapper, NodeWrapper> newGraph = ImportAndLoad(BTAssetType.XML);
+                Graph<SerializedBehaviorTree, NodeWrapper> newGraph = ImportAndLoad(BTAssetType.XML);
                 if (newGraph != null)
                 {
                     graph = newGraph;
@@ -137,21 +137,21 @@ namespace AillieoUtils.EasyBehaviorTree.Creator
             return string.Empty;
         }
 
-        private bool ExportFromGraph(Graph<BehaviorTreeAssetWrapper, NodeWrapper> graph, BTAssetType assetType)
+        private bool ExportFromGraph(Graph<SerializedBehaviorTree, NodeWrapper> graph, BTAssetType assetType)
         {
-            BehaviorTreeAssetWrapper asset = new BehaviorTreeAssetWrapper();
+            SerializedBehaviorTree asset = new SerializedBehaviorTree();
             graph.Save(asset);
-            BehaviorTree behaviorTree = asset.behaviorTree;
+            BehaviorTree behaviorTree = asset.LoadFromSerializedAsset();
             return ExportBehaviorTree(assetType, behaviorTree);
         }
 
-        private Graph<BehaviorTreeAssetWrapper, NodeWrapper> ImportAndLoad(BTAssetType assetType)
+        private Graph<SerializedBehaviorTree, NodeWrapper> ImportAndLoad(BTAssetType assetType)
         {
             BehaviorTree behaviorTree = ImportBehaviorTree(assetType);
-            BehaviorTreeAssetWrapper asset = new BehaviorTreeAssetWrapper();
-            asset.behaviorTree = behaviorTree;
-            Graph<BehaviorTreeAssetWrapper, NodeWrapper> newGraph = null;
-            if (Graph<BehaviorTreeAssetWrapper, NodeWrapper>.Load(asset, out newGraph))
+            SerializedBehaviorTree asset = SerializedBehaviorTree.CreateInstance<SerializedBehaviorTree>();
+            asset.SerializeBehaviorTree(behaviorTree);
+            Graph<SerializedBehaviorTree, NodeWrapper> newGraph = null;
+            if (Graph<SerializedBehaviorTree, NodeWrapper>.Load(asset, out newGraph))
             {
                 return newGraph;
             }

@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 
 namespace AillieoUtils.EasyBehaviorTree
 {
@@ -23,7 +23,7 @@ namespace AillieoUtils.EasyBehaviorTree
                 {
                     stringBuilder.Append(',');
                 }
-                stringBuilder.AppendFormat("{0}={1}",nodeInfo.paramInfo[i].name,nodeInfo.paramInfo[i].serializedValue);
+                stringBuilder.AppendFormat("{0}={1}",nodeInfo.paramInfo[i].name,nodeInfo.paramInfo[i].value);
             }
             stringBuilder.Append('}');
         }

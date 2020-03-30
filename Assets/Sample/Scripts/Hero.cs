@@ -16,8 +16,8 @@ public class Hero : MonoBehaviour, IBlackBoardData
     {
         hpCurrent = hp;
 
-        string fullPath = Application.dataPath + "/Sample/BT/BT_Hero.bt";
-        behaviorTree = BytesAssetProcessor.LoadBehaviorTree(fullPath);
+        string fullPath = Application.dataPath + "/Sample/BT/BT_Hero.xml";
+        behaviorTree = XmlAssetProcessor.LoadBehaviorTree(fullPath);
 
         if(behaviorTree != null)
         {

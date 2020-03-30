@@ -7,6 +7,16 @@ namespace AillieoUtils.EasyBehaviorTree.Creator
 {
     public static class ParamValueDrawer
     {
+        public static void Draw(ParamInfo paramInfo)
+        {
+            EnsureDrawers();
+            Type t = paramInfo.type;
+            object newValue = drawFuncs[t].Invoke(
+                drawersForType[t],
+                new object[] { paramInfo.value });
+            paramInfo.value = newValue;
+        }
+
         public static void Draw(FieldInfo fieldInfo, object target)
         {
             EnsureDrawers();

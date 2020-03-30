@@ -10,12 +10,12 @@ namespace AillieoUtils.EasyBehaviorTree
 
         private float timer;
 
-        public override void Cleanup()
+        protected override void Cleanup()
         {
 
         }
 
-        public override bool Validate(out string error)
+        protected internal override bool Validate(out string error)
         {
             error = null;
             if (time < 0)
@@ -25,7 +25,7 @@ namespace AillieoUtils.EasyBehaviorTree
             return error == null;
         }
 
-        public override void Reset()
+        protected override void Reset()
         {
             base.Reset();
             timer = 0f;

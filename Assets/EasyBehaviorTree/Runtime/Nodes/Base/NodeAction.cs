@@ -10,7 +10,7 @@ namespace AillieoUtils.EasyBehaviorTree
         protected abstract BTState ExecuteTask(float deltaTime);
 
 
-        public override BTState Update(float deltaTime)
+        protected override BTState Update(float deltaTime)
         {
             return ExecuteTask(deltaTime);
         }
