@@ -96,6 +96,15 @@ namespace AillieoUtils.EasyBehaviorTree.Creator
                 }
             }
 
+            if (GUILayout.Button("Import Prefab"))
+            {
+                Graph<SerializedBehaviorTree, NodeWrapper> newGraph = ImportAndLoad(BTAssetType.UnityPrefab);
+                if (newGraph != null)
+                {
+                    graph = newGraph;
+                }
+            }
+
             GUILayout.EndVertical();
             GUILayout.BeginVertical("box");
 
@@ -109,6 +118,11 @@ namespace AillieoUtils.EasyBehaviorTree.Creator
             if (GUILayout.Button("Export Xml"))
             {
                 ExportFromGraph(graph, BTAssetType.XML);
+            }
+
+            if (GUILayout.Button("Export Prefab"))
+            {
+                ExportFromGraph(graph, BTAssetType.UnityPrefab);
             }
 
             if (GUILayout.Button("Export Builder.cs"))
@@ -139,7 +153,7 @@ namespace AillieoUtils.EasyBehaviorTree.Creator
 
         private bool ExportFromGraph(Graph<SerializedBehaviorTree, NodeWrapper> graph, BTAssetType assetType)
         {
-            SerializedBehaviorTree asset = new SerializedBehaviorTree();
+            SerializedBehaviorTree asset = SerializedBehaviorTree.CreateInstance<SerializedBehaviorTree>();
             graph.Save(asset);
             BehaviorTree behaviorTree = asset.LoadFromSerializedAsset();
             return ExportBehaviorTree(assetType, behaviorTree);
@@ -166,14 +180,30 @@ namespace AillieoUtils.EasyBehaviorTree.Creator
                 Debug.LogError("文件已存在 即将覆盖");
             }
 
+            //string filePath = EditorUtility.SaveFilePanelInProject("存到哪里", ".", "bt", GetFileExt(assetType));
+            //if (File.Exists(filePath))
+            //{
+            //    Debug.LogError("文件已存在 即将覆盖");
+            //}
+
             switch (assetType)
             {
                 case BTAssetType.Bytes:
-                    return BytesAssetProcessor.SaveBehaviorTree(behaviorTree, filePath);
+                    byte[] bytes = BytesAssetProcessor.SaveBehaviorTree(behaviorTree);
+                    File.WriteAllBytes(filePath, bytes);
+                    break;
                 case BTAssetType.XML:
-                    return XmlAssetProcessor.SaveBehaviorTree(behaviorTree, filePath);
+                    string xml = XmlAssetProcessor.SaveBehaviorTree(behaviorTree);
+                    File.WriteAllText(filePath, xml);
+                    break;
+                case BTAssetType.UnityPrefab:
+                    GameObject prefab = UnityPrefabAssetProcessor.SaveBehaviorTree(behaviorTree);
+                    string assetPath = FileUtil.GetProjectRelativePath(filePath);
+                    AssetDatabase.CreateAsset(prefab, assetPath);
+                    break;
                 case BTAssetType.CSBuilder:
-                    Debug.LogError("BTAssetType.CSBuilder");
+                    string script = CSBuilderAssetProcessor.SaveBehaviorTree(behaviorTree);
+                    File.WriteAllText(filePath, script);
                     break;
                 default:
                     break;
@@ -193,9 +223,15 @@ namespace AillieoUtils.EasyBehaviorTree.Creator
             switch (assetType)
             {
                 case BTAssetType.Bytes:
-                    return BytesAssetProcessor.LoadBehaviorTree(filePath);
+                    byte[] bytes = File.ReadAllBytes(filePath);
+                    return BytesAssetProcessor.LoadBehaviorTree(bytes);
                 case BTAssetType.XML:
-                    return XmlAssetProcessor.LoadBehaviorTree(filePath);
+                    string xml = File.ReadAllText(filePath);
+                    return XmlAssetProcessor.LoadBehaviorTree(xml);
+                case BTAssetType.UnityPrefab:
+                    string assetPath = FileUtil.GetProjectRelativePath(filePath);
+                    GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(assetPath);
+                    return UnityPrefabAssetProcessor.LoadBehaviorTree(prefab);
                 default:
                     break;
             }

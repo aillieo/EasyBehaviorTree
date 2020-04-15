@@ -1,5 +1,3 @@
-using System;
-
 namespace AillieoUtils.EasyBehaviorTree
 {
     public enum BTAssetType
@@ -7,6 +5,7 @@ namespace AillieoUtils.EasyBehaviorTree
         Unknown = 0,
         Bytes = 1,
         XML = 2,
-        CSBuilder = 3,
+        UnityPrefab = 3,
+        CSBuilder = 4,
     }
 }

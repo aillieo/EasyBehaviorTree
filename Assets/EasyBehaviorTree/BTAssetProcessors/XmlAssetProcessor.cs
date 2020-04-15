@@ -5,42 +5,42 @@ using System.Xml;
 
 namespace AillieoUtils.EasyBehaviorTree
 {
-    public class XmlAssetProcessor : IBTAssetProcessor
+    public class XmlAssetProcessor : IBTAssetProcessor<string>
     {
         private static XmlAssetProcessor instance;
 
-        public static BehaviorTree LoadBehaviorTree(string filePath)
+        public static BehaviorTree LoadBehaviorTree(string xml)
         {
             if (instance == null)
             {
                 instance = new XmlAssetProcessor();
             }
-            return instance.Load(filePath);
+            return instance.Load(xml);
         }
 
-        public static bool SaveBehaviorTree(BehaviorTree behaviorTree, string filePath)
+        public static string SaveBehaviorTree(BehaviorTree behaviorTree)
         {
             if (instance == null)
             {
                 instance = new XmlAssetProcessor();
             }
-            return instance.Save(behaviorTree,filePath);
+            return instance.Save(behaviorTree);
         }
 
-        public BehaviorTree Load(string filePath)
+        public BehaviorTree Load(string asset)
         {
-            if (!File.Exists(filePath))
-            {
-                return null;
-            }
-
             XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.Load (filePath);
+            xmlDoc.LoadXml(asset);
             XmlElement root = xmlDoc.SelectSingleNode("root") as XmlElement;
-
             BehaviorTree behaviorTree = CreatorUtils.NewBehaviorTree(XmlElementToBTNode(root));
-
             return behaviorTree;
+        }
+
+        public string Save(BehaviorTree behaviorTree)
+        {
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.AppendChild(BTNodeToXmlElement(xmlDoc, behaviorTree.root));
+            return xmlDoc.ToString();
         }
 
         private static NodeBase XmlElementToBTNode(XmlElement xmlEle, NodeParent nodeParent = null)
@@ -96,14 +96,6 @@ namespace AillieoUtils.EasyBehaviorTree
                 }
             }
             return node;
-        }
-
-        public bool Save(BehaviorTree behaviorTree, string filepath)
-        {
-            XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.AppendChild(BTNodeToXmlElement(xmlDoc, behaviorTree.root));
-            xmlDoc.Save(filepath);
-            return true;
         }
 
         private static XmlElement BTNodeToXmlElement(XmlDocument xmlDoc, NodeBase node)

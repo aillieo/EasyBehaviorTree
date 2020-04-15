@@ -1,8 +1,8 @@
 namespace AillieoUtils.EasyBehaviorTree
 {
-    public interface IBTAssetProcessor
+    public interface IBTAssetProcessor<T>
     {
-        BehaviorTree Load(string filepath);
-        bool Save(BehaviorTree behaviorTree, string filepath);
+        BehaviorTree Load(T asset);
+        T Save(BehaviorTree behaviorTree);
     }
 }

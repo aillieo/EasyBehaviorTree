@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace AillieoUtils.EasyBehaviorTree
 {
@@ -63,6 +63,26 @@ namespace AillieoUtils.EasyBehaviorTree
                 logger.Error(err);
                 return null;
             }
+        }
+
+        public BehaviorTreeBuilder Add(NodeAction nodeAction)
+        {
+            return AddAction(nodeAction);
+        }
+
+        public BehaviorTreeBuilder Add(NodeCondition nodeCondition)
+        {
+            return AddCondition(nodeCondition);
+        }
+
+        public BehaviorTreeBuilder Add(NodeComposite nodeComposite)
+        {
+            return AddComposite(nodeComposite);
+        }
+
+        public BehaviorTreeBuilder Add(NodeDecorator nodeDecorator)
+        {
+            return AddDecorator(nodeDecorator);
         }
     }
 }
