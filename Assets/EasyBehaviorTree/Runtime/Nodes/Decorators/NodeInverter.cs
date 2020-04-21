@@ -3,7 +3,7 @@ using System;
 namespace AillieoUtils.EasyBehaviorTree
 {
     [Serializable]
-    public class NodeInvert : NodeDecorator
+    public class NodeInverter : NodeDecorator
     {
         protected override void Cleanup()
         {

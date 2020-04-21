@@ -11,20 +11,17 @@ namespace AillieoUtils.EasyBehaviorTree.Creator
         {
             EnsureDrawers();
             Type t = paramInfo.type;
-            object newValue = drawFuncs[t].Invoke(
-                drawersForType[t],
-                new object[] { paramInfo.value });
-            paramInfo.value = newValue;
-        }
-
-        public static void Draw(FieldInfo fieldInfo, object target)
-        {
-            EnsureDrawers();
-            Type t = fieldInfo.FieldType;
-            object newValue = drawFuncs[t].Invoke(
-                drawersForType[t],
-                new object[] { fieldInfo.GetValue(target) });
-            fieldInfo.SetValue(target, newValue);
+            if(drawFuncs.ContainsKey(t) && drawersForType.ContainsKey(t))
+            {
+                object newValue = drawFuncs[t].Invoke(
+                    drawersForType[t],
+                    new object[] { paramInfo.value });
+                paramInfo.value = newValue;
+            }
+            else
+            {
+                UnityEngine.Debug.LogError($"Cant find drawer for type {t.Name},please create a class and implement IParamValueDrawer<{t.Name}>");
+            }
         }
 
         private static Dictionary<Type, object> drawersForType;
