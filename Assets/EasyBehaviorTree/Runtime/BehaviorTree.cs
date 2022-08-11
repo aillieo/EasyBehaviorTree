@@ -1,6 +1,5 @@
 using System.Text;
 using System;
-using Random = System.Random;
 
 namespace AillieoUtils.EasyBehaviorTree
 {
@@ -10,143 +9,91 @@ namespace AillieoUtils.EasyBehaviorTree
         public event Action<BehaviorTree> OnBehaviorTreeStarted;
         public event Action<BehaviorTree, BTState> OnBehaviorTreeCompleted;
 
-        private bool treeInited = false;
-
+        internal BehaviorTreeStructure behaviorTreeStructure;
+        [field:NonSerialized]
+        internal BehaviorTreeVisitor behaviorTreeVisitor { get; set; }
+        
         internal NodeBase root { get; private set; }
 
-        public BlackBoard blackBoard { get; private set; }
+        public Blackboard blackboard
+        {
+            get
+            {
+                return behaviorTreeVisitor.blackboard;
+            }
+        }
 
-        public static BlackBoard sharedBlackBoard { get; private set; } = new BlackBoard();
-
-        public Random random { get; private set; }
+        public Blackboard sharedBlackboard
+        {
+            get
+            {
+                return behaviorTreeVisitor.sharedBlackboard;
+            }
+        }
 
         public bool debugLogging
         {
             get
             {
-                return (logger.filter & LogLevel.Debug) > 0;
+                return behaviorTreeVisitor.debugLogging;
             }
             set
             {
-                if (value)
-                {
-                    logger.filter |= LogLevel.Debug;
-                }
-                else
-                {
-                    logger.filter &= LogLevel.NonDebug;
-                }
+                behaviorTreeVisitor.debugLogging = value;
             }
         }
 
-        public bool isRunning { get; private set; } = false;
-
-        [NonSerialized]
-        private BaseLogger mLogger;
-
-        public BaseLogger logger
+        public DefaultLogger logger
         {
             get
             {
-                if (mLogger == null)
-                {
-                    mLogger = new DefaultLogger();
-                    mLogger.filter = LogLevel.NonDebug;
-                }
-                return mLogger;
-            }
-            set
-            {
-                mLogger = value;
+                return behaviorTreeVisitor.logger;
             }
         }
 
         public bool Validate(out string error, out NodeBase errorNode)
         {
-            return ValidateNodeAndChildren(root, out error, out errorNode);
-        }
-
-        private static bool ValidateNodeAndChildren(NodeBase node, out string error, out NodeBase errorNode)
-        {
-            errorNode = node;
-            if(!node.Validate(out error))
-            {
-                return false;
-            }
-
-            NodeParent nodeParent = node as NodeParent;
-            if(nodeParent != null)
-            {
-                foreach (var child in nodeParent.Children)
-                {
-                    if (!ValidateNodeAndChildren(child, out error, out errorNode))
-                    {
-                        return false;
-                    }
-                }
-            }
-            return true;
+            return this.behaviorTreeStructure.Validate(out error, out errorNode);
         }
 
         internal BehaviorTree(NodeBase root)
         {
-            this.root = root;
+            this.behaviorTreeStructure = new BehaviorTreeStructure(root);
+            this.behaviorTreeVisitor = new BehaviorTreeVisitor(root);
         }
 
-        private void Init()
+        internal BehaviorTree(BehaviorTreeStructure behaviorTreeStructure)
         {
-            if (isRunning)
+            this.behaviorTreeStructure = behaviorTreeStructure;
+            this.behaviorTreeVisitor = new BehaviorTreeVisitor(behaviorTreeStructure.root);
+        }
+        
+        public BehaviorTree(BehaviorTree behaviorTree)
+            : this(behaviorTree.behaviorTreeStructure)
+        {
+        }
+
+        public void Init()
+        {
+            if (behaviorTreeVisitor.isRunning)
             {
                 return;
             }
-
-            this.blackBoard = new BlackBoard();
-            this.random = new Random(DateTime.Now.Second);
-
-            NodeBase.InitNode(root, this);
-        }
-
-        private void ResetNodes()
-        {
-            NodeBase.ResetNode(root);
+            
+            behaviorTreeVisitor.Init(this);
         }
 
         public void Restart()
         {
-            if (isRunning)
-            {
-                return;
-            }
-
-            if(!treeInited)
-            {
-                Init();
-                treeInited = true;
-            }
-
-            ResetNodes();
-
-            if(OnBehaviorTreeStarted != null)
-            {
-                OnBehaviorTreeStarted.Invoke(this);
-            }
-
-            isRunning = true;
+            this.behaviorTreeVisitor.Restart();
         }
 
         public void Tick(float deltaTime)
         {
-            if (!isRunning)
-            {
-                return;
-            }
-
-            BTState ret = NodeBase.NodeTick(root, deltaTime);
+            BTState ret = behaviorTreeVisitor.Tick(deltaTime);
 
             if (ret != BTState.Running)
             {
-                isRunning = false;
-
                 logger.Debug("Tree complete : " + ret);
 
                 if (OnBehaviorTreeCompleted != null)
@@ -158,19 +105,12 @@ namespace AillieoUtils.EasyBehaviorTree
 
         public string DumpTree(INodeInfoFormatter formatter = null)
         {
-            StringBuilder sb = new StringBuilder();
-            if (formatter == null)
-            {
-                formatter = new DefaultFormatter();
-            }
-            root.DumpNode(sb, formatter, 0);
-            return sb.ToString();
+            return behaviorTreeStructure.DumpTree(formatter);
         }
 
         public void CleanUp()
         {
-            root.OnTreeCleanUp();
-            this.blackBoard.CleanUp();
+            behaviorTreeVisitor.CleanUp();
         }
     }
 }

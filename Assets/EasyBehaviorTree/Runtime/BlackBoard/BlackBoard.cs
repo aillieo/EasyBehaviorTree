@@ -4,11 +4,11 @@ using System.Collections.Generic;
 namespace AillieoUtils.EasyBehaviorTree
 {
     [Serializable]
-    public class BlackBoard : IBlackBoard
+    public class Blackboard
     {
-        private Dictionary<string, IBlackBoardData> dict = new Dictionary<string, IBlackBoardData>();
+        private Dictionary<string, object> dict = new Dictionary<string, object>();
 
-        public IBlackBoardData this[string key]
+        public object this[string key]
         {
             get
             {
@@ -35,9 +35,9 @@ namespace AillieoUtils.EasyBehaviorTree
             return this.dict.Remove(key);
         }
 
-        public IBlackBoardData SafeGet(string key, IBlackBoardData fallback = default)
+        public object SafeGet(string key, object fallback = default)
         {
-            IBlackBoardData ret = default;
+            object ret = default;
             if (this.dict.TryGetValue(key, out ret))
             {
                 return ret;

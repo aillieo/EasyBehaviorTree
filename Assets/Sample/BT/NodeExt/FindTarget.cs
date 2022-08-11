@@ -6,34 +6,45 @@ using System;
 [NodeIcon("Assets/Sample/BT/NodeExt/FindTarget.png")]
 public class FindTarget : NodeAction
 {
-    public override void Cleanup()
+    public override IBTTask CreateBTTask(BehaviorTreeVisitor behaviorTreeVisitor)
     {
-
+        return new FindTargetTask();
     }
 
-    protected override BTState ExecuteTask(float deltaTime)
+    public class FindTargetTask : IBTTask
     {
-        Hero self = behaviorTree.blackBoard["self"] as Hero;
-        Hero target = null;
-        float sqrDis = float.MaxValue;
-        foreach (var hero in GameManager.Instance.GetHeroes())
+        public void Cleanup(BehaviorTreeVisitor behaviorTreeVisitor)
         {
-            if (hero != null && hero.alive && hero != self)
-            {
-                float newSqrDis = (hero.transform.position - self.transform.position).sqrMagnitude;
-                if(newSqrDis < sqrDis)
-                {
-                    sqrDis = newSqrDis;
-                    target = hero;
-                }
-            }
         }
 
-        if(target != null)
+        public void Init(BehaviorTreeVisitor behaviorTreeVisitor)
         {
-            behaviorTree.blackBoard["target"] = target;
-            return BTState.Success;
         }
-        return BTState.Failure;
+
+        public BTState ExecuteTask(BehaviorTreeVisitor behaviorTreeVisitor, float deltaTime)
+        {
+            Hero self = behaviorTreeVisitor.blackboard["self"] as Hero;
+            Hero target = null;
+            float sqrDis = float.MaxValue;
+            foreach (var hero in GameManager.Instance.GetHeroes())
+            {
+                if (hero != null && hero.alive && hero != self)
+                {
+                    float newSqrDis = (hero.transform.position - self.transform.position).sqrMagnitude;
+                    if (newSqrDis < sqrDis)
+                    {
+                        sqrDis = newSqrDis;
+                        target = hero;
+                    }
+                }
+            }
+
+            if (target != null)
+            {
+                behaviorTreeVisitor.blackboard["target"] = target;
+                return BTState.Success;
+            }
+            return BTState.Failure;
+        }
     }
 }

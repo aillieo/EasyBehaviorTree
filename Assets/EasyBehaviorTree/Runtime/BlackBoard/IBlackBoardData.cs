@@ -1,6 +1,6 @@
 namespace AillieoUtils.EasyBehaviorTree
 {
-    public interface IBlackBoardData
+    public interface IBlackboardData
     {
 
     }

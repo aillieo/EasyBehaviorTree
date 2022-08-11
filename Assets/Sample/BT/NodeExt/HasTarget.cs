@@ -4,14 +4,14 @@ using System;
 [Serializable]
 public class HasTarget : NodeCondition
 {
-    public override void Cleanup()
+    public override void Cleanup(BehaviorTreeVisitor behaviorTreeVisitor)
     {
 
     }
 
-    protected override bool CheckCondition(float deltaTime)
+    protected override bool CheckCondition(BehaviorTreeVisitor behaviorTreeVisitor, float deltaTime)
     {
-        Hero target = behaviorTree.blackBoard.SafeGet("target") as Hero;
+        Hero target = behaviorTreeVisitor.blackboard.SafeGet("target") as Hero;
         return target != null && target.alive;
     }
 }

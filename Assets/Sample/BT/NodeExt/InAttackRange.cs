@@ -5,15 +5,15 @@ using System;
 [Serializable]
 public class InAttackRange : NodeCondition
 {
-    public override void Cleanup()
+    public override void Cleanup(BehaviorTreeVisitor behaviorTreeVisitor)
     {
 
     }
 
-    protected override bool CheckCondition(float deltaTime)
+    protected override bool CheckCondition(BehaviorTreeVisitor behaviorTreeVisitor, float deltaTime)
     {
-        Hero self = behaviorTree.blackBoard["self"] as Hero;
-        Hero target = behaviorTree.blackBoard["target"] as Hero;
+        Hero self = behaviorTreeVisitor.blackboard["self"] as Hero;
+        Hero target = behaviorTreeVisitor.blackboard["target"] as Hero;
         if(self == null || target == null || !target.alive)
         {
             return false;

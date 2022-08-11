@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7280771303738026283}
   - component: {fileID: 412142040119128609}
   m_Layer: 0
-  m_Name: seq
+  m_Name: seq_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,31 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nodeFullName: AillieoUtils.EasyBehaviorTree.NodeSequence
-  assemblyName: Assembly-CSharp
-  displayName: seq
+  displayName: seq_5
   nodeDescription: 
-  mEnumParamSet:
-    nodeParams: []
-  mStringParamSet:
-    nodeParams: []
-  mStringArrayParamSet:
-    nodeParams: []
-  mIntParamSet:
-    nodeParams: []
-  mIntArrayParamSet:
-    nodeParams: []
-  mFloatParamSet:
-    nodeParams: []
-  mFloatArrayParamSet:
-    nodeParams: []
-  mBoolParamSet:
-    nodeParams: []
-  mBoolArrayParamSet:
-    nodeParams: []
-  mLongParamSet:
-    nodeParams: []
-  mLongArrayParamSet:
-    nodeParams: []
+  nodeParams: 
 --- !u!1 &390500512716528126
 GameObject:
   m_ObjectHideFlags: 0
@@ -115,31 +93,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nodeFullName: InAttackRange
-  assemblyName: Assembly-CSharp
   displayName: inRange
   nodeDescription: 
-  mEnumParamSet:
-    nodeParams: []
-  mStringParamSet:
-    nodeParams: []
-  mStringArrayParamSet:
-    nodeParams: []
-  mIntParamSet:
-    nodeParams: []
-  mIntArrayParamSet:
-    nodeParams: []
-  mFloatParamSet:
-    nodeParams: []
-  mFloatArrayParamSet:
-    nodeParams: []
-  mBoolParamSet:
-    nodeParams: []
-  mBoolArrayParamSet:
-    nodeParams: []
-  mLongParamSet:
-    nodeParams: []
-  mLongArrayParamSet:
-    nodeParams: []
+  nodeParams: 
 --- !u!1 &524446370117698833
 GameObject:
   m_ObjectHideFlags: 0
@@ -151,7 +107,7 @@ GameObject:
   - component: {fileID: 2298456890506143845}
   - component: {fileID: 358806568063287919}
   m_Layer: 0
-  m_Name: seq
+  m_Name: seq_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -186,31 +142,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nodeFullName: AillieoUtils.EasyBehaviorTree.NodeSequence
-  assemblyName: Assembly-CSharp
-  displayName: seq
+  displayName: seq_2
   nodeDescription: 
-  mEnumParamSet:
-    nodeParams: []
-  mStringParamSet:
-    nodeParams: []
-  mStringArrayParamSet:
-    nodeParams: []
-  mIntParamSet:
-    nodeParams: []
-  mIntArrayParamSet:
-    nodeParams: []
-  mFloatParamSet:
-    nodeParams: []
-  mFloatArrayParamSet:
-    nodeParams: []
-  mBoolParamSet:
-    nodeParams: []
-  mBoolArrayParamSet:
-    nodeParams: []
-  mLongParamSet:
-    nodeParams: []
-  mLongArrayParamSet:
-    nodeParams: []
+  nodeParams: 
 --- !u!1 &2694959127662684527
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,31 +189,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nodeFullName: HasTarget
-  assemblyName: Assembly-CSharp
   displayName: hasTar
   nodeDescription: 
-  mEnumParamSet:
-    nodeParams: []
-  mStringParamSet:
-    nodeParams: []
-  mStringArrayParamSet:
-    nodeParams: []
-  mIntParamSet:
-    nodeParams: []
-  mIntArrayParamSet:
-    nodeParams: []
-  mFloatParamSet:
-    nodeParams: []
-  mFloatArrayParamSet:
-    nodeParams: []
-  mBoolParamSet:
-    nodeParams: []
-  mBoolArrayParamSet:
-    nodeParams: []
-  mLongParamSet:
-    nodeParams: []
-  mLongArrayParamSet:
-    nodeParams: []
+  nodeParams: 
 --- !u!1 &3091194340361083576
 GameObject:
   m_ObjectHideFlags: 0
@@ -291,7 +203,7 @@ GameObject:
   - component: {fileID: 5029907821792034462}
   - component: {fileID: 3577076098894803220}
   m_Layer: 0
-  m_Name: seq
+  m_Name: seq_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -326,31 +238,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nodeFullName: AillieoUtils.EasyBehaviorTree.NodeSequence
-  assemblyName: Assembly-CSharp
-  displayName: seq
+  displayName: seq_4
   nodeDescription: 
-  mEnumParamSet:
-    nodeParams: []
-  mStringParamSet:
-    nodeParams: []
-  mStringArrayParamSet:
-    nodeParams: []
-  mIntParamSet:
-    nodeParams: []
-  mIntArrayParamSet:
-    nodeParams: []
-  mFloatParamSet:
-    nodeParams: []
-  mFloatArrayParamSet:
-    nodeParams: []
-  mBoolParamSet:
-    nodeParams: []
-  mBoolArrayParamSet:
-    nodeParams: []
-  mLongParamSet:
-    nodeParams: []
-  mLongArrayParamSet:
-    nodeParams: []
+  nodeParams: 
 --- !u!1 &4024296256866472905
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,7 +252,7 @@ GameObject:
   - component: {fileID: 6042652884301486020}
   - component: {fileID: 1405395451246056853}
   m_Layer: 0
-  m_Name: sel
+  m_Name: sel_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -397,31 +287,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nodeFullName: AillieoUtils.EasyBehaviorTree.NodeSelector
-  assemblyName: Assembly-CSharp
-  displayName: sel
+  displayName: sel_3
   nodeDescription: 
-  mEnumParamSet:
-    nodeParams: []
-  mStringParamSet:
-    nodeParams: []
-  mStringArrayParamSet:
-    nodeParams: []
-  mIntParamSet:
-    nodeParams: []
-  mIntArrayParamSet:
-    nodeParams: []
-  mFloatParamSet:
-    nodeParams: []
-  mFloatArrayParamSet:
-    nodeParams: []
-  mBoolParamSet:
-    nodeParams: []
-  mBoolArrayParamSet:
-    nodeParams: []
-  mLongParamSet:
-    nodeParams: []
-  mLongArrayParamSet:
-    nodeParams: []
+  nodeParams: 
 --- !u!1 &4258583553955009579
 GameObject:
   m_ObjectHideFlags: 0
@@ -466,33 +334,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nodeFullName: AillieoUtils.EasyBehaviorTree.NodeActionWait
-  assemblyName: Assembly-CSharp
   displayName: wait
   nodeDescription: 
-  mEnumParamSet:
-    nodeParams: []
-  mStringParamSet:
-    nodeParams: []
-  mStringArrayParamSet:
-    nodeParams: []
-  mIntParamSet:
-    nodeParams: []
-  mIntArrayParamSet:
-    nodeParams: []
-  mFloatParamSet:
-    nodeParams:
-    - key: time
-      value: 1
-  mFloatArrayParamSet:
-    nodeParams: []
-  mBoolParamSet:
-    nodeParams: []
-  mBoolArrayParamSet:
-    nodeParams: []
-  mLongParamSet:
-    nodeParams: []
-  mLongArrayParamSet:
-    nodeParams: []
+  nodeParams: '{"time":1.0}'
 --- !u!1 &5212268213413486706
 GameObject:
   m_ObjectHideFlags: 0
@@ -537,31 +381,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nodeFullName: FindTarget
-  assemblyName: Assembly-CSharp
   displayName: find
   nodeDescription: 
-  mEnumParamSet:
-    nodeParams: []
-  mStringParamSet:
-    nodeParams: []
-  mStringArrayParamSet:
-    nodeParams: []
-  mIntParamSet:
-    nodeParams: []
-  mIntArrayParamSet:
-    nodeParams: []
-  mFloatParamSet:
-    nodeParams: []
-  mFloatArrayParamSet:
-    nodeParams: []
-  mBoolParamSet:
-    nodeParams: []
-  mBoolArrayParamSet:
-    nodeParams: []
-  mLongParamSet:
-    nodeParams: []
-  mLongArrayParamSet:
-    nodeParams: []
+  nodeParams: 
 --- !u!1 &5745398602456458304
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,31 +428,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nodeFullName: ApproachTarget
-  assemblyName: Assembly-CSharp
   displayName: move
   nodeDescription: 
-  mEnumParamSet:
-    nodeParams: []
-  mStringParamSet:
-    nodeParams: []
-  mStringArrayParamSet:
-    nodeParams: []
-  mIntParamSet:
-    nodeParams: []
-  mIntArrayParamSet:
-    nodeParams: []
-  mFloatParamSet:
-    nodeParams: []
-  mFloatArrayParamSet:
-    nodeParams: []
-  mBoolParamSet:
-    nodeParams: []
-  mBoolArrayParamSet:
-    nodeParams: []
-  mLongParamSet:
-    nodeParams: []
-  mLongArrayParamSet:
-    nodeParams: []
+  nodeParams: 
 --- !u!1 &6330730763159732533
 GameObject:
   m_ObjectHideFlags: 0
@@ -675,31 +475,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nodeFullName: AttackTarget
-  assemblyName: Assembly-CSharp
   displayName: atk
   nodeDescription: 
-  mEnumParamSet:
-    nodeParams: []
-  mStringParamSet:
-    nodeParams: []
-  mStringArrayParamSet:
-    nodeParams: []
-  mIntParamSet:
-    nodeParams: []
-  mIntArrayParamSet:
-    nodeParams: []
-  mFloatParamSet:
-    nodeParams: []
-  mFloatArrayParamSet:
-    nodeParams: []
-  mBoolParamSet:
-    nodeParams: []
-  mBoolArrayParamSet:
-    nodeParams: []
-  mLongParamSet:
-    nodeParams: []
-  mLongArrayParamSet:
-    nodeParams: []
+  nodeParams: 
 --- !u!1 &7250049149516005805
 GameObject:
   m_ObjectHideFlags: 0
@@ -711,7 +489,7 @@ GameObject:
   - component: {fileID: 5080145349469489006}
   - component: {fileID: 6872137341970812858}
   m_Layer: 0
-  m_Name: sel
+  m_Name: sel_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -746,31 +524,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nodeFullName: AillieoUtils.EasyBehaviorTree.NodeSelector
-  assemblyName: Assembly-CSharp
-  displayName: sel
+  displayName: sel_1
   nodeDescription: 
-  mEnumParamSet:
-    nodeParams: []
-  mStringParamSet:
-    nodeParams: []
-  mStringArrayParamSet:
-    nodeParams: []
-  mIntParamSet:
-    nodeParams: []
-  mIntArrayParamSet:
-    nodeParams: []
-  mFloatParamSet:
-    nodeParams: []
-  mFloatArrayParamSet:
-    nodeParams: []
-  mBoolParamSet:
-    nodeParams: []
-  mBoolArrayParamSet:
-    nodeParams: []
-  mLongParamSet:
-    nodeParams: []
-  mLongArrayParamSet:
-    nodeParams: []
+  nodeParams: 
 --- !u!1 &9013434109520092283
 GameObject:
   m_ObjectHideFlags: 0
@@ -816,34 +572,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nodeFullName: AillieoUtils.EasyBehaviorTree.NodeRepeater
-  assemblyName: Assembly-CSharp
   displayName: root
   nodeDescription: test root
-  mEnumParamSet:
-    nodeParams: []
-  mStringParamSet:
-    nodeParams: []
-  mStringArrayParamSet:
-    nodeParams: []
-  mIntParamSet:
-    nodeParams:
-    - key: repeatTimes
-      value: 100
-  mIntArrayParamSet:
-    nodeParams: []
-  mFloatParamSet:
-    nodeParams: []
-  mFloatArrayParamSet:
-    nodeParams: []
-  mBoolParamSet:
-    nodeParams:
-    - key: ignoringFailure
-      value: 0
-    - key: oncePerTick
-      value: 1
-  mBoolArrayParamSet:
-    nodeParams: []
-  mLongParamSet:
-    nodeParams: []
-  mLongArrayParamSet:
-    nodeParams: []
+  nodeParams: '{"repeatTimes":100,"ignoringFailure":false,"oncePerTick":true}'

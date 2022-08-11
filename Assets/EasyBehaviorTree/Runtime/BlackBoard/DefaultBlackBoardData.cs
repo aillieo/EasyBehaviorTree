@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 namespace AillieoUtils.EasyBehaviorTree
 {
     [StructLayout(LayoutKind.Explicit, Size = 8)]
-    public struct BBValue : IBlackBoardData
+    public struct BBValue : IBlackboardData
     {
         [FieldOffset(0)]
         public float floatValue;
@@ -76,7 +76,7 @@ namespace AillieoUtils.EasyBehaviorTree
         }
     }
 
-    public struct BBString : IBlackBoardData
+    public struct BBString : IBlackboardData
     {
         public string strValue;
 

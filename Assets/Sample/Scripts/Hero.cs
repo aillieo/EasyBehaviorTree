@@ -1,7 +1,10 @@
+using System;
+using System.Globalization;
+using System.Reflection;
 using UnityEngine;
 using AillieoUtils.EasyBehaviorTree;
 
-public class Hero : MonoBehaviour, IBlackBoardData
+public class Hero : MonoBehaviour, IBlackboardData
 {
     private BehaviorTree behaviorTree;
 
@@ -12,19 +15,31 @@ public class Hero : MonoBehaviour, IBlackBoardData
 
     public bool alive { get { return hpCurrent >= 0; } }
 
+    private static BehaviorTree btProtoType;
+
     public void Restart()
     {
         hpCurrent = hp;
 
-        string fullPath = Application.dataPath + "/Sample/BT/BT_Hero.bt";
-        behaviorTree = BytesAssetProcessor.LoadBehaviorTree(fullPath);
-
-        if(behaviorTree != null)
+        if (btProtoType == null)
         {
-            behaviorTree.Restart();
-            behaviorTree.blackBoard["self"] = this;
+            string fullPath = Application.dataPath + "/Sample/BT/BT_Hero.bt";
+            btProtoType = BytesAssetProcessor.LoadBehaviorTree(fullPath);
+        }
 
-            behaviorTree.OnBehaviorTreeCompleted += (bt,st) => bt.Restart();
+        behaviorTree = new BehaviorTree(btProtoType);
+
+        if (behaviorTree != null)
+        {
+            behaviorTree.Init();
+            behaviorTree.Restart();
+            behaviorTree.blackboard["self"] = this;
+
+            behaviorTree.OnBehaviorTreeCompleted += (bt, st) =>
+            {
+                bt.Restart();
+                behaviorTree.blackboard["self"] = this;
+            };
         }
     }
 

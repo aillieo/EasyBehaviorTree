@@ -1,16 +1,17 @@
-﻿using System;
+using System;
 
 namespace AillieoUtils.EasyBehaviorTree
 {
-#if UNITY_EDITOR
-    public static class CreatorUtils
-#else
     internal static class CreatorUtils
-#endif
     {
         public static BehaviorTree NewBehaviorTree(NodeBase root)
         {
             return new BehaviorTree(root);
+        }
+
+        public static BehaviorTree NewBehaviorTree(BehaviorTree behaviorTree)
+        {
+            return new BehaviorTree(behaviorTree.behaviorTreeStructure);
         }
 
         public static void AddChild(NodeParent parent, NodeBase child)
